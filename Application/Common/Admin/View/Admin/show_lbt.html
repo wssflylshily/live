@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="en" class="ie6 ielt7 ielt8 ielt9"><![endif]--><!--[if IE 7 ]><html lang="en" class="ie7 ielt8 ielt9"><![endif]--><!--[if IE 8 ]><html lang="en" class="ie8 ielt9"><![endif]--><!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]--><!--[if (gt IE 9)|!(IE)]><!--> 
+<html lang="en"><!--<![endif]--> 
+  <head>
+    <meta charset="utf-8">
+    <title>婚礼后台管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="__PUBLIC__/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/site.css" rel="stylesheet">
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <style type="text/css">
+    /*分页*/
+      .current{
+        background-color:rgba(0,255,150,0.5);
+      }
+      .prev,.num,.next,.current{
+        width:auto;
+        height:auto;
+        margin:4px;
+        padding:1px 2px;
+        box-shadow:0 0 2px rgba(0,0,0,0.2);
+        background-color:rgba(255,255,255,0.1);
+      }
+    /*分页结束*/
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <include file="public:nav" />
+      <div class="row">
+        <include file="public:left" />
+        <div class="span9">
+
+           轮播图
+           <hr/>
+          <table class="table table-bordered table-striped">
+            
+          大轮播图:
+          <img src ="{$arr.big_img}" />
+          <br /><br /><br /><br />
+          小轮播图:
+          <img src ="{$arr.small_img}" />
+          <br />
+<br /><br />
+          图片主题:
+          <input type="text"  name="imgname"  disabled value="{$arr.imgname}" />              
+          <br />
+          图片链接:
+          <input type="text"  name="imgname"  disabled value="{$arr.url}" />              
+          <br />
+          直播时间:(例如2016年11月31日 则填写2016-11-31)
+          <input type="text"  name="livetime" disabled  value="{$arr.livetime}" />              
+          <br />
+
+
+
+          </table>
+          <div class="pagination">
+　　{$page}
+</div>
+
+        </div>
+      </div>
+    </div>
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/site.js"></script>
+    <script type="text/javascript">
+            $('.current').css('color','#333');
+    </script>
+  </body>
+</html>

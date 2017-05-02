@@ -1,0 +1,95 @@
+<include file="Public/header" />
+    <!--main part-->
+    <section class="showPartBg2">
+        <!--主图展示部分-->
+        <div class="container">
+            <ul class="H-inviteList" ms-controller="inviteHistory">
+                <li class="clear"><!--Title-->
+                    <span class="col-xs-1 col-sm-1 col-md-1 col-lg-1">顺序</span>
+                    <span class="col-xs-3 col-sm-3 col-md-3 col-lg-3">头像</span>
+                    <span class="col-xs-3 col-sm-3 col-md-3 col-lg-3">会员名</span>
+                    <span class="col-xs-5 col-sm-5 col-md-5 col-lg-5">时间</span>
+                </li>
+                <!--用户数据-->
+                <li class="clear" ms-for="el in @data">
+                    <span class="col-xs-1 col-sm-1 col-md-1 col-lg-1" ms-text="el.inviteRanking"></span>
+                    <span class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <img ms-attr="{src:el.imgSrc}" class="img-responsive img-center">
+                    </span>
+                    <span class="col-xs-3 col-sm-3 col-md-3 col-lg-3 single_text" ms-text="el.uName"></span>
+                    <span class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                        <em ms-text="el.inviteDate"></em>
+                        <p ms-text="el.inviteTime"></p>
+                    </span>
+                </li>
+            </ul>
+            <div class="row H-inviteList-loadMore"><button class="btn btn-default center-block">点击加载更多</button></div>
+
+        </div>
+    </section>
+    <footer class="container-fluid showPartBg hidden-xs">
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="footer-logo"></div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 footer-txt noPaddRL">
+                    <p class="small-Block">证婚直播LIVE&nbsp;&nbsp;版权所有&nbsp;&nbsp;<span>京ICP备15015202号-3&nbsp;&nbsp;</span><span class="small-Block">联系电话:010-89468899</span></p>
+                    <span class="small-Block">© 2005-2016 zhenghun.yicehua.cn, All rights reserved.</span>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="QR_Code"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="__PUBLIC__/Home/js/jquery-1.11.3.js"></script>
+    <script src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Home/js/addfunction.js"></script>
+    <script src="__PUBLIC__/Home/js/avalon.js"></script>
+    <script>
+        /***数据绑定部分****/
+        var inviteHistory=avalon.define({
+            $id:"inviteHistory",
+            data:[]
+        });
+        //加载后台渲染数据
+        for(var j in {$invs}.data){
+            inviteHistory.data.push({$invs}.data[j]);
+        }
+
+        avalon.ready(function () {
+            if({$invs}.data==""){
+                $('.H-inviteList-loadMore button').css('display','none');
+            }else if({$invnum}==0){
+                 $('.H-inviteList-loadMore button').text('没有更多数据了').addClass('disabledbtn');
+            }else {
+                var currAjax=null;
+                var page=2;
+                $('.H-inviteList-loadMore button').on('click', function () {
+                    currAjax=jQuery.ajax({
+                        method: "GET",
+                        url: "{:U('User/ajaxGetperinv')}",
+                        data:{page:page},
+                        dataType: 'json',
+                        success: function (data) {
+                            avalon.each(data.data, function (k, v) {
+                                inviteHistory.data.push(v);
+                            });
+                            page++;
+                            if (data.num==0) {    
+                                $('.H-inviteList-loadMore button').text('没有更多数据了').addClass('disabledbtn');
+                                stopAjax();
+                            }
+                        }
+                    })
+                });
+                function stopAjax(){
+                    if(currAjax){ currAjax.abort(); }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="en" class="ie6 ielt7 ielt8 ielt9"><![endif]--><!--[if IE 7 ]><html lang="en" class="ie7 ielt8 ielt9"><![endif]--><!--[if IE 8 ]><html lang="en" class="ie8 ielt9"><![endif]--><!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]--><!--[if (gt IE 9)|!(IE)]><!--> 
+<html lang="en"><!--<![endif]--> 
+  <head>
+    <meta charset="utf-8">
+    <title>goto直播</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="__PUBLIC__/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/site.css" rel="stylesheet">
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+      </head>
+  <body>
+    <div class="container">
+      <include file="public:nav" />
+      <div class="row">
+        <include file="public:left" />
+        <div class="span9">
+            <form method="post" action="{:U('Admin/add_hongbao')}" id="myform" enctype="multipart/form-data">            
+            <p>红包所属直播:
+              <select name="v_id">
+                <foreach name="video" item='res'>
+                  <option value="{$res['v_id']}">{$res['video_file']}</option>
+                </foreach>  
+              </select>
+            </p>
+              <p>红包标题:<input type="text"  name="hb_title"  value="" /></p>  
+              <p>上传新郎红包图片:<input type="file"  name="xl_img"  value="" /></p>  
+              <p>上传新娘红包图片;<input type="file"  name="xn_img"  value="" /></p>
+              <button id="send" >提交</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/site.js"></script>
+    <script type="text/javascript">
+            $("#send").click(function(){
+                $("#myform").submit();
+            });
+    </script>
+  </body>
+</html>

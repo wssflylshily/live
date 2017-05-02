@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 兼容国产浏览器的高速模式 -->
+    <title>直播间</title>
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/normalize.css"/>
+    <link rel="stylesheet" href="css/main.css"/>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.src.js"></script>
+    <script src="data/laydate/laydate.js"></script>
+</head>
+<body>
+    <!--nav part-->
+    <div class=" navbar-default ">
+        <div class="container">
+            <div class="row">
+                <!--logo-->
+                <a class="hidden-xs" >
+                    <div class="brand"></div>
+                </a>
+                <a class="hidden-xs brandBox">
+                    <div class="brand2"></div>
+                </a>
+            </div>
+        </div>
+        <div class=" navLine"></div>
+    </div>
+    <nav id="navPart" class="nav navbar-default navbar-fixed-top">
+        <div class="container" role="navigation">
+            <div class="row">
+                <!--pc端-->
+                <div id="navBox" class="navbar-collapse collapse">
+                    <ul class="nav navbar  noMargin">
+                        <li class="dropdown  dropBoxLine col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                            <span class="leftBoxline hidden-xs"></span>
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle drop_link">
+                                <span class="locoLogo"></span>天津<span class="caret leftMore"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">天津</a></li>
+                                <!--<li><a href="#">上海</a></li>
+                                <li><a href="#">广州</a></li>
+                                <li><a href="#">沈阳</a></li>
+                                <li><a href="#">石家庄</a></li>
+                                <li><a href="#">济南</a></li>-->
+                            </ul>
+                        </li>
+                        <!--菜单选项-->
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="index.html" class="navSet_txt">
+                                首页
+                                <p class="navSet_txt_sub">HOME</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href=" " class="navSet_txt pageTitleActive">
+                                直播间
+                                <p class="navSet_txt_sub">LIVE SHOW</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="wonderful.html" class="navSet_txt">
+                                精选视频
+                                <p class="navSet_txt_sub">WONDERFUL</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="#" class="navSet_txt">
+                                商城
+                                <p class="navSet_txt_sub">THE MALL</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="personal_center_view.html" class="navSet_txt">
+                                个人中心
+                                <p class="navSet_txt_sub">PERSONAL</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--移动端--><!--移动端代码位于pc下部，可出现导航条上不折叠菜单-->
+                <div class="navbar-header mo-navBg">
+                    <div class="navbar-left dropdown mo-navBg-title visible-xs-inline-block">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle drop_link2">
+                            <span class="locoLogo2"></span>天津<span class="caret leftMore"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">天津</a></li>
+                            <!--<li><a href="#">上海</a></li>
+                            <li><a href="#">广州</a></li>
+                            <li><a href="#">沈阳</a></li>
+                            <li><a href="#">石家庄</a></li>
+                            <li><a href="#">济南</a></li>-->
+                        </ul>
+                    </div>
+                    <!--移动端中心logo-->
+                    <div class="mo-navLogo visible-xs">
+                        <div class="mo-navLogo_sub1"></div>
+                        <div class="mo-navLogo_sub2"></div>
+                    </div>
+
+                    <button type="button" class="navbar-toggle mo-navBtn" data-toggle="collapse" data-target="#navBox">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar mo-navBtnSub"></span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--nav end-->
+    <!--main part-->
+    <section>
+        <!--主图展示部分-->
+        <div class="container-fluid L-mainImg hidden-xs"></div>
+        <div class="container-fluid L-mainImg-xs visible-xs"></div>
+        <!--live show-->
+        <div class="container-fluid showPartBg">
+            <div class="container sm-addPadd L-addMar" ms-controller="videos">
+                <div class="row">
+                    <div class="L-liveTitle" >
+                        <span>直播间</span>
+                        <em class="L-liveTitleSub2">LIVE SHOW</em>
+                        <!--pc时间选择-->
+                        <div class="L-liveTitleDate hidden-xs">
+                            选择时间段：
+                            <input id="L-dateBox" placeholder="请输入日期" class="laydate-icon L-dateBoxType" ms-duplex="@startDate">
+                            <em class="dateBox-offLine">-</em>
+                            <input id="L-dateBox2" placeholder="请输入日期" class="laydate-icon L-dateBoxType" ms-duplex="@endDate">
+                            <button id="L_dateDone" type="button" class="btn btn-default L-dateDone" >确定</button>
+                            <!--日期选择调用JS，见下JS代码-->
+                        </div>
+                        <div class="L-liveTitleDate-xs visible-xs">
+                            <div class="L-dateBox-label" data-toggle="collapse" data-target="#dateBox_xs" aria-expanded="true" aria-controls="demo">时间筛选<span class="caret"></span></div>
+                        </div>
+                        <!--移动端时间选择-->
+                        <div id="dateBox_xs" class="collapse ">
+                            选择时间段：
+                            <input id="L-dateBox3" placeholder="请输入日期" readonly class="laydate-icon L-dateBoxType" ms-duplex="@startDate" >
+                            <em class="dateBox-offLine">-</em>
+                            <input id="L-dateBox4" placeholder="请输入日期" readonly class="laydate-icon L-dateBoxType" ms-duplex="@endDate" >
+                            <p>
+                                <button id="L-dateReset" class="btn btn-default L-dateDone-xs">重置</button>
+                                <button id="L-dateDone-xs" class="btn btn-default L-dateDone-xs L-dateDoneBg-xs">确定</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 L-liveShowBox" ms-for="el in @data">
+                        <a href="liveRoom_broadcast.html"><!--vm对象hrefAddr传值-->
+                            <img ms-attr="{src:el.imgSrc}" class="img-responsive showSubImg">
+                        </a>
+                        <p class="single_text showSubTxtTitle showSubTxtTitle2 center L-liveShowTxt" >
+                            {{el.title}}
+                            <span class="L-showSubTxtdate" ms-text="el.date"></span>
+                            <span class="L-liveCount">直播倒计时：<b>{{el.countTime}}</b></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="btn btn-default btn-lg moreBtn center-block">点击加载更多</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="container-fluid showPartBg hidden-xs">
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="footer-logo"></div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 footer-txt noPaddRL">
+                    <p class="hidden-xs">粤ICP备09075143号 | 增值电信业务经营许可证B2-20120219 | 粤公网安备44011302000069号 | 视听许可证1910441号</p>
+                    <div>
+                        <span class="small-Block">© 2005-2015 YY.com, All rights reserved.</span>
+                        <em class="small-Block">广州证婚直播LIVE网络科技有限公司&nbsp;版权所有</em>
+                        <span class="small-Block">联系电话:020-82120010</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="QR_Code"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/addfunction.js"></script>
+    <script src="js/avalon.js"></script>
+    <script>
+        /***数据绑定部分****/
+        //TODO:视频
+        var videos=avalon.define({
+            $id:"videos",
+            startDate:'',
+            endDate:'', //时间段数据
+            data:[
+                {imgSrc:'img/hl_1_15.png',hrefAddr:'',title:'美好美好美好',date:'2015-06',countTime:'2016/10/13 19:18:00'},
+                {imgSrc:'img/hl_1_15.png',hrefAddr:'',title:'美好美好美好',date:'2015-06',countTime:'2016/10/14 19:18:00'},
+                {imgSrc:'img/hl_1_15.png',hrefAddr:'',title:'美好美好美好',date:'2015-06',countTime:'2016/10/29 19:18:00'},
+                {imgSrc:'img/hl_1_15.png',hrefAddr:'',title:'美好美好美好',date:'2015-06',countTime:'2016/10/14 19:18:00'}
+            ]
+        });
+
+        avalon.ready(function () {
+        //Todo：时间操作功能
+            /**移动端时：**/
+                /*重置按钮*/
+            function filterdone(){
+                $("#L-dateBox3").val('');
+                $("#L-dateBox4").val('');
+            }
+            $("#L-dateReset").on('click', function() {
+                filterdone();
+            });
+                /*确定按钮，调取后台数据*/
+            $("#L-dateDone-xs").on('click', function() {
+                jQuery.ajax({
+                    method: "POST",
+                    url: 'testLR.json',
+                    //这里是取vm的数据模型 ,通过JSON.stringify会去掉其所有方法, 变成JSON字符串
+                    //再用JSON.parse变回纯JS对象
+                    /*data: JSON.parse(JSON.stringify(vm.$model))*/
+                    success: function () {
+                        console.log('hey u')
+                    }
+                })
+
+            });
+
+            /*PC时： 时间选择完后开始异步加载数据*/
+            $('#L_dateDone').on('click', function () {
+                jQuery.ajax({
+                    method: "POST",
+                    url: 'test.html',
+                    //这里是取vm的数据模型 ,通过JSON.stringify会去掉其所有方法, 变成JSON字符串
+                    //再用JSON.parse变回纯JS对象
+                    /*data: JSON.parse(JSON.stringify(vm.$model))*/
+                    success: function () {
+                        console.log('hey u')
+                  }
+                })
+            });
+
+        //TODO:加载更多
+            $('.moreBtn').on('click', function (event) {
+                jQuery.ajax({
+                    method: "GET",
+                    url: 'testLR.json',
+                    dataType:'json',
+                    success: function (data) {
+                        if(data.liveLoadMore!=''){
+                            avalon.each(data.liveLoadMore, function (k,v) {
+                                videos.data.push(v);
+                            });
+                            LiveCountdown();
+                        }else{
+                            $('.moreBtn').text('没有更多啦!');
+                            $(".moreBtn").attr("disabled", true);
+                        }
+                    }
+                });
+            });
+
+        });
+        //TODO:直播倒计时
+        function LiveCountdown(){
+            $(".L-liveCount b").each(function(){
+                var target=this;
+                var data=new Date(this.innerHTML);
+                var timer=null;
+                timer=setInterval(function () {
+                    var nowTime=new Date();
+                    var s=(data-nowTime)/1000;
+                    if(s>=0){
+                        var h=parseInt(s/3600);
+                        h<10&&(h='0'+h);
+                        var m=parseInt(s%3600/60);
+                        m<10&&(m='0'+m);
+                        s=parseInt(s%60);
+                        s<10&&(s='0'+s);
+                        target.innerHTML=target.innerHTML.indexOf(":")==-1?h+":"+m+":"+s:h+" "+m+" "+s;
+                    }else{
+                        clearInterval(timer);
+                        timer=null;
+                        target.parentNode.textContent='直播已开始！';
+                    }
+                },500);
+            });
+        }
+        window.onload=LiveCountdown;
+
+    </script>
+    <script>
+        /***观看视频日期选择器的JS调用设置代码***/
+                /*！！注意：该插件源码已修改*/
+        var filterDatestart1 = {
+            elem: '#L-dateBox',
+            format: 'YYYY-MM-DD',
+            min: '2016-01-01', //设定最小日期为当前日期
+            max: '2099-06-16', //最大日期
+            istoday: false,
+            issure: false,
+            choose: function(datas){
+                filterDatestart1.min = datas; //开始日选好后，重置结束日的最小日期
+                filterDatestart1.start = datas; //将结束日的初始值设定为开始日
+            }
+        };
+        var filterDateend1 = {
+            elem: '#L-dateBox2',
+            format: 'YYYY-MM-DD',
+            min: '2016-01-01',
+            max: '2099-06-16',
+            istoday: false,
+            issure: false,
+            choose: function(datas){
+                filterDateend1.max = datas; //结束日选好后，重置开始日的最大日期
+            }
+        };
+        var filterDatestart2 = {
+            elem: '#L-dateBox3',
+            format: 'YYYY-MM-DD',
+            min: '2016-01-01', //设定最小日期为当前日期
+            max: '2099-06-16', //最大日期
+            istoday: false,
+            issure: false,
+            choose: function(datas){
+                filterDatestart2.min = datas; //开始日选好后，重置结束日的最小日期
+                filterDatestart2.start = datas; //将结束日的初始值设定为开始日
+            }
+        };
+        var filterDateend2 = {
+            elem: '#L-dateBox4',
+            format: 'YYYY-MM-DD',
+            min: '2016-01-01',
+            max: '2099-06-16',
+            istoday: false,
+            issure: false,
+            choose: function(datas){
+                filterDateend2.max = datas; //结束日选好后，重置开始日的最大日期
+            }
+        };
+        laydate(filterDatestart1);
+        laydate(filterDateend1);
+        laydate(filterDatestart2);
+        laydate(filterDateend2);
+
+    </script>
+</body>
+</html>

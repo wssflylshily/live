@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 兼容国产浏览器的高速模式 -->
+    <title>直播间-直播现场</title>
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/normalize.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/main.css"/>
+    <script src="__PUBLIC__/Home/js/jquery-1.11.3.js"></script>
+    <script src="__PUBLIC__/Home/js/html5shiv.min.js"></script>
+    <script src="__PUBLIC__/Home/js/respond.src.js"></script>
+    <script type="text/javascript" charset="utf-8" src="http://yuntv.letv.com/player/vod/bcloud.js"></script>
+    <script type="text/javascript">
+        var jx_url = "{:U('Live/get_jx')}?id="+"{$arr.v_id}";
+        var zan_url = "{:U('Live/zan')}?id="+"{$arr.v_id}";   
+        var vid = "{$arr.v_id}";
+        var zf_url  = "{:U('Live/save_zf')}?id="+"{$arr.v_id}"; 
+        var time = "{$time}";
+        var sj_url = "{:U('Live/get_sj')}?id="+"{$arr.v_id}"; 
+        var jw_url = "{:U('Live/get_mdd')}?id="+"{$arr.v_id}";
+         //TODO:页面加载获取渲染数据
+        //验证码--加载页面后弹出
+        $(function () {
+            var liveMyLng='', liveMyLat='', liveTargetPlace='';
+            // jQuery.ajax({
+            //     method: "GET",
+            //     url: 'testLR.json',
+            //     dataType:'json',
+            //     success: function (data) {
+            //         if(data.safeCode==0) {
+            //             $('.Lnow-safeBox').css('display','none');
+            //             $('.Lnow-tipsBox').fadeIn(function () {
+            //                 $('.Lnow-tipsBox li:last-child').on('click', function () {
+            //                     $('#myModal_safe_tips').modal('hide');
+            //                 });
+            //             });
+            //         }
+            //     }
+            // });
+            //加载页面后获取其他渲染数据
+                //视频播放器参数需要DOM加载同步执行，JS代码位于播放器html代码位置
+            jQuery.ajax({
+                method: "GET",
+                url: jx_url,
+                dataType:'json',
+                async : false,
+                success: function (data) {  
+                    //console.log(data.ad_img);
+                    likeLuckys.likes="{$arr['zan_num']?$arr['zan_num']:0}"; 
+                    likeLuckys.viewSum="{$arr['number']?$arr['number']:0}";
+                    $('.Lnow-tab-banner').css("backgroundImage",'url('+data.ad_img+')');
+                    $('.Lnow-tab-bannerBg a').attr("href",data.AdvBanner_url);
+                    procedure.data=data.WeddingProcedure;
+                    procedure.liveTel=data.liveTel;
+                    inviteList.data=data.inviteList;
+                    otherVideos.data=data.otherVideos;
+                }
+            });
+        })
+    </script>
+</head>
+<body>
+    <!--nav part-->
+    <div class=" navbar-default hidden-xs">
+        <div class="container">
+            <div class="row">
+                <!--logo-->
+                <a class="hidden-xs" >
+                    <div class="brand"></div>
+                </a>
+                <a class="hidden-xs brandBox">
+                    <div class="brand2"></div>
+                </a>
+            </div>
+        </div>
+        <div class=" navLine"></div>
+    </div>
+    <nav id="navPart" class="nav navbar-default navbar-fixed-top">
+        <div class="container" role="navigation">
+            <div class="row">
+                <!--pc端-->
+                <div id="navBox" class="navbar-collapse collapse">
+                    <ul class="nav navbar  noMargin">
+                        <li class="dropdown  dropBoxLine col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                            <span class="leftBoxline hidden-xs"></span>
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle drop_link">
+                                <span class="locoLogo"></span>北京<span class="caret leftMore"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">北京</a></li>
+                                <!--<li><a href="#">上海</a></li>
+                                <li><a href="#">广州</a></li>
+                                <li><a href="#">沈阳</a></li>
+                                <li><a href="#">石家庄</a></li>
+                                <li><a href="#">济南</a></li>-->
+                            </ul>
+                        </li>
+                        <!--菜单选项-->
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="index.html" class="navSet_txt">
+                                首页
+                                <p class="navSet_txt_sub">HOME</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="liveRoom.html" class="navSet_txt pageTitleActive">
+                                直播间
+                                <p class="navSet_txt_sub">LIVE SHOW</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="wonderful.html" class="navSet_txt">
+                                精选视频
+                                <p class="navSet_txt_sub">WONDERFUL</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="#" class="navSet_txt">
+                                商城
+                                <p class="navSet_txt_sub">THE MALL</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="personal_center_view.html" class="navSet_txt">
+                                个人中心
+                                <p class="navSet_txt_sub">PERSONAL</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--移动端--><!--移动端代码位于pc下部，可出现导航条上不折叠菜单-->
+                <div class="navbar-header mo-navBg hidden-xs">
+                    <div class="navbar-left dropdown mo-navBg-title visible-xs-inline-block">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle drop_link2">
+                            <span class="locoLogo2"></span>北京<span class="caret leftMore"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">北京</a></li>
+                            <!--<li><a href="#">上海</a></li>
+                            <li><a href="#">广州</a></li>
+                            <li><a href="#">沈阳</a></li>
+                            <li><a href="#">石家庄</a></li>
+                            <li><a href="#">济南</a></li>-->
+                        </ul>
+                    </div>
+                    <!--移动端中心logo-->
+                    <div class="mo-navLogo visible-xs">
+                        <div class="mo-navLogo_sub1"></div>
+                        <div class="mo-navLogo_sub2"></div>
+                    </div>
+
+                    <button type="button" class="navbar-toggle mo-navBtn" data-toggle="collapse" data-target="#navBox">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar "></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!--main part-->
+    <section class="showPartBg2">
+        <!--返回按钮-->
+        <a href="liveRoom.html" class="glyphicon glyphicon-chevron-left Lnow-backBtn visible-xs"></a>
+        <!--视频播放部分-->
+        <div class="container-fluid carouselBoxBg ">
+            <div class="container noPaddRL">
+                <div class="W-mainBg clear">
+                    <!--乐视云播放器JS嵌入代码-->
+                    <div id="player" class="clear">
+                        <script type="text/javascript">
+                            var Live_player = new CloudVodPlayer();
+                            var uu="{$arr.sp1_uu}",vu="{$arr.sp1_vu}",pu="{$arr.sp1_pu}";
+                            // jQuery.ajax({
+                            //     method: "GET",
+                            //     url: 'testLR.json',
+                            //     dataType:'json',
+                            //     async : false,
+                            //     success: function (data) {
+                 
+                            //     }
+                            // });
+                            Live_player.init({"uu":uu,"vu":vu,"pu":pu,"auto_play":0,"gpcflag":1,"lang":"zh_CN"},"player");
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <!--广告浮窗-->
+            <a href="#" class="float-adv">
+                <img src="__PUBLIC__/Home/img/hl_1_02.png" class="img-responsive"></a>
+            <a href="#" class="float-adv2 ">
+                <img src="__PUBLIC__/Home/img/hl_1_02.png" class="img-responsive">
+            </a>
+        </div>
+        <!--安全码及观看提示-->
+        <div class="Lnow-safe-tips">
+            <div id="myModal_safe_tips" class="modal fade bs-example-modal-lg-safeTips" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+                <div class="modal-dialog modal-lg Lnow-safeBox">
+                    <div class="modal-content my-modal-content Lnow-safeTipsBox" ms-controller="safeCode">
+                        <p>输入安全码</p>
+                        <form class="clear">
+                            <label for="LpicValidate">输入安全码</label>
+                            <input id="LpicValidate" type="text" placeholder="请输入安全码" ms-duplex="@safeValiCode">
+                        </form>
+                        <div class="P-phoneWarnBox fade">不可为空</div>
+                        <ul class="clear">
+                            <li><a href="liveRoom.html">取消</a></li>
+                            <li>确定</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-dialog modal-lg Lnow-tipsBox">
+                    <div class="modal-content my-modal-content Lnow-safeTipsBox" ms-controller="safeCode">
+                        <p>温馨提示</p>
+                        <dl>
+                            <dt>感谢您收看本婚礼直播！</dt>
+                            <dd>本房间婚礼是现场直播，请您遵守国家法律法规，尊重他人，尊重自己，文明用语，非常感谢您的合作！</dd>
+                            <dd>同时，您在为新人送上祝福时，可以使用系统定义用语或者您自定义的祝福语，每人每分钟只能发送1条祝福语，整个直播时段您最多能发送5次祝福，敬请谅解。</dd>
+                            <dd>谢谢您的阅读，祝您婚姻美满幸福！</dd>
+                        </dl>
+                        <ul class="clear">
+                            <li><a href="liveRoom.html">取消</a></li>
+                            <li>确定</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--红包和点赞-->
+        <div class="container Lnow-likeLuckyBox" ms-controller="likeLuckys">
+            <div>直播间房间列表显示的房间标题</div>
+            <div>
+                <ul>
+                    <li><em class="glyphicon glyphicon-eye-open"></em><span ms-text="@viewSum"></span></li>
+                    <li><em class="glyphicon glyphicon-thumbs-up"></em><span ms-text="@likes" ></span></li>
+                </ul>
+                <p>
+                    <span class="Lnow-luckyMoney" data-toggle="modal" data-target=".bs-example-modal-lg-QRCode"></span>
+                    <b>红包</b></p>
+                <p><span class="glyphicon glyphicon-thumbs-up"></span><b>点赞</b></p>
+            </div>
+            <!--红包二维码弹窗-->
+            <div class="modal fade bs-example-modal-lg-QRCode" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content my-modal-content">
+                        <img src="">
+                        <em>扫描二维码，发送微信红包。</em>
+                        <h6 data-dismiss="modal">关闭</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--观看操作-->
+        <div id="Lnow-panel" class="container showPartBg2">
+                <!-- TODO 标签页 -->
+            <div class="row">
+                <ul class="nav nav-tabs functionTabs funTabsOrig">
+                    <li class="col-lg-3 col-md-3 col-sm-3 col-xs-3 active"><a data-toggle="tab" href="#pane-wish">征婚祝福</a></li>
+                    <li class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a data-toggle="tab" href="#pane2-procedure">仪式流程</a></li>
+                    <li class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a data-toggle="tab" href="#pane3-hots">邀约人气</a></li>
+                    <li class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a data-toggle="tab" href="#pane4-greatVedios">精彩视频</a></li>
+                </ul>
+            </div>
+            <!--固定标题栏克隆元素-->
+            <div class="row">
+                <ul class="nav nav-tabs functionTabs funTabsClone">
+                    <li class="col-lg-3 col-md-3 col-sm-3 col-xs-3 active"><a data-toggle="tab" href="#pane-wish">征婚祝福</a></li>
+                    <li class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a data-toggle="tab" href="#pane2-procedure">仪式流程</a></li>
+                    <li class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a data-toggle="tab" href="#pane3-hots">邀约人气</a></li>
+                    <li class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a data-toggle="tab" href="#pane4-greatVedios">精彩视频</a></li>
+                </ul>
+            </div>
+            <div class="row Lnow-tab-bannerBg">
+                <a href="" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 noPaddRL">
+                    <div class="Lnow-tab-banner"></div>
+                </a>
+            </div>
+            <!-- TODO 面板 -->
+            <div class="row Lnow-tab-panelBg">
+                <div class="tab-content tab-MyContent">
+                    <!--祝福语(wishList)-->
+                    <div id="pane-wish" class="tab-pane fade in active Lnow-tab-ColContent">
+                        <ul class="Lnow-wishBox" ms-controller="wishList">
+                            <!--用户数据显示-->
+                            <li ms-for="el in @data" class="clear">
+                                <img class="Lnow-wishUserLogo" ms-attr="{src:el.imgSrc}">
+                                <div class="">
+                                    <b ms-text="el.wishuname"></b>
+                                    <h6><span ms-text="el.date"></span><em ms-text="el.time"></em></h6>
+                                    <p ms-text="el.txtCon"></p>
+                                </div>
+                            </li>
+
+                        </ul>
+                        <!--发送祝福语-->
+                        <div class="Lnow-wishInputBox col-lg-12 col-md-12 col-sm-12 col-xs-12" ms-controller="wordsFilter">
+                            <div>
+                                <b class="Lnow-wishInputLogo"></b>
+                                <input type="text" class="Lnow-wishInput" placeholder="送上祝福" ms-duplex="@wdsFilter">
+                                <span id="wishPopBtn" class="glyphicon glyphicon-plus-sign"></span>
+                                <input type="button" class=" Lnow-wishInputBtn" value="发送">
+                            </div>
+                        </div>
+                    </div>
+                    <!--固定祝福语弹出层-->
+                    <div class="Lnow-wishPopBox fade in" ms-controller="sysWords">
+                        <p class="Lnow-wishWordsTitle">
+                            <button class="btn btn-default">取消</button>
+                            <button class="btn btn-default pull-right">确认</button>
+                        </p>
+                        <ul class="Lnow-wishWordsBox">
+                            <li><input name="wish" id="wishFirst" type="radio" class="Lnow-wishBtn" value="0" ms-duplex="@sysWordIndex">
+                                <label for="wishFirst" >{{@sysWordList[0]}}</label></li>
+                            <li><input name="wish" id="wishSecond" type="radio" class="Lnow-wishBtn" value="1" ms-duplex="@sysWordIndex">
+                                <label for="wishSecond" >{{@sysWordList[1]}}</label></li>
+                            <li><input name="wish" id="wishThird" type="radio" class="Lnow-wishBtn" value="2" ms-duplex="@sysWordIndex">
+                                <label for="wishThird">{{@sysWordList[2]}}</label></li>
+                            <li><input name="wish" id="wishFouth" type="radio" class="Lnow-wishBtn" value="3" ms-duplex="@sysWordIndex">
+                                <label for="wishFouth">{{@sysWordList[3]}}</label></li>
+                        </ul>
+                    </div>
+                    <!--婚礼流程-->
+                    <div id="pane2-procedure" class="tab-pane fade" ms-controller="procedure">
+                        <div ms-for="el in @data">
+                            <div>
+                                <p>{{el.coupleName}}婚礼仪式</p>
+                                <span>{{el.date}}</span>
+                            </div>
+                            <dl>
+                                <dt>{{el.conTxt1}}</dt>
+                                    <dd>{{el.conTxt2}}</dd>　
+                                    <dd>{{el.conTxt3}}</dd>　
+                                    <dd>{{el.conTxt4}}</dd>　　　　
+                                    <dd>{{el.conTxt5}}</dd>　
+                                    <dd>{{el.conTxt6}}</dd>　　
+                                    <dd>{{el.conTxt7}}</dd>　　
+                                    <dd>{{el.conTxt8}}</dd>　　
+                                    <dd>{{el.conTxt9}}</dd>　　
+                                    <dd>{{el.conTxt10}}</dd>　　
+                                    <dd>{{el.conTxt11}}</dd>　　
+                            </dl>
+                        </div>
+                        <div class="Lnow-tel-navi" >
+                            <hr>
+                            <h3>婚礼现场地图及电话</h3>
+                            <h6><em class="glyphicon glyphicon-info-sign"></em>打开地图导航前，<button type="button" class="btn btn-default">请点击这里</button>，以授权我们为您加载导航信息。页面跳转后加载您的导航软件。</h6>
+                            <p>
+                                <span class="glyphicon glyphicon-send"></span>
+                                <a ms-attr="{href:@liveNavi}">点击这里打开地图导航</a>
+                            </p>
+                            <h4>
+                                <span class="glyphicon glyphicon-earphone"></span>
+                                <a ms-attr="{href:@liveTel}">点击这里电话联系</a>
+                            </h4>
+                        </div>
+                    </div>
+                    <input  type="hidden" name="tm" id="tm" value="{$time}" /> 
+                    <!--人气邀约-->
+                    <div id="pane3-hots" class="tab-pane fade" ms-controller="inviteList">
+                        <ul>
+                            <li class="clear"><!--Title-->
+                                <span class="col-xs-2 col-sm-2 col-md-2 col-lg-2">排名</span>
+                                <span class="col-xs-3 col-sm-3 col-md-3 col-lg-3">头像</span>
+                                <span class="col-xs-4 col-sm-4 col-md-4 col-lg-4">会员名</span>
+                                <span class="col-xs-3 col-sm-3 col-md-3 col-lg-3">邀约人数</span>
+                            </li>
+                            <!--用户数据-->
+                            <li class="clear" ms-for="el in @data">
+                                <span class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><em ms-class="@showRank(el.ranking)">{{el.ranking}}</em></span>
+                                <span class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    <img ms-attr="{src:el.imgSrc}" class="img-responsive img-center"></span>
+                                <span class="col-xs-4 col-sm-4 col-md-4 col-lg-4">{{el.uName}}</span>
+                                <span class="col-xs-3 col-sm-3 col-md-3 col-lg-3">{{el.uSum}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--相关视频-->
+                    <div id="pane4-greatVedios" class="tab-pane fade" ms-controller="otherVideos">
+                        <div class="media Lnow-tab-Mymedia" ms-for="el in @data">
+                            <a class="media-left" href=" ">
+                                <img ms-attr="{src:el.imgSrc}" class="Lnow-tab-ImgSmall">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">{{el.title}}</h4>
+                                {{el.conTxt}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="container-fluid showPartBg hidden-xs hidden-sm">
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="footer-logo"></div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 footer-txt noPaddRL">
+                    <p class="hidden-xs">粤ICP备09075143号 | 增值电信业务经营许可证B2-20120219 | 粤公网安备44011302000069号 | 视听许可证1910441号</p>
+                    <div>
+                        <span class="small-Block">© 2005-2015 YY.com, All rights reserved.</span>
+                        <em class="small-Block">广州证婚直播LIVE网络科技有限公司&nbsp;版权所有</em>
+                        <span class="small-Block">联系电话:020-82120010</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="QR_Code"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <input type="hidden" id="zf_num" value="{$zf_num}">
+
+
+    <script src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Home/js/liveRoom_add.js"></script>
+    <script src="__PUBLIC__/Home/js/avalon.js"></script>
+    <script>
+
+
+
+    /***数据绑定部分****/
+        avalon.config({debug: false});
+        /**安全码**/
+        var safeCode=avalon.define({
+            $id:'safeCode',
+            safeValiCode:[]
+        });
+
+
+
+
+
+        /***点赞和红包***/
+        var likeLuckys=avalon.define({
+            $id:'likeLuckys',
+            likes:'',
+            viewSum:''
+        });
+
+        /***祝福语&用户列表***/
+        var wordsFilter=avalon.define({
+           $id:'wordsFilter',
+            wdsFilter:''
+        });
+        var sysWords=avalon.define({
+            $id:'sysWords',
+            sysWordList:[
+                "两情相悦的最高境界是相对两无厌，祝福这一对新人真心相爱，相约永远。恭贺新婚之禧！",
+                 "愿有情人终成眷属，缘定三生。新婚大喜！百年好合！",
+                 "送上最由衷的祝福，幸福美满，多子多福，白头偕老！",
+                 "祝你们永结同心，新婚快乐，甜甜蜜蜜！携手共渡美丽人生！"
+            ],
+            sysWordIndex:''
+        });
+        var wishList=avalon.define({
+            $id:"wishList",
+            data:[
+                /*{wishuname:"贵妃BB",imgSrc:'img/liveroom_userLogo.png',txtCon:'十年修得同船渡，百年修得共枕眠。于茫茫人海中找到他/她，分明是千年前的一段缘；无数个偶然堆积而成的必然，怎能不是三生石上精心镌刻的结果呢？用真心呵护这份缘吧，真爱的你们。',date:'2015-06',time:'18:06'},*/
+            ]
+        });
+        /***婚礼流程内容***/
+                /**conTitle1 -内容第一标题，conTitle1_sub1 -第一标题下第一段子内容，
+                 * conTitle2 -内容第二标题。conTxt1        -第二标题下第一段自内容，
+                 *                       conTxt2        -第二标题下第二段自内容，以此类推**/
+        var procedure=avalon.define({
+            $id:"procedure",
+            data:[],
+            liveNavi: '' ,
+            liveTel:[]
+        });
+    //仪式
+        procedure.data.push({$arrs}.data); 
+    
+        /*人气邀约排行数据*/
+        var inviteList=avalon.define({
+            $id:"inviteList",
+            data:[],
+            showRank: function (data) {
+                var obj='';
+                data<=3?obj='Lnow-hotsNums': obj='Lnow-hotsNumsFouth';
+                return obj;
+            }
+        });
+        /*直播相关视频*/
+        var otherVideos=avalon.define({
+            $id:"otherVideos",
+            data:[]
+        });
+
+        var n_url = "{:U('Live/get_code1')}?id="+"{$arr.v_id}";
+
+        avalon.ready(function () {
+
+        /*TODO:安全码*/
+            $('#myModal_safe_tips').modal({backdrop: 'static', keyboard: false});   //空白不可点击
+
+            $('#myModal_safe_tips').modal('show');
+            //禁止移动端滑动，在模态框弹出后
+            $('#myModal_safe_tips').on('shown.bs.modal', function (e) {
+                document.ontouchmove=function(e){ e.preventDefault() };
+                //document.ontouchmove=function(){ return false; };
+            });
+            //允许移动端滑动，在模态框隐藏后
+            $('#myModal_safe_tips').on('hidden.bs.modal', function () {
+                document.ontouchmove=function(){ return true; };
+            });
+            //加载页面后弹出
+            //
+            
+            jQuery.ajax({
+                method: "GET",
+                url: n_url,
+                dataType:'json',
+                success: function (data) {
+                    if(data.safeCode==0) {
+                        $('.Lnow-safeBox').css('display','none');
+                        $('.Lnow-tipsBox').fadeIn(function () {
+                            $('.Lnow-tipsBox li:last-child').on('click', function () {
+                                $('#myModal_safe_tips').modal('hide');
+                            });
+                        });
+                    }
+                }
+            });
+            //验证
+            $('#myModal_safe_tips  li:last-child').on('click', function () {
+                /*需要验证所有输入空均不为空才可提交，任意一个为空也不行*/
+                var warnMsg=$("#myModal_safe_tips .P-phoneWarnBox")[0];
+                var reg=/^\s*$/g;
+                if (reg.test($("#LpicValidate").val())||$("#LpicValidate").val() == '') {
+                    $('#myModal_safe_tips .P-phoneWarnBox').css('opacity','1');
+                    warnMsg.innerHTML = '验证码不可为空';
+                    return false;
+                }
+
+                var vid = "{$arr.v_id}"; 
+                jQuery.ajax({
+                    method: "POST",
+                    url: "{:U('Live/get_code')}",
+                    dataType:'json',
+                    //这里是取vm的数据模型 ,通过JSON.stringify会去掉其所有方法, 变成JSON字符串
+                    //再用JSON.parse变回纯JS对象
+                    data: {vid:vid,code:JSON.parse(JSON.stringify(safeCode.safeValiCode))},
+                    success: function (data) {
+                        //console.log(data.safeValiState==1);
+                        if(data.safeValiState==1){
+                            $('#myModal_safe_tips .Lnow-safeBox').fadeOut(function () {
+                                $('.Lnow-tipsBox').fadeIn(function () {
+                                    $('.Lnow-tipsBox li:last-child').on('click', function () {
+                                        $('#myModal_safe_tips').modal('hide');
+                                    });
+                                });
+                            });
+                        }
+                        else{$('#myModal_safe_tips .P-phoneWarnBox').css('opacity', '1');
+                            warnMsg.innerHTML = '验证码验证码不正确';
+                            return false
+                        }
+                    }
+                });
+            });
+
+        //TODO:红包
+            $('.Lnow-luckyMoney').on('click', function () {
+                jQuery.ajax({
+                    method: "GET",
+                    url: 'testWishList.json',
+                    //这里是取vm的数据模型 ,通过JSON.stringify会去掉其所有方法, 变成JSON字符串
+                    //再用JSON.parse变回纯JS对象
+                    success: function (data) {
+                        if(data.luckyQR_Code){
+                            $('.bs-example-modal-lg-QRCode img').attr("src",data.luckyQR_Code);
+                        }
+                    }
+                });
+            });
+        //TODO:点赞功能
+            var likeSwitch=true;
+            $('.Lnow-likeLuckyBox div>p:last-child>span').on('click', function () {
+
+            if(likeSwitch){
+                    jQuery.ajax({
+                        method: "POST",
+                        url: zan_url,
+                        //这里是取vm的数据模型 ,通过JSON.stringify会去掉其所有方法, 变成JSON字符串
+                        //再用JSON.parse变回纯JS对象
+                        dataType:'json',
+                         async : false,
+                        data:{vid:vid,code:JSON.parse(JSON.stringify(likeLuckys.likes))},
+                        success: function (data) {
+                                if(!data){
+                                    if(likeSwitch){
+                                        likeLuckys.likes = parseInt(likeLuckys.likes)+1;
+                                        likeSwitch=false;
+                                    }
+                                    $('.Lnow-likeLuckyBox div>p:last-child>span').css('background','#ff6c00');
+                                    $('.Lnow-likeLuckyBox div>p:last-child>b').css('color','#ff6c00');
+                                    $('.Lnow-likeLuckyBox div>ul>li:last-child>span').addClass('Lnow-likesAnimate');
+                                }else{
+                                     alert('不能重复点击');
+                                     likeSwitch=false;
+                                }
+                        }   
+                    });
+                }
+            });
+        //TODO:点击发送祝福语
+            $('.Lnow-wishInputBtn').on('click', function () {
+
+                var zfm = $('#zf_num').val();
+                //alert(zfm);
+                //非空验证！
+                var time = $("#tm").val();
+                var reg=/^\s*$/g;
+                if(!reg.test(wordsFilter.wdsFilter)){
+
+                    if(zfm<5){
+                        jQuery.ajax({
+                            method: "POST",
+                            url: zf_url,
+                            dataType:"json",
+                            async : false,
+                            data: {vid:vid,time:time,wish:JSON.parse(JSON.stringify(wordsFilter.wdsFilter))},
+                            success: function (data) {  
+                                $('#zf_num').val(data.now_num);
+                                var userWords=data;
+                                if(userWords.txtCon){   //后台返回发言判断值
+                                    userWords.txtCon=wordsFilter.wdsFilter;
+                                    wishList.data.push(userWords);
+                                    
+                                    $('.Lnow-wishInputBox input[type="text"]').val('');
+                               }
+                            }
+                        });              
+                    }
+                }
+            });
+
+        /*TODO:祝福图弹出框*/
+            $('.Lnow-wishWordsTitle button:first-child').on('click', function () {
+                $('.Lnow-wishPopBox').css('display','none');
+            });
+            $('.Lnow-wishWordsTitle button:last-child').on('click', function () {
+
+                var zfm = $('#zf_num').val();
+                var time = $("#tm").val();
+
+                $('.Lnow-wishPopBox').css('display','none');
+                var checkedWords=sysWords.sysWordList[sysWords.sysWordIndex];
+
+                if(zfm<5){
+                    jQuery.ajax({
+                        method: "POST",
+                        url: zf_url,
+                        dataType:"json",
+                        data: {vid:vid,time:time,wish:checkedWords},
+                        success: function (data) {
+
+                            $('#zf_num').val(data.now_num);
+                            var userWords=data;
+
+                            if(userWords.txtCon){
+                                userWords.txtCon=checkedWords;
+                                wishList.data.push(userWords);
+                            }
+                        }
+                    });
+
+                }
+
+
+            });
+            $('#wishPopBtn').on('click', function () {
+                $('.Lnow-wishPopBox').css('display','block');
+            });
+
+        //TODO:定时查询用户祝福语
+            var time = $('#tm').val();
+            setInterval(function () {
+                jQuery.ajax({
+                    method: "POST",
+                    url: sj_url,
+                    data:{vid:vid,time:time},
+                    dataType:'json',
+                    //返回数据是执行定时器添加，还是用定时器执行ajax添加数据。
+                    success: function (data) {
+                        //alert(data.time);
+                        $('#tm').val(data.time);
+                        avalon.each(data.data, function (k, v) {
+                            wishList.data.push(v);
+                        });
+                    }
+                });
+            },15000);
+
+        /*TODO:地理定位*/
+            $('.Lnow-tel-navi h6').on('click', function () {
+                //判断浏览器支持
+                if(window.navigator.geolocation) {
+                    //调用getCurrentPosition方法
+                    window.navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
+                    //var options = {enableHighAccuracy: true,timeout: 2000,maximumAge: 2000};
+                }/*else{console.log("浏览器不支持html5来获取地理位置信息");}*/
+                function handleSuccess(position){
+                    //经纬度
+                    var lng = position.coords.longitude;
+                    var lat = position.coords.latitude;
+                    //转化成百度经纬度
+                    //在这里操作
+                    jQuery.ajax({
+                        method: "POST",
+                        url: jw_url,
+                        async : false,
+                        data:{vid:vid},
+                        success: function (data) {
+                            alert('您已完成定位信息授权，再点下面地图导航'+lng+','+lat);
+                            procedure.liveNavi='http://api.map.baidu.com/direction?origin=latlng:'+lat+','+lng+'|name:我的位置&destination='+data.liveTargetPlace+'&mode=driving&region='+data.city+'&output=html'
+                        }
+                    });
+                }
+                function handleError(error){
+                    var result;
+                    switch (error.code) {
+                        case error.PERMISSION_DENIED:
+                            result="请打开您的定位系统";
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            result="暂时获取不到您的地点信息，请手动选择城市";
+                            break;
+                        case error.TIMEOUT:
+                            result="连接超时";
+                            break;
+                        case error.UNKNOWN_ERROR:
+                            result="发生了位置错误";
+                            break;
+                    }
+                }
+            });
+
+        });
+        //TODO：tabs标题栏定固定功能
+        $(function () {
+            //tabs原型和克隆选择联动功能
+            $('.funTabsOrig li').on('click', function () {
+                var cont = $(this).text();
+                $('.funTabsClone li a:contains(' + cont + ')').parent().addClass('active').siblings('.active').removeClass('active');
+            });
+            $('.funTabsClone li').on('click', function () {
+                var cont = $(this).text();
+                $('.funTabsOrig li a:contains(' + cont + ')').parent().addClass('active').siblings('.active').removeClass('active');
+            });
+            //滚动触发
+            window.onscroll=changePos;
+            function changePos() {
+                var obj = document.getElementsByClassName('funTabsClone')[0];
+                var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                var playerHeight = document.getElementById("player").style.height;
+                //克隆固定触发
+                if (window.innerWidth < 767) {
+                    if (scrollTop > 64) {
+                        obj.style.display = 'block';
+                        obj.style.position = 'fixed';
+                        obj.style.width = 100 + "%";
+                        obj.style.top = playerHeight;
+                        obj.style.zIndex = 120;
+
+                    } else if (scrollTop < 80) {
+                        obj.style.display = 'none';
+                    }
+                }
+            }
+
+        })
+
+    </script>
+</body>
+</html>

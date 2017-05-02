@@ -1,0 +1,1 @@
+a:6:{i:0;s:5:"appid";i:1;s:7:"appname";i:2;s:7:"pubtime";i:3;s:6:"active";s:3:"_pk";s:5:"appid";s:5:"_type";a:4:{s:5:"appid";s:16:"int(10) unsigned";s:7:"appname";s:9:"char(100)";s:7:"pubtime";s:16:"int(10) unsigned";s:6:"active";s:10:"tinyint(1)";}}

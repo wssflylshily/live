@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 兼容国产浏览器的高速模式 -->
+    <title>个人中心-邀约记录详情</title>
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/normalize.css"/>
+    <link rel="stylesheet" href="css/main.css"/>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.src.js"></script>
+</head>
+<body>
+    <!--nav part-->
+    <div class=" navbar-default ">
+        <div class="container">
+            <div class="row">
+                <!--logo-->
+                <a class="hidden-xs" >
+                    <div class="brand"></div>
+                </a>
+                <a class="hidden-xs brandBox">
+                    <div class="brand2"></div>
+                </a>
+            </div>
+        </div>
+        <div class=" navLine"></div>
+    </div>
+    <nav id="navPart" class="nav navbar-default navbar-fixed-top">
+        <div class="container" role="navigation">
+            <div class="row">
+                <!--pc端-->
+                <div id="navBox" class="navbar-collapse collapse">
+                    <ul class="nav navbar  noMargin">
+                        <li class="dropdown  dropBoxLine col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                            <span class="leftBoxline hidden-xs"></span>
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle drop_link">
+                                <span class="locoLogo"></span>天津<span class="caret leftMore"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">北京</a></li>
+                                <li><a href="#">上海</a></li>
+                                <li><a href="#">广州</a></li>
+                                <li><a href="#">沈阳</a></li>
+                                <li><a href="#">石家庄</a></li>
+                                <li><a href="#">济南</a></li>
+                            </ul>
+                        </li>
+                        <!--菜单选项-->
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="index.html" class="navSet_txt">
+                                首页
+                                <p class="navSet_txt_sub">HOME</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="liveRoom.html" class="navSet_txt">
+                                直播间
+                                <p class="navSet_txt_sub">LIVE SHOW</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="" class="navSet_txt">
+                                精选视频
+                                <p class="navSet_txt_sub">WONDERFUL</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="#" class="navSet_txt">
+                                商城
+                                <p class="navSet_txt_sub">THE MALL</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="personal_center_view.html" class="navSet_txt pageTitleActive">
+                                个人中心
+                                <p class="navSet_txt_sub">PERSONAL</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--移动端--><!--移动端代码位于pc下部，可出现导航条上不折叠菜单-->
+                <div class="navbar-header mo-navBg">
+                    <div class="navbar-left dropdown mo-navBg-title visible-xs-inline-block">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle drop_link2">
+                            <span class="locoLogo2"></span>天津<span class="caret leftMore"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">北京</a></li>
+                            <li><a href="#">上海</a></li>
+                            <li><a href="#">广州</a></li>
+                            <li><a href="#">沈阳</a></li>
+                            <li><a href="#">石家庄</a></li>
+                            <li><a href="#">济南</a></li>
+                        </ul>
+                    </div>
+                    <!--移动端中心logo-->
+                    <div class="mo-navLogo visible-xs">
+                        <div class="mo-navLogo_sub1"></div>
+                        <div class="mo-navLogo_sub2"></div>
+                    </div>
+
+                    <button type="button" class="navbar-toggle mo-navBtn" data-toggle="collapse" data-target="#navBox">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar mo-navBtnSub"></span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--nav end-->
+    <!--main part-->
+    <section class="showPartBg2">
+        <!--主图展示部分-->
+        <div class="container">
+            <ul class="H-inviteList" ms-controller="inviteUserList">
+                <li class="clear"><!--Title-->
+                    <span class="col-xs-1 col-sm-1 col-md-1 col-lg-1">顺序</span>
+                    <span class="col-xs-3 col-sm-3 col-md-3 col-lg-3">头像</span>
+                    <span class="col-xs-3 col-sm-3 col-md-3 col-lg-3">会员名</span>
+                    <span class="col-xs-5 col-sm-5 col-md-5 col-lg-5">时间</span>
+                </li>
+                <!--用户数据-->
+                <li class="clear" ms-for="el in @data">
+                    <span class="col-xs-1 col-sm-1 col-md-1 col-lg-1" ms-text="el.inviteRanking"></span>
+                    <span class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <img ms-attr="{src:el.imgSrc}" class="img-responsive img-center">
+                    </span>
+                    <span class="col-xs-3 col-sm-3 col-md-3 col-lg-3" ms-text="el.uName"></span>
+                    <span class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                        <em ms-text="el.inviteDate"></em>
+                        <p ms-text="el.inviteTime"></p>
+                    </span>
+                </li>
+            </ul>
+            <div class="row H-inviteList-loadMore"><button class="btn btn-default ">点击加载更多</button></div>
+
+        </div>
+    </section>
+    <footer class="container-fluid showPartBg hidden-xs">
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="footer-logo"></div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 footer-txt noPaddRL">
+                    <p class="hidden-xs">粤ICP备09075143号 | 增值电信业务经营许可证B2-20120219 | 粤公网安备44011302000069号 | 视听许可证1910441号</p>
+                    <div>
+                        <span class="small-Block">© 2005-2015 YY.com, All rights reserved.</span>
+                        <em class="small-Block">广州证婚直播LIVE网络科技有限公司&nbsp;版权所有</em>
+                        <span class="small-Block">联系电话:020-82120010</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="QR_Code"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/addfunction.js"></script>
+    <script src="js/avalon.js"></script>
+    <script>
+        /***数据绑定部分****/
+        var inviteUserList=avalon.define({
+            $id:"inviteUserList",
+            data:[
+                {inviteRanking:1,uName:'贵妇BB',imgSrc:'img/liveroom_userLogo.png',inviteDate:'2016-05-12',inviteTime:'08:12'},
+                {inviteRanking:2,uName:'贵妇BB',imgSrc:'img/liveroom_userLogo.png',inviteDate:'2016-05-12',inviteTime:'08:12'},
+                {inviteRanking:3,uName:'贵妇BB',imgSrc:'img/liveroom_userLogo.png',inviteDate:'2016-05-12',inviteTime:'08:12'},
+                {inviteRanking:4,uName:'贵妇BB',imgSrc:'img/liveroom_userLogo.png',inviteDate:'2016-05-12',inviteTime:'08:12'},
+                {inviteRanking:5,uName:'贵妇BB',imgSrc:'img/liveroom_userLogo.png',inviteDate:'2016-05-12',inviteTime:'08:12'}
+
+            ]
+
+        });
+        avalon.ready(function () {
+            $('.H-inviteList-loadMore').on('click',function () {
+                alert('1234556');
+                jQuery.ajax({
+                    method: "POST",
+                    url: 'test.html',
+                    //这里是取vm的数据模型 ,通过JSON.stringify会去掉其所有方法, 变成JSON字符串
+                    //再用JSON.parse变回纯JS对象
+                    /*data: JSON.parse(JSON.stringify(vm.$model))*/
+
+                    success: function () {
+                        console.log('hey u & me');
+
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+</html>

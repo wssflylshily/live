@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="en" class="ie6 ielt7 ielt8 ielt9"><![endif]--><!--[if IE 7 ]><html lang="en" class="ie7 ielt8 ielt9"><![endif]--><!--[if IE 8 ]><html lang="en" class="ie8 ielt9"><![endif]--><!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]--><!--[if (gt IE 9)|!(IE)]><!--> 
+<html lang="en"><!--<![endif]--> 
+  <head>
+    <meta charset="utf-8">
+    <title>婚礼后台管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="__PUBLIC__/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/site.css" rel="stylesheet">
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script type="text/javascript" charset="utf-8" src="/Public/UEditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/Public/UEditor/ueditor.all.js"></script>
+  <style type="text/css">
+    span.reneed::after{
+      content:'*';
+      color:red;
+      font-size:1.3em;
+      margin-right:3px;
+      position:absolute;
+      right:100%;
+      top:10%;
+    }
+    p.marb{
+      margin:5px 0;
+    }
+  </style>
+  </head>
+  <body>
+    <div class="container">
+      <include file="public:nav" />
+      <div class="row">
+        <include file="public:left" />
+        <div class="span9">
+          <h4>
+            添加直播 
+            <br />所有图片 只支持jpg png jpeg格式 直播图片大小必须尺寸为：260*180 相关点播频展示图：220*150 
+          </h4>
+          <form method="post" action="{:U('admin/admin/bczb')}" id="myform" enctype="multipart/form-data">
+            <input type="hidden" name="v_id" value="{$id}">
+              <div>
+                  <span class="reneed" style="position:relative">直播标题名称:</span>
+                  <input type="text" name="video_name" id="name" style="width:200px;" value="{$arr['video_name']}" />
+              </div>
+              <div> 
+              <!-- <span class="reneed" style="position:relative">选择直播类型:</span>
+                  <select name="video_type" id="tv"> 
+                            <option value=""></option>
+                      </notempty>
+                  </select>
+              </div> -->
+                  <span class="reneed" style="position:relative">直播应用名:</span>
+                  <input type="text" name="video_type" id="name" style="width:200px;" value="{$arr['video_type']}" />
+              <div>
+                 <span class="reneed" style="position:relative">直播文件流名:</span>
+                  <input type="text" name="video_file" id='video_file' style="width:200px;" value="{$arr['video_file']}" />
+              </div>
+              <div>
+                  <span class="reneed" style="position:relative">首页排序(0-99 99最大 倒序排序 如果想展示第一位 请填写99) :</span> <input type="text" name="sort" id="sort" style="width:100px;" value="{$arr['sort']}" />
+              </div>
+                <p class="marb">直播是否展示在首页:
+                <if condition="$arr['zb_zs'] eq 1"> 
+                <input  type="radio" id="zb_zs" name="zb_zs" value="1" checked />显示
+                <input  name="zb_zs" type="radio" value="0"  id="no_zb_zs" />不显示 
+                <else />
+                <input  type="radio" id="zb_zs" name="zb_zs" value="1" />显示
+                <input  name="zb_zs" type="radio" value="0"  id="no_zb_zs" checked />不显示 
+                </if>
+                </p>
+              <div>
+                  <span class="reneed" style="position:relative">直播的开始时间:</span>
+                  <input type="text" name="start_time" id="start_time" style="width:200px;" value="{$arr['start_time']}" />
+                  (例如2016年10月20日15时00分02秒 则需要填写格式为<span style="color:red">2016/10/20/15/00/02</span>  必需这样填写 否则无法匹配时间)
+                  <br /><br />
+                  <span class="reneed" style="position:relative">直播所在的的城市:</span>
+                  <input type="text" name="video_city" id="video_city" style="width:200px;" value="{$arr['video_city']}"  placeholder="天津" />
+                  <span>例如直播详细的地址为:天津市河东区万达广场</span> <span style="color:red">     这里则只填写天津</span> 
+                  <br />
+                  <span class="reneed" style="position:relative">直播所在的详细地址:</span>
+                  <input type="text" name="video_address" id="video_address" style="width:200px;" value="{$arr['video_address']}"  placeholder="河东区万达广场" />
+                  <span>例如直播详细的地址为:天津市河东区万达广场</span>      <span style="color:red">这里则填写河东区万达广场</span>                
+                  <br />
+                  <span class="reneed" style="position:relative">直播新人联系方式:</span>
+                  <input type="text" name="video_phone" id="video_phone" style="width:200px;" value="{$arr['video_phone']}"  />
+                  <span>例如直播联系人电话：18611234567</span>      <span style="color:red">这里则填写18611234567</span>                
+                  <br />
+                  <span class="reneed" style="position:relative">安全码:</span>
+                  <input type="text" name="safe_code" id="safe_code" style="width:200px;" value="{$arr['safe_code']}" />    安全码长度为6位(例如123456)，默认值为0，0表示不开启安全码
+                  <br />
+                 <span class="reneed" style="position:relative">选择直播地区:</span>
+                  <select name="c_id" id="cate"> 
+                        <foreach name="arr1" item="vo">
+                          <if condition="$arr['c_id'] eq $vo['qy_id']">
+                            <option value="{$vo.qy_id}" selected>{$vo.qy_name}</option>
+                          <else />
+                            <option value="{$vo.qy_id}">{$vo.qy_name}</option>
+                          </if>  
+                      </foreach>
+                  </select>
+                  <br />
+                  <span class="reneed" style="position:relative">添加房间管理员:(每个直播只能有一个管理员)</span>
+                  <select name="g_id" id="cate"> 
+                          <foreach name="arr2" item="adv">
+                          <if condition="$arr['a_id'] eq $adv['admin_id']">
+                            <option value="{$adv.admin_id}" selected>{$adv['name']}</option>
+                           <else />
+                            <option value="{$adv.admin_id}">{$adv['name']}</option>
+                            </if>
+                          </foreach>
+                  </select>
+                  <br />
+
+
+                 <span class="reneed" style="position:relative">上传直播图片: 只支持jpg png jpeg格式 直播图片大小必须尺寸为：260*180</span> 
+                 <input type="file"  name="zb_img"  value="" />    
+
+                  <br />
+                  <p class="marb">婚礼流程是否显示: 
+                  <input  type="radio" id="l_show" name="liucheng" value="1" checked/>显示 <input  name="liucheng" type="radio" value="0"  id="l_no_show" />不显示</p>
+                  
+                  <div id="hl">
+                  <br/>
+                  <taglib name="html" />
+                  <html:editor id="info" name="info" type="UEDITOR" >{$arr['info']}</html:editor>
+                  </div>           
+
+                <p class="marb">是否显示祝福: 
+                <if condition="$arr['zhufu'] eq 1">
+                <input  type="radio" name="zhufu" value="1" checked />显示 <input  name="zhufu" type="radio" value="0" />不显示</p>
+                <else />
+                <input  type="radio" name="zhufu" value="1" />显示 <input  name="zhufu" type="radio" value="0" checked/>不显示</p>
+                </if>
+                <p class="marb">是否显示邀约人气: 
+                <if condition="$arr['renqi'] eq 1">
+                <input  type="radio" name="renqi" value="1" checked />显示 <input name="renqi"  type="radio" value="0" />不显示</p>
+                <else />
+                 <input  type="radio" name="renqi" value="1" />显示 <input name="renqi"  type="radio" value="0" checked />不显示</p>
+                 </if>
+               </div>
+               <br />
+                <span class="reneed" style="position:relative">添加主持人:</span>
+                <select name="z_id" id="cate"> 
+                        <foreach name="zcr" item="zcv">
+                          <if condition="$arr['z_id'] eq $zcv['zcr_id']">
+                          <option value="{$zcv.zcr_id}" selected>{$zcv['zcr_name']}</option>
+                          <else />
+                           <option value="{$zcv.zcr_id}">{$zcv['zcr_name']}</option>
+                          </if>
+                        </foreach>
+                </select>
+                <br />
+               <br /><br />
+              <button id="send1" >提交</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/site.js"></script>
+    <script type="text/javascript">
+
+            $("#l_show").click(function(){
+                $("#hl").show();
+            });
+            $("#l_no_show").click(function(){
+                $("#hl").hide();
+            });
+            $("#sp_no_show").click(function(){
+                $("#sp").hide();
+            });
+            $("#sp_show").click(function(){
+                $("#sp").show();
+            });
+            document.getElementById("send1").onclick = function(){
+              //alert('1');
+                if($("#name").val()==''){
+                      alert('请填写直播标题名称');
+                      return false;
+                }
+                if($("#video_file").val()==''){
+                      alert('请填写推流文件名');
+                      return false;
+                }
+                if($("#c_id").val()==''){
+                      alert('请填写直播地区');
+                      return false;
+                }
+                if(($("#safe_code").val()!=0)&&($("#safe_code").val()!='')){
+                    if($("#safe_code").val().length!=6){
+                          alert('安全码必须为6位');
+                          return false;
+                    }
+                }
+               if($('#video_city').val()==''){
+                      alert('请填写直播所在的城市');
+                      return false;
+
+               }
+               if($('#video_address').val()==''){
+                      alert('请填写直播所在的详细地址');
+                      return false;
+
+               }
+
+              $("#myform").submit();
+            };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,179 @@
+<include file="Public/header" />
+    <!--main part-->
+    <section>
+        <!--主图展示部分-->
+        <div class="container showPartBg2">
+            <div class="Lg-loginTitle text-center">REGISTER</div>
+            <div class="Lg-loginLogo center-block">
+                <p class="Lg-loginLogo-txt">会员注册</p>
+                <em class="alert-txt">手码不手机号能为空！</em>
+            </div>
+            <div class="Lg-regBg center-block">
+                <form action="{:U('Login/doregister')}" id="myform" method="post">
+                <div class="Lg-loginInfo Lg-regInfo">
+                    <label class="Lg-regUserPhone" for="regUserPhone">手&nbsp;机&nbsp;号&nbsp;：<input id="regUserPhone" type="tel" name="mobile"></label>
+                    <button class="sendValid btn btn-default" id="yzm">发送验证码</button>
+                    <label class="Lg-regValidate" for="validate">验&nbsp;证&nbsp;码&nbsp;：<input id="validate" type="text" name="mobilecode"></label>
+                    <label class="Lg-regUserPwd" for="regUserPwd">设置密码：<input id="regUserPwd" type="password"  name="password"></label>
+                    <label class="Lg-REregUserPwd" for="REregUserPwd">确认密码：<input id="REregUserPwd" type="password" name="repassword"></label>
+                    <!--****注册会员入口*****-->
+                    <a href="login.html" class="Lg-regVip">返回登录</a>
+                    <!--****会员登陆入口*****-->
+                  
+                    <a href="#" class="Lg-regDone" id="sub">注册
+                        <p>Register</p>
+                    </a>
+                    </div> 
+                </form>
+
+            </div>
+
+        </div>
+    </section>
+    <footer class="container-fluid showPartBg hidden-xs">
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="footer-logo"></div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 footer-txt noPaddRL">
+                    <p class="small-Block">证婚直播LIVE&nbsp;&nbsp;版权所有&nbsp;&nbsp;<span>京ICP备15015202号-3&nbsp;&nbsp;</span><span class="small-Block">联系电话:010-89468899</span></p>
+                    <span class="small-Block">© 2005-2016 zhenghun.yicehua.cn, All rights reserved.</span>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="QR_Code"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="__PUBLIC__/Home/js/jquery-1.11.3.js"></script>
+    <script src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Home/js/addfunction.js"></script>
+    <script src="__PUBLIC__/Home/js/avalon.js"></script>
+    <script>
+        /***数据绑定部分****/
+        //TODO:城市列表
+        var cityList=avalon.define({
+            $id:"cityList",
+            data:["北京","上海","广州","天津"]
+        });
+        //后台更新数据
+
+        avalon.ready(function () {
+            //TODO：城市选择
+            $('.dropdown-menu li a').on('click',function (e) {
+                e.preventDefault();
+                var cityName=$(this).text();
+                jQuery.ajax({
+                    method: "POST",
+                    url: 'testLR.json',
+                    data: cityName,
+                    dataType:'json',
+                    success: function () {
+                        console.log(cityName);
+                    }
+                })
+            });
+        });
+
+        //表单验证
+        jQuery("#yzm").click(function(){
+                
+            var name = $("input[name='mobile']").val();
+
+            if(name==""){
+                $('.alert-txt').css("display","block");
+                setTimeout(function () { $('.alert-txt').css("display","none");},3000);
+                $("input[name='mobile']").focus();
+                return false;
+            }else{
+                if(!/^1[3|4|5|7|8]\d{9}$/g.test(name)){
+                    $('.alert-txt').css("display","block");
+                    $('.alert-txt').text("手机号码格式不正确！");
+                    setTimeout(function () { $('.alert-txt').css("display","none");},3000);
+                    $("input[name='mobile']").focus();
+                    return false;
+                }else{
+                    jQuery.ajax({
+                        type: "POST",
+                        url: "{:U('Login/get_mobile_code')}",
+                        data: {name:name},
+                        dataType: "json",
+                        success: function(data){
+                           if(data){
+                               $('.alert-txt').css("display","block");
+                               $('.alert-txt').text("请查收手机验证码!");
+                               setTimeout(function () { $('.alert-txt').css("display","none");},3000);
+                           }
+                           
+                        } 
+                    })
+                }
+            }
+            return false;
+        });
+
+
+    //注册验证
+    jQuery('#sub').click(function(){
+        var name = $("input[name='mobile']").val();
+        var pwd  = $("input[name='password']").val();
+        var repwd= $("input[name='repassword']").val();
+        var code = $("input[name='mobilecode']").val();
+        if(code==""){
+            $('.alert-txt').css("display","block");
+            $('.alert-txt').text("手机验证码不能为空!");
+            setTimeout(function () { $('.alert-txt').css("display","none");},3000);
+            $("input[name='code']").focus();
+            return false;
+        }
+        if(pwd==""){
+            $('.alert-txt').css("display","block");
+            $('.alert-txt').text("密码不能为空!");
+            setTimeout(function () { $('.alert-txt').css("display","none");},3000);
+                $("input[name='password']").focus();
+                return false;
+        }
+        if(repwd==""){
+            $('.alert-txt').css("display","block");
+            $('.alert-txt').text("确认密码不能为空!");
+            setTimeout(function () { $('.alert-txt').css("display","none");},3000);
+            $("input[name='repassword']").focus();
+            return false;
+        }
+
+        if((pwd.length<6)||(pwd.length>12)){
+            $('.alert-txt').css("display","block");
+            $('.alert-txt').text("密码长度为6-12位!");
+            setTimeout(function () { $('.alert-txt').css("display","none");},3000);
+            $("input[name='password']").focus();
+            return false;
+        }
+
+        if(pwd!=repwd){
+            $('.alert-txt').css("display","block");
+            $('.alert-txt').text("确认密码与密码不相同!");
+            setTimeout(function () { $('.alert-txt').css("display","none");},3000);
+            return false;
+        }
+
+
+        jQuery.ajax({
+            type: "POST",
+            url: "{:U('Login/check_mobile_code')}",
+            data: {name:code},
+            dataType: "json",
+            success: function(data){
+               if(data){
+                $("#myform").submit();
+               }else{
+                    return false;
+               }
+            } 
+        })
+    })
+            
+    </script>
+</body>
+</html>

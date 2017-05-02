@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="en" class="ie6 ielt7 ielt8 ielt9"><![endif]--><!--[if IE 7 ]><html lang="en" class="ie7 ielt8 ielt9"><![endif]--><!--[if IE 8 ]><html lang="en" class="ie8 ielt9"><![endif]--><!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]--><!--[if (gt IE 9)|!(IE)]><!--> 
+<html lang="en"><!--<![endif]--> 
+  <head>
+    <meta charset="utf-8">
+    <title>婚礼后台管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="__PUBLIC__/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/site.css" rel="stylesheet">
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <include file="public:nav" />
+      <div class="row">
+        <include file="public:left" />
+        <div class="span9">
+
+          <h4>
+            添加主持人
+            <br />所有图片 只支持jpg png jpeg格式 图片大小必须尺寸为：170*150
+          </h4>
+          <form method="post" action="{:U('Admin/bczcr')}" id="myform" enctype="multipart/form-data">
+              <input type="hidden" name="dd" value="{$arr['zcr_id']}">
+              <div>
+                  名称:
+                  <input type="text" name="name" id="name" style="width:200px;" value="{$arr['zcr_name']}" /><br/>
+                  年龄:
+                  <input type="text" name="age" id="name" style="width:200px;" value="{$arr['zcr_age']}" /><br/>
+                  专业:
+                  <input type="text" name="zy" id="name" style="width:200px;" value="{$arr['zcr_zy']}" /><br/>
+                  身高:
+                  <input type="text" name="height" id="name" style="width:200px;" value="{$arr['zcr_height']}" /><br/>
+                  场次:
+                  <input type="text" name="num" id="name" style="width:200px;" value="{$arr['zcr_num']}" /><br/>
+              </div>
+          
+              <div>
+                  简介(每个不能超过100个字):<br/>
+                 <textarea name="info" style="width:400px;height:100px;" maxlength="100">{$arr['info']}</textarea><br/>
+              </div>
+              上传主持人图片: 图片只支持jpg png jpeg格式
+              <input type="file"  name="img"  value="" />              
+              <button id="send" >提交</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/site.js"></script>
+    <script type="text/javascript">
+            $("#send").click(function(){
+                $('#pd').val($("#cate").find("option:selected").text());
+                if($("#name").val()==''){
+                      alert('请填写主持人名称');
+                      return false;
+                }
+                $("#myform").submit();
+            });
+    </script>
+  </body>
+</html>

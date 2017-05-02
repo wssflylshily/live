@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 兼容国产浏览器的高速模式 -->
+    <title>Goto.live直播回放</title>
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/normalize.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/iconfont.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/main.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/swiper.min.css"/>
+    <style>
+    	.float_left{ width: 16%; overflow: hidden; max-width: 60px; z-index: 100; position: fixed; bottom: 100px; right: 5px;}
+    	.float_left a{ display: block;}
+		.float_left img{ width: 100%;}
+		.float_left.Hide{ display: none;}
+		.yincang{ display: none;}
+    </style>
+    <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Home/js/avalon.js"></script>
+    <script src="__PUBLIC__/Home/js/html5shiv.min.js"></script>
+    <script src="__PUBLIC__/Home/js/respond.src.js"></script>
+    <script src="__PUBLIC__/Home/js/swiper.min.js"></script>
+
+    <!--播放器引入-->
+    <link rel="stylesheet" type="text/css" href="//g.alicdn.com/de/prismplayer/1.4.10/skins/default/index-min.css">
+    <script src="//g.alicdn.com/de/prismplayer/1.4.10/prism-min.js"></script>
+    <!--end-->
+	
+</head>
+<script type="text/javascript">
+//	if()
+		var c_state="{$_GET['state']}";
+        var jxid = "{$arr.jx_id}";
+        var n_url = "{:U('Live/get_code3')}?id="+"{$arr.jx_id}";
+        var y_url = "{:U('Live/get_code2')}?id="+"{$arr.jx_id}";
+        var hb_url = "{:U('Index/get_hongbao')}";
+        /***数据绑定部分****/
+        
+        //后台更新数据
+        /***点赞和红包***/
+        var likeLuckys=avalon.define({
+            $id:'likeLuckys',
+            likes:"",
+            viewSum:""
+        });
+        likeLuckys.likes="{$number['zan_num']?$number['zan_num']:0}"; 
+        likeLuckys.viewSum="{$number['number']?$number['number']:0}";
+        /***祝福语用户列表***/
+        var safeCode=avalon.define({
+           $id:'safeCode',
+            safeValiCode:[]
+        });
+
+        var wishList=avalon.define({
+            $id:"wishList",
+            data:[],
+            replyStorage:'',   //标记某人，存储变量
+            targetName:'',      //标记某人，用户id
+            //执行妙计某人传值
+            userReply:function(data,name){
+                wishList.replyStorage=data;
+                wishList.targetName=name;
+                replyOperate(wishList.replyStorage);
+            },
+            //标记某人，做非空处理
+            toggle:true,
+            markName:function(data){
+               var obj='';
+               data==""?obj=false:obj=true;
+               return obj     
+            }
+        });
+        
+        /***婚礼流程内容***/
+                /**conTitle1 -内容第一标题，conTitle1_sub1 -第一标题下第一段子内容，
+                 * conTitle2 -内容第二标题。conTxt1        -第二标题下第一段自内容，
+                 *                       conTxt2        -第二标题下第二段自内容，以此类推**/
+        var procedure=avalon.define({
+            $id:"procedure",
+            data:[    
+            ]
+        });
+        /*人气邀约排行数据*/
+        var inviteList=avalon.define({
+            $id:"inviteList",
+            data:[
+                /*{uName:'东方',imgSrc:'/Public/Home/img/liveroom_userLogo.png',uSum:290,ranking:1}*/
+            ],
+            showRank: function (data) {
+                var obj='';
+                data<=3?obj='Lnow-hotsNums': obj='Lnow-hotsNumsFouth';
+                return obj;
+            }
+        });
+         for(var j in {$invs}.data ){
+            inviteList.data.push({$invs}.data[j]);
+        }
+        /*直播相关视频*/
+        var otherVideos=avalon.define({
+            $id:"otherVideos",
+            data:[],
+            state_id:'',
+        });
+        var floatBack=avalon.define({
+        	$id:"floatBack",
+            state_id:''
+        });
+ 		
+ 		if(c_state)
+		{
+			floatBack.state_id=c_state;
+			otherVideos.state_id=c_state;
+		}
+		else
+		{
+			console.log(2)
+		}
+ 
+        for(var k in {$hiss}.data){
+            otherVideos.data.push({$hiss}.data[k]);
+        }    
+        $(function(){
+            //页面加载后body背景色改变
+            if (window.innerWidth < 767) {
+                $('body').css('background','#f8f8f8');
+                $('.Lnow-tab-bannerBg').css('backgroundColor','#f8f8f8');
+                $('.Lnow-tab-panelBg').css('backgroundColor','#f8f8f8');
+            }
+        })
+</script>
+<body>
+    <!--nav part-->
+    <div class=" navbar-default hidden-xs">
+        <div class="container">
+            <div class="row">
+                <!--logo-->
+                <a class="hidden-xs" >
+                    <div class="brand"></div>
+                </a>
+                <a class="hidden-xs brandBox">
+                   <!--  <div class="brand2"></div> -->
+                </a>
+            </div>
+        </div>
+        <div class=" navLine"></div>
+    </div>
+    <nav id="navPart" class="nav navbar-default navbar-fixed-top">
+        <div class="container" role="navigation">
+            <div class="row">
+                <!--pc端-->
+                <div id="navBox" class="navbar-collapse collapse">
+                    <ul class="nav navbar  noMargin">
+                        <li class="dropdown  dropBoxLine col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                            <span class="leftBoxline hidden-xs"></span>
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle drop_link">
+                                <span class="locoLogo"></span>{$cname}
+                            </a>
+                            <ul class="dropdown-menu">
+                            <foreach name='citys' item='cv'>
+                                <li><a href="{:U('Home/Live/liveRoom',['cid'=>$cv['qy_id']])}">{$cv['qy_name']}</a></li>
+                            </foreach>
+                            </ul>
+                        </li>
+                        <!--菜单选项-->
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="{:U('Index/index')}" class="navSet_txt">
+                                首页
+                                <p class="navSet_txt_sub">HOME</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="{:U('Live/liveRoom')}" class="navSet_txt">
+                                直播间
+                                <p class="navSet_txt_sub">LIVE SHOW</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="{:U('Live/wonderful')}" class="navSet_txt pageTitleActive">
+                                精选视频
+                                <p class="navSet_txt_sub">WONDERFUL</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="http://www.yicehua.cn" class="navSet_txt">
+                                商城
+                                <p class="navSet_txt_sub">THE MALL</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="{:U('User/personal_center_view')}" class="navSet_txt">
+                                个人中心
+                                <p class="navSet_txt_sub">PERSONAL</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--移动端--><!--移动端代码位于pc下部，可出现导航条上不折叠菜单-->
+                <div class="navbar-header mo-navBg  hidden-xs">
+                    <div class="navbar-left dropdown mo-navBg-title visible-xs-inline-block">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle drop_link2">
+                            <span class="locoLogo2"></span>{$cname}<span class="caret leftMore"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <foreach name='citys' item='cv'>
+                                <li><a href="{:U('Home/Live/liveRoom',['cid'=>$cv['qy_id']])}">{$cv['qy_name']}</a></li>
+                            </foreach>
+                        </ul>
+                    </div>
+                    <!--移动端中心logo-->
+                    <div class="mo-navLogo visible-xs">
+                        <div class="mo-navLogo_sub1"></div>
+                        <!-- <div class="mo-navLogo_sub2"></div> -->
+                    </div>
+
+                    <button type="button" class="navbar-toggle mo-navBtn" data-toggle="collapse" data-target="#navBox">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar mo-navBtnSub"></span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--nav end-->
+    <!--main part-->
+    <section id="wonderfulPage" class="showPartBg2">
+        <!--返回按钮-->
+        <a href="{:U('Home/index/index')}" class="glyphicon glyphicon-chevron-left Lnow-backBtn"></a>
+        <!--主图展示部分-->
+        <div class="container-fluid carouselBoxBg">
+            <div class="container noPaddRL">
+                <div class="W-mainBg clear">
+                    <!--阿里云播放器JS嵌入代码-->
+                    <div id="player" class="clear">
+                        <script>
+                            var url = "{$arr['url']}";
+                            function InitPlayer(){
+                                var player = new prismplayer({
+                                    id: "J_prismPlayer",    // 容器id
+                                    source: url,  // 视频url 支持互联网可直接访问的视频地址
+                                    autoplay: false,       // 自动播放
+                                    width: "100%",        // 播放器宽度
+                                    height: "100%",      // 播放器高度
+                                    isLive:false,
+                                     waterMark:"{$watermark}|TL|0.15|0.8",
+                                });
+                            }
+                            </script>
+                            <div id='J_prismPlayer' class='prism-player'></div>
+                            <script type="text/javascript">InitPlayer()</script>
+                    </div>
+                </div>
+            </div>
+            <!--广告浮窗-->
+          <a href="{$img_responsive[4]['url']}" class="float-adv ">
+               <img src="{$img_responsive[4]['big_img']}" class="img-responsive"></a>
+               
+           <a href="{$img_responsive[4]['url']}" class="float-adv2 ">
+               <img src="{$img_responsive[4]['small_img']}" class="img-responsive">
+           </a> 
+        </div>
+        <!--安全码-->
+        <!-- <div class="Lnow-safe-tips">
+            <div id="myModal_safe_tips" class="modal fade bs-example-modal-lg-safeTips" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+                <div class="modal-dialog modal-lg Lnow-safeBox">
+                    <div class="modal-content my-modal-content Lnow-safeTipsBox" ms-controller="safeCode">
+                        <p>输入安全码</p>
+                        <form class="clear">
+                            <label for="LpicValidate">输入安全码</label>
+                            <input id="LpicValidate" type="text" placeholder="请输入安全码" ms-duplex="@safeValiCode">
+                        </form>
+                        <div class="P-phoneWarnBox fade">不可为空</div>
+                        <ul class="clear">
+                            <li><a href="{:U('Home/Live/wonderful')}">取消</a></li>
+                            <li>确定</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!--红包和点赞-->
+        <div class="container Lnow-likeLuckyBox" ms-controller="likeLuckys">
+            <div>{$arr.jx_name}</div>
+            <div>
+                <ul>
+                    <li><em class="glyphicon glyphicon-eye-open"></em><span ms-text="@viewSum"></span></li>
+                    <li><em class="glyphicon glyphicon-thumbs-up"></em><span ms-text="@likes" ></span></li>
+                </ul>
+                <!-- <p class="W-luckyMoney"><span class="Lnow-luckyMoney icon iconfont">&#xe6ea;</span><b>红包</b></p>
+                <p><span class="glyphicon glyphicon-thumbs-up"></span><b>点赞</b></p> -->
+            </div>
+        </div>
+        <div class="container Lnow-likeLuckyBanner"></div>
+        <!--观看操作-->
+        <div id="Lnow-panel" class="container showPartBg2">
+                <!-- TODO 标签页 -->
+            <div class="row">
+                <ul class="nav nav-tabs functionTabs funTabsOrig">
+                    <li class="col-lg-3 col-md-3 col-sm-3 col-xs-3 active"><a data-toggle="tab" href="#pane2-procedure">活动详情</a></li>
+                    <li class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a data-toggle="tab" href="#pane-wish">在线互动</a></li>
+                    <li class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a data-toggle="tab" href="#pane3-hots">邀约人气</a></li>
+                    <li class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a data-toggle="tab" href="#pane4-greatVedios">直播回放</a></li>
+                </ul>
+            </div>
+            <!--固定标题栏克隆元素-->
+            <div class="row">
+                <ul class="nav nav-tabs functionTabs funTabsClone">
+                    <li class="col-lg-3 col-md-3 col-sm-3 col-xs-3 active"><a data-toggle="tab" href="#pane2-procedure">活动详情</a></li>
+                    <li class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a data-toggle="tab" href="#pane-wish">在线互动</a></li>
+                    <li class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a data-toggle="tab" href="#pane3-hots">邀约人气</a></li>
+                    <li class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a data-toggle="tab" href="#pane4-greatVedios">直播回放</a></li>
+                </ul>
+            </div>
+            <!--<div class="row Lnow-tab-bannerBg">
+                <a href="{$img_responsive[1]['url']}" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 noPaddRL">
+                    <div class="Lnow-tab-banner W-tab-banner"></div>
+                </a>
+            </div>-->
+            <div class="swiper-container top_banner" style="margin-left: -15px; margin-right: -15px;">
+                <div class="swiper-wrapper">
+<foreach name="img_responsive2" item="gg8">
+                    <div class="swiper-slide">
+                        <div class="Lnow-tab-bannerBg">
+			                <a href="{$gg8['url']}" style="display: block;">
+                                <!-- <input type="hidden" value="{$gg8['big_img']}" id="lb_gg"> -->
+ 			                    <div class="Lnow-tab-banner W-tab-banner" style="background:url({$gg8['big_img']}) no-repeat center center; background-size:100% 100%;"></div>
+			                </a>
+			            </div>
+                    </div>
+</foreach>
+                    <!-- <div class="swiper-slide">
+                        <div class="Lnow-tab-bannerBg">
+                                               <a href="{$img_responsive[1]['url']}" style="display: block;">
+                                                    <div class="Lnow-tab-banner W-tab-banner"></div>
+                                                </a>
+                                            </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="Lnow-tab-bannerBg">
+                                                <a href="{$img_responsive[1]['url']}" style="display: block;">
+                                                    <div class="Lnow-tab-banner W-tab-banner"></div>
+                                                </a>
+                                            </div>
+                    </div> -->
+                </div>
+           </div>
+           <script>
+	           	var mySwiper = new Swiper ('.top_banner', {
+				direction: 'horizontal',
+				loop: true,
+				autoplay : 3000,
+				autoplayDisableOnInteraction : false
+			  });
+           </script>
+            <!-- TODO 面板 -->
+            <div class="row Lnow-tab-panelBg">
+                <div class="tab-content tab-MyContent">
+                    <!--祝福语(wishList)-->
+                    <div id="pane-wish" class="tab-pane fade  Lnow-tab-ColContent">
+                        <ul class="Lnow-wishBox" ms-controller="wishList">
+                            <!--用户数据显示-->
+                            <li ms-for="el in @data" class="clear">
+                                <img class="Lnow-wishUserLogo" ms-attr="{src:el.imgSrc}">
+                                <div class="">
+                                    <b ms-text="el.wishuname"></b>
+                                    <h6><span ms-text="el.date"></span><em ms-text="el.time"></em></h6>
+                                    <p><em class="Lnow-markNameColor" ms-if="@toggle && @markName(el.markName)"><i ms-text="'@'+el.markName+'：&nbsp;'"></i></em><span ms-text="el.txtCon"></span></p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--流程-->
+                    <div id="pane2-procedure" class="tab-pane fade in active" ms-controller="procedure">
+                       
+                        <div class="row noMargL noMargR">
+                            <div class=" Lnow-weddingContent">
+                                {$jxinfo}
+                            </div>
+                        
+                        </div>
+                    </div>
+                    <!--人气邀约-->
+                    <div id="pane3-hots" class="tab-pane fade" ms-controller="inviteList">
+                        <ul>
+                            <li class="clear"><!--Title-->
+                                <span class="col-xs-2 col-sm-2 col-md-2 col-lg-2">排名</span>
+                                <span class="col-xs-3 col-sm-3 col-md-3 col-lg-3">头像</span>
+                                <span class="col-xs-4 col-sm-4 col-md-4 col-lg-4">会员名</span>
+                                <span class="col-xs-3 col-sm-3 col-md-3 col-lg-3">邀约人数</span>
+                            </li>
+                            <!--用户数据-->
+                            <li class="clear" ms-for="el in @data">
+                                <span class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><em ms-class="@showRank(el.ranking)">{{el.ranking}}</em></span>
+                                <span class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    <img ms-attr="{src:el.imgSrc}" class="img-responsive img-center"></span>
+                                <span class="col-xs-4 col-sm-4 col-md-4 col-lg-4 single_text Lnow-narrowTxt">{{el.uName}}</span>
+                                <span class="col-xs-3 col-sm-3 col-md-3 col-lg-3">{{el.uSum}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--相关视频-->
+                    <div id="pane4-greatVedios" class="tab-pane fade" ms-controller="otherVideos">
+                        <div class="media Lnow-tab-Mymedia" ms-for="el in @data">
+                            <div class="Lnow-Mymedia-imgBox">
+                                <a class="media-left" ms-attr="{href:el.url}" ms-class="{yincang:@state_id!=''}">
+                                    <img ms-attr="{src:el.imgSrc}" class="Lnow-tab-ImgSmall">
+                                </a>
+                                 <a class="media-left" ms-attr="{href:el.url+'?state='+@state_id}" ms-class="{yincang:@state_id==''}">
+                                    <img ms-attr="{src:el.imgSrc}" class="Lnow-tab-ImgSmall">
+                                </a>
+                            </div>
+                            <div class="media-body Lnow-Mymedia-txtBox">
+                                <h4 class="media-heading">{{el.title}}</h4>
+                                {{el.date}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="container-fluid showPartBg hidden-xs">
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="footer-logo"></div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 footer-txt noPaddRL">
+                    <p class="small-Block">证婚直播LIVE&nbsp;&nbsp;版权所有&nbsp;&nbsp;<span>京ICP备15015202号-3&nbsp;&nbsp;</span><span class="small-Block">联系电话:010-89468899</span></p>
+                    <span class="small-Block">© 2005-2016 zhenghun.yicehua.cn, All rights reserved.</span>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="QR_Code"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div ms-controller="floatBack">
+    	<div class="float_left" ms-class="{Hide:@state_id==''}">
+			<a ms-attr="{href:'/home/live/liveroom_broadcast/id/'+@state_id+'.html'}">
+				<img src="__PUBLIC__/Home/img/back.png">
+			</a>
+		</div>
+    </div>
+	
+    
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+    var jsconfig ='{$jsconfig}';
+    var wfen_url = "{$wfen_url}";
+    var imgurl = "http://goto.yicehua.cn"+"{$arr['jx_img']}";
+    var locaurl = window.location.href;
+    wx.config(JSON.parse(jsconfig));
+    wx.ready(function(){
+        wx.checkJsApi({
+            jsApiList: ['onMenuShareAppMessage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+        });
+         wx.onMenuShareTimeline({
+            title: "{$arr['jx_name']}", 
+            link: wfen_url,
+            imgUrl: imgurl, // 分享图标
+            trigger:function(res){
+            },
+            success: function () {
+                //alert('已分享');
+            },
+            cancel: function () {
+            },
+            fail:function(){
+            } 
+        });
+        wx.onMenuShareAppMessage({
+            title: "{$arr['jx_name']}", // 分享标题
+            desc: locaurl, // 分享描述
+            link: wfen_url, // 分享链接
+            imgUrl: imgurl, // 分享图标
+            type: 'link', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+              //  alert('hello');
+            },
+            cancel: function () {
+            }
+        });
+         //分享到QQ
+        wx.onMenuShareQQ({
+            title: "{$arr['jx_name']}",
+            desc: locaurl,
+            link: wfen_url,
+            imgUrl: imgurl, // 分享图标
+            success: function () { 
+               // 用户确认分享后执行的回调函数
+            },
+            cancel: function () { 
+               // 用户取消分享后执行的回调函数
+            }
+        });
+        //分享到腾讯微博
+        wx.onMenuShareWeibo({
+            title: "{$arr['jx_name']}",
+            desc: locaurl,
+            link: wfen_url,
+            imgUrl: imgurl, // 分享图标
+            success: function () { 
+               // 用户确认分享后执行的回调函数
+            },
+            cancel: function () { 
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    });
+
+</script>
+    <script>
+    
+
+        //重调位置，先加载播放器
+        //TODO:播放器调试 
+            $(function () {
+                var player=document.getElementById("player");
+                var playerCon=document.getElementById("J_prismPlayer");
+                player.style.height=window.innerWidth*9/16+'px';
+                playerCon.style.height=100+'%';
+                document.getElementsByClassName('W-mainBg')[0].style.marginBottom=player.style.height;
+                $('.prism-player .prism-big-play-btn').css({"width": "9.5%", "height": "18%","left":"5%","bottom":"24%","background-size": "300%"});
+                if(window.innerWidth>767){
+                    player.style.position='relative';
+                    document.getElementsByClassName('W-mainBg')[0].style.marginBottom=1+'%';
+                }
+                if(window.innerWidth>800){
+                    player.style.width=90+'%';
+                    player.style.left=0;
+                    player.style.right=0;
+                }
+                if(window.innerWidth>1010){
+                    player.style.position='relative';
+                    player.style.width=889+'px';
+                    player.style.height=540+'px';
+                    document.getElementsByClassName('W-mainBg')[0].style.marginBottom=0;
+                }
+
+                //分享判断是否显示返回按钮
+                if(window.innerWidth<768){
+                    var backBtn="{$fen}";
+                    if(backBtn==1){
+                        $('.Lnow-backBtn').css({'display':'none'});
+                    }else {
+                        $('.Lnow-backBtn').css('display','block');
+                    }
+                }
+            });
+              
+        avalon.ready(function () {
+            
+            //流程部分-富文本样式重调
+            $('.Lnow-weddingContent').css({'textAlign':'center','border':'none'});
+             $('.Lnow-weddingContent img').css({'margin':'0 auto ','width':'100%','height':'auto'});
+
+            //修改数据原型
+            // var zfly = '{$fan_arr}';
+            // console.log(zfly);
+            // wishList.data = zfly;
+          
+            if({$fan_arr}!=null){
+                for(var key in {$fan_arr}.data ){
+               wishList.data.push({$fan_arr}.data[key]); 
+            }
+            } 
+            procedure.data.push({$yishi}.data); 
+  
+            //console.log({$jc_arr});
+             if({$jc_arr}!=null){    
+                for(var key in {$jc_arr}.otherVideos ){
+                   otherVideos.data.push({$jc_arr}.otherVideos[key]); 
+                } 
+             }   
+            //var adv_banner="{$img_responsive[8]['big_img']}";
+            /*
+            console.log(adv_banner); 
+            $('.W-tab-banner').css({'background':'url('+adv_banner+') no-repeat center center','backgroundSize':'100% 100%'});*/
+            //console.log({$fan_arr});
+            //TODO:安全码
+            //加载页面后弹出
+            /*jQuery.ajax({
+                method: "GET",
+                url: y_url,
+                dataType:'json',
+                success: function (data) {
+                    if(data.safeCode==0) {
+                        $('.Lnow-safe-tips').css("display","none");
+                        $('.modal-backdrop').css("display","none");
+                        $('#myModal_safe_tips').modal('hide');
+
+                    }else{
+                        $('#myModal_safe_tips').modal('show');
+                    }
+                }
+            });*/
+
+
+
+            //空白不可点击
+            //$('#myModal_safe_tips').modal({backdrop: 'static', keyboard: false});
+            //禁止移动端滑动，在模态框弹出后
+            //$('#myModal_safe_tips').on('shown.bs.modal', function (e) {
+            //    document.ontouchmove=function(e){ e.preventDefault() };
+            //});
+            //允许移动端滑动，在模态框隐藏后
+            //$('#myModal_safe_tips').on('hidden.bs.modal', function () {
+            //  document.ontouchmove=function(){ return true; };
+            //});
+            //验证
+            /*$('#myModal_safe_tips  li:last-child').on('click', function () {
+                //需要验证所有输入空均不为空才可提交，空格也不行
+                var warnMsg=$("#myModal_safe_tips .P-phoneWarnBox")[0];
+                var reg=/^\s*$/g;
+                if (reg.test($("#LpicValidate").val())||$("#LpicValidate").val() == '') {
+                    $('#myModal_safe_tips .P-phoneWarnBox').css('opacity','1');
+                    warnMsg.innerHTML = '验证码不可为空';
+                    return false;
+                }
+                jQuery.ajax({
+                    method: "POST",
+                    url: n_url,
+                    dataType:'json',
+                    //这里是取vm的数据模型 ,通过JSON.stringify会去掉其所有方法, 变成JSON字符串
+                    //再用JSON.parse变回纯JS对象
+                    data: {jxid:jxid,code:JSON.parse(JSON.stringify(safeCode.safeValiCode))},
+                    success: function (data) {
+                        if(data.safeValiState==1){
+                            $('#myModal_safe_tips').modal('hide');
+                        }
+                        else{$('#myModal_safe_tips .P-phoneWarnBox').css('opacity', '1');
+                            warnMsg.innerHTML = '验证码验证码不正确';
+                            return false
+                        }
+                    }
+                });
+            });*/
+
+        //TODO:播放器调试
+        
+        //TODO：tabs标题栏定固定功能
+            $(function () {
+                //tabs原型和克隆选择联动功能
+                $('.funTabsOrig li').on('click', function () {
+                    var cont = $(this).text();
+                    $('.funTabsClone li a:contains(' + cont + ')').parent().addClass('active').siblings('.active').removeClass('active');
+                });
+                $('.funTabsClone li').on('click', function () {
+                    var cont = $(this).text();
+                    $('.funTabsOrig li a:contains(' + cont + ')').parent().addClass('active').siblings('.active').removeClass('active');
+                });
+
+                //第一个tab选中，背景变化
+                $('.funTabsOrig li:first-child').on('click', function () {
+                    $('body').css('background','#f8f8f8');
+                    $('.Lnow-tab-bannerBg').css('backgroundColor','#f8f8f8');
+                    $('.Lnow-tab-panelBg').css('backgroundColor','#f8f8f8');
+                });
+                $('.funTabsOrig li:not(:first-child)').on('click', function () {
+                    $('body').css('background','#ffe4f2');
+                    $('.Lnow-tab-bannerBg').css('backgroundColor','#ffe4f2');
+                    $('.Lnow-tab-panelBg').css('backgroundColor','#ffe4f2');
+                });
+                //克隆tab操作
+                $('.funTabsClone li:first-child').on('click', function () {
+                    $('body').css('background','#f8f8f8');
+                    $('.Lnow-tab-bannerBg').css('backgroundColor','#f8f8f8');
+                    $('.Lnow-tab-panelBg').css('backgroundColor','#f8f8f8');
+                });
+                $('.funTabsClone li:not(:first-child)').on('click', function () {
+                    $('body').css('background','#ffe4f2');
+                    $('.Lnow-tab-bannerBg').css('backgroundColor','#ffe4f2');
+                    $('.Lnow-tab-panelBg').css('backgroundColor','#ffe4f2');
+                });
+
+                //滚动触发
+                window.onscroll=changePos;
+                function changePos() {
+                    var obj = document.getElementsByClassName('funTabsClone')[0];
+                    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                    var playerHeight=document.getElementById("player").style.height;
+                    //克隆固定触发
+                    if (window.innerWidth < 767) {
+                        if (scrollTop > 73) {
+                            obj.style.display = 'block';
+                            obj.style.position = 'fixed';
+                            obj.style.width = 100 + "%";
+                            obj.style.top = playerHeight;
+                            obj.style.zIndex = 120;
+
+                        } else if (scrollTop < 114) {
+                            obj.style.display = 'none';
+                        }
+                    }
+                }
+            });
+
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 兼容国产浏览器的高速模式 -->
+    <title>会员登录</title>
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/normalize.css"/>
+    <link rel="stylesheet" href="css/main.css"/>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.src.js"></script>
+</head>
+<body>
+    <!--nav part-->
+    <div class=" navbar-default ">
+        <div class="container">
+            <div class="row">
+                <!--logo-->
+                <a class="hidden-xs" >
+                    <div class="brand"></div>
+                </a>
+                <a class="hidden-xs brandBox">
+                    <div class="brand2"></div>
+                </a>
+            </div>
+        </div>
+        <div class=" navLine"></div>
+    </div>
+    <nav id="navPart" class="nav navbar-default navbar-fixed-top">
+        <div class="container" role="navigation">
+            <div class="row">
+                <!--pc端-->
+                <div id="navBox" class="navbar-collapse collapse">
+                    <ul class="nav navbar  noMargin">
+                        <li class="dropdown  dropBoxLine col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                            <span class="leftBoxline hidden-xs"></span>
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle drop_link">
+                                <span class="locoLogo"></span>天津<span class="caret leftMore"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">北京</a></li>
+                                <li><a href="#">上海</a></li>
+                                <li><a href="#">广州</a></li>
+                                <li><a href="#">沈阳</a></li>
+                                <li><a href="#">石家庄</a></li>
+                                <li><a href="#">济南</a></li>
+                            </ul>
+                        </li>
+                        <!--菜单选项-->
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="index.html" class="navSet_txt">
+                                首页
+                                <p class="navSet_txt_sub">HOME</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="liveRoom.html" class="navSet_txt">
+                                直播间
+                                <p class="navSet_txt_sub">LIVE SHOW</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="wonderful.html" class="navSet_txt">
+                                精选视频
+                                <p class="navSet_txt_sub">WONDERFUL</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="#" class="navSet_txt">
+                                商城
+                                <p class="navSet_txt_sub">THE MALL</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="personal_center_view.html" class="navSet_txt pageTitleActive">
+                                个人中心
+                                <p class="navSet_txt_sub">PERSONAL</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--移动端--><!--移动端代码位于pc下部，可出现导航条上不折叠菜单-->
+                <div class="navbar-header mo-navBg">
+                    <div class="navbar-left dropdown mo-navBg-title visible-xs-inline-block">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle drop_link2">
+                            <span class="locoLogo2"></span>天津<span class="caret leftMore"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">北京</a></li>
+                            <li><a href="#">上海</a></li>
+                            <li><a href="#">广州</a></li>
+                            <li><a href="#">沈阳</a></li>
+                            <li><a href="#">石家庄</a></li>
+                            <li><a href="#">济南</a></li>
+                        </ul>
+                    </div>
+                    <!--移动端中心logo-->
+                    <div class="mo-navLogo visible-xs">
+                        <div class="mo-navLogo_sub1"></div>
+                        <div class="mo-navLogo_sub2"></div>
+                    </div>
+
+                    <button type="button" class="navbar-toggle mo-navBtn" data-toggle="collapse" data-target="#navBox">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar mo-navBtnSub"></span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--nav end-->
+    <!--main part-->
+    <section>
+        <!--主图展示部分-->
+        <div class="container showPartBg2">
+            <div class="Lg-loginTitle text-center">LOGIN</div>
+            <div class="Lg-loginLogo center-block">
+                <p class="Lg-loginLogo-txt">会员登录</p>
+            </div>
+            <div class="Lg-loginBg center-block">
+                <div class="Lg-loginInfo">
+                    <label class="Lg-userPhone" for="userPhone">手机号：<input id="userPhone" type="tel">
+                    </label>
+                    <label class="Lg-userPwd" for="userPwd">密码：<input id="userPwd" type="password">
+                    </label>
+                    <!--****注册会员入口*****-->
+                    <a href="register.html" class="Lg-regVip">注册会员</a>
+                    <!--****会员登陆入口*****-->
+                    <a href="#" class="Lg-loginDone">登录
+                        <p>Login</p>
+                    </a>
+                    <!--****忘记密码入口*****-->
+                    <a href="forget_pwd.html" class="Lg-forgetPwd">忘记密码？</a>
+                </div>
+            </div>
+            <!--第三方登录-->
+            <div class="Lg-otherLogin">
+               <!-- <div class="Lg-otherLoginTitle text-center">
+                    <span class="Lg-spaceLine"></span>
+                    <em class="Lg-spaceLine-txt">第三方登录</em>
+                    <span class="Lg-spaceLine"></span>
+                </div>
+                <div class="Lg-weiboLogin-box">
+                    <a href="#" class="Lg-weiboLogin"></a>
+                    <p>微博登录</p>
+                </div>
+                <div class="Lg-weixinLogin-box">
+                    <a href="#" class="Lg-weiboLogin Lg-weixinLogin"></a>
+                    <p>微信登录</p>
+                </div>-->
+            </div>
+        </div>
+    </section>
+    <footer class="container-fluid showPartBg hidden-xs">
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="footer-logo"></div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 footer-txt noPaddRL">
+                    <p class="hidden-xs">粤ICP备09075143号 | 增值电信业务经营许可证B2-20120219 | 粤公网安备44011302000069号 | 视听许可证1910441号</p>
+                    <div>
+                        <span class="small-Block">© 2005-2015 YY.com, All rights reserved.</span>
+                        <em class="small-Block">广州证婚直播LIVE网络科技有限公司&nbsp;版权所有</em>
+                        <span class="small-Block">联系电话:020-82120010</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="QR_Code"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/addfunction.js"></script>
+    <script src="js/avalon.js"></script>
+    <script>
+        /***数据绑定部分****/
+        
+    </script>
+</body>
+</html>

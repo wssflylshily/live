@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="en" class="ie6 ielt7 ielt8 ielt9"><![endif]--><!--[if IE 7 ]><html lang="en" class="ie7 ielt8 ielt9"><![endif]--><!--[if IE 8 ]><html lang="en" class="ie8 ielt9"><![endif]--><!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]--><!--[if (gt IE 9)|!(IE)]><!--> 
+<html lang="en"><!--<![endif]--> 
+  <head>
+    <meta charset="utf-8">
+    <title>goto直播</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="__PUBLIC__/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/site.css" rel="stylesheet">
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <style>
+        #send{padding:4px 60px;font-weight: 600;display: block;font-size: 14px;border-radius: 4px;box-shadow: 0 0 5px #666;margin:40px auto 0;}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <include file="public:nav" />
+      <div class="row">
+        <include file="public:left" />
+        <div class="span9">
+
+          <h4>
+            添加服务人员
+            <br />所有图片 只支持jpg png jpeg格式 图片大小必须尺寸为：170*150
+          </h4>
+          <form method="post" action="{:U('Admin/save_zcr')}" id="myform" enctype="multipart/form-data">
+              
+              <div>
+                  姓名:
+                  <input type="text" name="name" id="name" style="width:200px;" value="" /><br/>
+                  星级:
+                  <input type="text" name="num" id="num" style="width:200px;" value="" /><br/>
+                  链接:
+                  <input type="text" name="url" id="url" style="width:200px;" value="" /><br/>
+                    职业:
+                 <select name="hid" id="hid">
+                  <option value="">请选择</option>
+                  <foreach name="host" item="hv">
+                    <option value="{$hv['id']}">{$hv['profession']}</option>
+                  </foreach>
+                 </select><br/>
+              </div>
+              上传主持人图片: 图片只支持jpg png jpeg格式
+              <input type="file"  name="img"  value="" /> 
+              <br>
+              <span>
+              <font color="red" font-size="0.9em">图片请上传大小比例:170*150,最小尺寸为:170*150</font></span>      
+              <br>   
+              <br>    
+              <button id="send" >提交</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/site.js"></script>
+    <script type="text/javascript">
+            $("#send").click(function(){
+                $('#pd').val($("#cate").find("option:selected").text());
+                if($("#name").val()==''){
+                      alert('请填写主持人名称');
+                      return false;
+                }
+                if($("#hid").val()==''){
+                      alert('请选择职业');
+                      return false;
+                }
+                $("#myform").submit();
+            });
+    </script>
+  </body>
+</html>

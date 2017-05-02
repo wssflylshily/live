@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="en" class="ie6 ielt7 ielt8 ielt9"><![endif]--><!--[if IE 7 ]><html lang="en" class="ie7 ielt8 ielt9"><![endif]--><!--[if IE 8 ]><html lang="en" class="ie8 ielt9"><![endif]--><!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]--><!--[if (gt IE 9)|!(IE)]><!--> 
+<html lang="en"><!--<![endif]--> 
+	<head>
+		<meta charset="utf-8">
+		<title>婚礼后台管理系统</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="__PUBLIC__/Admin/css/bootstrap.min.css" rel="stylesheet">
+		<link href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" rel="stylesheet">
+		<link href="__PUBLIC__/Admin/css/site.css" rel="stylesheet">
+		<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	</head>
+	<body>
+		<div id="login-page" class="container">
+			<h1 style="text-align:center;">修改会员</h1>
+			<form id="login-form" class="well"  method="post" action="{:U('User/wuseredit')}">
+			<input type="hidden" name='userid' value="{$eUser['wid']}">
+			昵称:<input type="text" class="span2" id="user" name="mobile" placeholder="{$eUser['nick']}" style="width:95%" value="{$eUser['nick']}"/><br />
+			性别:<input type="text" class="span2" id="user" name="gender" placeholder="" style="width:95%" value="{$eUser['gender']}"/><br />
+			地区:<input type="text" class="span2" id="user" name="path" placeholder="" style="width:95%" value="{$eUser['path']}"/><br />
+			绑定手机号:<input type="text" class="span2" id="user" name="phone" placeholder="" style="width:95%" value="{$eUser['phone']}"/><br />
+			绑定QQ:<input type="text" class="span2" id="user" name="qq" placeholder="" style="width:95%" value="{$eUser['qq']}"/><br />
+						
+			<!-- <label class="checkbox"> <input type="checkbox" /> Remember me </label> -->
+			<button class="btn btn-primary" style="width:100%">修改</button>
+			<!-- <button type="submit" class="btn">Forgot Password</button> -->
+			</form>	
+		</div>
+		<script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+		<script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+		<script src="__PUBLIC__/Admin/js/site.js"></script>
+	</body>
+	<script type="text/javascript">
+
+		$(function(){
+
+			$("button").click(function(){
+				$('#login-form').submit();
+			});
+
+
+		});
+
+
+
+	</script>
+
+
+</html>

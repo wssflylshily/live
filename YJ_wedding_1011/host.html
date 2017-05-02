@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 兼容国产浏览器的高速模式 -->
+    <title>主持人信息</title>
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/normalize.css"/>
+    <link rel="stylesheet" href="css/main.css"/>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.src.js"></script>
+</head>
+<body>
+    <!--nav part-->
+    <div class=" navbar-default ">
+        <div class="container">
+            <div class="row">
+                <!--logo-->
+                <a class="hidden-xs" >
+                    <div class="brand"></div>
+                </a>
+                <a class="hidden-xs brandBox">
+                    <div class="brand2"></div>
+                </a>
+            </div>
+        </div>
+        <div class=" navLine"></div>
+    </div>
+    <nav id="navPart" class="nav navbar-default navbar-fixed-top">
+        <div class="container" role="navigation">
+            <div class="row">
+                <!--pc端-->
+                <div id="navBox" class="navbar-collapse collapse">
+                    <ul class="nav navbar  noMargin">
+                        <li class="dropdown  dropBoxLine col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                            <span class="leftBoxline hidden-xs"></span>
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle drop_link">
+                                <span class="locoLogo"></span>天津<span class="caret leftMore"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">天津</a></li>
+                                <!--<li><a href="#">上海</a></li>
+                                <li><a href="#">广州</a></li>
+                                <li><a href="#">沈阳</a></li>
+                                <li><a href="#">石家庄</a></li>
+                                <li><a href="#">济南</a></li>-->
+                            </ul>
+                        </li>
+                        <!--菜单选项-->
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="index.html" class="navSet_txt">
+                                首页
+                                <p class="navSet_txt_sub">HOME</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="liveRoom.html" class="navSet_txt pageTitleActive">
+                                直播间
+                                <p class="navSet_txt_sub">LIVE SHOW</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="wonderful.html" class="navSet_txt">
+                                精选视频
+                                <p class="navSet_txt_sub">WONDERFUL</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="#" class="navSet_txt">
+                                商城
+                                <p class="navSet_txt_sub">THE MALL</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="personal_center_view.html" class="navSet_txt">
+                                个人中心
+                                <p class="navSet_txt_sub">PERSONAL</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--移动端--><!--移动端代码位于pc下部，可出现导航条上不折叠菜单-->
+                <div class="navbar-header mo-navBg">
+                    <div class="navbar-left dropdown mo-navBg-title visible-xs-inline-block">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle drop_link2">
+                            <span class="locoLogo2"></span>天津<span class="caret leftMore"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">天津</a></li>
+                            <!--<li><a href="#">上海</a></li>
+                            <li><a href="#">广州</a></li>
+                            <li><a href="#">沈阳</a></li>
+                            <li><a href="#">石家庄</a></li>
+                            <li><a href="#">济南</a></li>-->
+                        </ul>
+                    </div>
+                    <!--移动端中心logo-->
+                    <div class="mo-navLogo visible-xs">
+                        <div class="mo-navLogo_sub1"></div>
+                        <div class="mo-navLogo_sub2"></div>
+                    </div>
+
+                    <button type="button" class="navbar-toggle mo-navBtn" data-toggle="collapse" data-target="#navBox">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar mo-navBtnSub"></span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--nav end-->
+    <!--main part-->
+    <section>
+        <div class="container showPartBg2" ms-controller="hostinfo">
+            <!--支持人资料-->
+            <div class="row">
+                <div class="HO-infoBg">
+                    <div class="HO-infoBox clear">
+                        <div class="col-lg-4 col-lg-offset-2 col-md-4 col-md-offset-2 col-sm-6 col-xs-7 HO-hostImgBox">
+                            <img src="img/hl_1_26.png" class="HO-hostImg">
+                        </div>
+                        <ul class="col-lg-4 col-lg-offset-2 col-md-4 col-md-offset-2 col-sm-6 col-xs-5 HO-hostInfoCon">
+                           <li>
+                               <em>主持人</em>
+                               <h4>张晓</h4>
+                           </li>
+                           <li ms-for="el in @stars" class="clear">
+                               <div class="host-rate">
+                                   <p ms-class="@showStar(el.hostRate)" class="HO-starRight"></p>
+                               </div>
+                           </li>
+                           <li>
+                               <em>年龄：</em>
+                               <span>28</span>
+                           </li>
+                           <li>
+                               <em>专业：</em>
+                               <span>播音主持</span>
+                           </li>
+                           <li>
+                               <em>身高：</em>
+                               <span>183cm</span>
+                           </li>
+                           <li>
+                               <em>场次数：</em>
+                               <span>1000+</span>
+                           </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <dl class="HO-hostDetail" ms-for="el in @info">
+                    <dd ms-text="el.txtCon1"></dd>
+                    <dd ms-text="el.txtCon2"></dd>
+                    <dd ms-text="el.txtCon3"></dd>
+                </dl>
+            </div>
+            <div class="HO-moBtnBox">
+                <a href="#" class="HO-moBtn">查看更多详情</a>
+            </div>
+        </div>
+    </section>
+    <footer class="container-fluid showPartBg hidden-xs">
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="footer-logo"></div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 footer-txt noPaddRL">
+                    <p class="hidden-xs">粤ICP备09075143号 | 增值电信业务经营许可证B2-20120219 | 粤公网安备44011302000069号 | 视听许可证1910441号</p>
+                    <div>
+                        <span class="small-Block">© 2005-2015 YY.com, All rights reserved.</span>
+                        <em class="small-Block">广州证婚直播LIVE网络科技有限公司&nbsp;版权所有</em>
+                        <span class="small-Block">联系电话:020-82120010</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="QR_Code"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/addfunction.js"></script>
+    <script src="js/avalon.js"></script>
+    <script>
+        /***数据绑定部分****/
+        var hostinfo=avalon.define({
+            $id:"hostinfo",
+            /*hostRate-为服务视频名次，5-0分别为5星、4星、3星。。*/
+            info:[{
+                txtCon1:"毕业于中国传媒大学，中国大陆男艺人：中国教育电视台外景节目主持人，歌手。高级婚礼策划师,婚礼讲师,有过上千场主持婚礼经验。",
+                txtCon2:"他毕业于美国纽约师范大学。演过宫廷剧和神话剧的男主角，他也是一位华语男歌手2012年首次推出个人专辑《从此以后》代表作品：平淡的幸福 真的动了情 忘记爱情 从此以后 成功进军歌坛！成为华语最具实力男歌手！",
+                txtCon3:"2013年个人作词、作曲，为婚礼创作一曲《平淡的幸福》。"
+            }],
+            stars:[{hostRate:5}],
+            showStar: function (data) {
+                var obj='';
+                data==5?obj='hostRates5-0':
+                        data==4?obj='hostRates4-1':
+                                data==3?obj='hostRates3-2':
+                                        data==2?obj='hostRates2-3':
+                                                data==1?obj='hostRates1-4':
+                                                        data==0?obj='hostRates0-5':
+                                                                obj='';
+                return obj;
+            }        });
+        avalon.ready(function () {
+            $('.HO-hostInfoCon').height(function () {
+                return $('.HO-infoBox>div>img').height();
+            });
+        })
+    </script>
+</body>
+</html>

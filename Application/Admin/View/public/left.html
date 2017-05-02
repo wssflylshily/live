@@ -1,0 +1,132 @@
+     <style>.nav-header{font-size:16px;}
+            .nav-list li.listTxtShadow{text-shadow: 0 0 8px rgba(24, 24, 25, 0.18);}
+     </style>
+      <div class="span3">
+          <div class="well" style="padding: 8px 0;box-shadow: 0 0 10px rgba(165, 199, 233, 0.74);">
+            <ul class="nav nav-list">
+            <if condition="$Think.session.admintype eq 0">
+                  <li class="nav-header listTxtShadow">直播管理</li>        
+                  <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'zblb')">class="active"</if> >
+                    <a href="{:U('Admin/zblb')}"><i class="icon-stop"></i>直播列表</a>
+                  </li>            
+                  <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'add_zb')">class="active"</if> >
+                    <a href="{:U('Admin/add_zb')}"><i class="icon-stop"></i>添加直播</a>
+                  </li>
+                   <li class="nav-header">精选视频管理</li>        
+                  <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'jxsplb')">class="active"</if> >
+                    <a href="{:U('Admin/jxsplb')}"><i class="icon-stop"></i>历史记录视频列表</a>
+                  </li>    
+                  <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'hxsplb')">class="active"</if> >
+                    <a href="{:U('Admin/hxsplb')}"><i class="icon-stop"></i>精选视频列表</a>
+                  </li>         
+                  <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'add_jxsp')">class="active"</if> >
+                    <a href="{:U('Admin/add_jxsp')}"><i class="icon-stop"></i>添加精选视频</a>
+                  </li>
+                  <li class="nav-header">红包管理</li>        
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'hblb')">class="active"</if> >
+                <a href="{:U('Admin/hblb')}"><i class="icon-stop"></i>红包列表</a>
+              </li>
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'add_hongbao')">class="active"</if> >
+                <a href="{:U('Admin/add_hongbao')}"><i class="icon-stop"></i>添加红包</a>
+                 <li class="nav-header">评论管理</li>        
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'commlist')">class="active"</if> >
+                <a href="{:U('Admin/commlist')}"><i class="icon-stop"></i>评论列表</a>
+              </li>   
+              <else />
+
+            <li class="nav-header listTxtShadow">后台管理员</li>        
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'glylb')">class="active"</if> >
+                <a href="{:U('Admin/glylb')}"><i class="icon-stop"></i>管理员</a>
+              </li>
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'add_user')">class="active"</if> >
+                <a href="{:U('Admin/add_user')}"><i class="icon-stop"></i>添加管理员</a>        
+              <li class="nav-header listTxtShadow">区域管理</li>        
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'qylb')">class="active"</if> >
+                <a href="{:U('Admin/qylb')}"><i class="icon-stop"></i>区域列表</a>
+              </li>            
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'add_quyu')">class="active"</if> >
+                <a href="{:U('Admin/add_quyu')}"><i class="icon-stop"></i>添加区域</a>
+              </li> 
+              <li class="nav-header listTxtShadow">直播管理</li>        
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'zblb')">class="active"</if> >
+                <a href="{:U('Admin/zblb')}"><i class="icon-stop"></i>直播列表</a>
+              </li>            
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'add_zb')">class="active"</if> >
+                <a href="{:U('Admin/add_zb')}"><i class="icon-stop"></i>添加直播</a>
+              </li>     
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'applb')">class="active"</if> >
+                <a href="{:U('Admin/applb')}"><i class="icon-stop"></i>直播应用列表</a>
+              </li>            
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'add_app')">class="active"</if> >
+                <a href="{:U('Admin/add_app')}"><i class="icon-stop"></i>添加直播应用</a>
+              </li> 
+
+              <li class="nav-header listTxtShadow">服务人员管理</li>        
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'zcrlb')">class="active"</if> >
+                <a href="{:U('Admin/zcrlb')}"><i class="icon-stop"></i>服务人员列表</a>
+              </li> 
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'hostlb')">class="active"</if> >
+                <a href="{:U('Admin/hostlb')}"><i class="icon-stop"></i>服务人员职业</a>
+              </li> 
+               <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'host_add')">class="active"</if> >
+                <a href="{:U('Admin/host_add')}"><i class="icon-stop"></i>添加职业</a>
+              </li>            
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'add_zcr')">class="active"</if> >
+                <a href="{:U('Admin/add_zcr')}"><i class="icon-stop"></i>添加服务人员</a>
+              </li>     
+
+              <li class="nav-header listTxtShadow">精选视频管理</li>        
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'jxsplb')">class="active"</if> >
+                <a href="{:U('Admin/jxsplb')}"><i class="icon-stop"></i>历史记录视频列表</a>
+              </li>  
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'hxsplb')">class="active"</if> >
+                    <a href="{:U('Admin/hxsplb')}"><i class="icon-stop"></i>精选视频列表</a>
+                  </li>            
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'add_jxsp')">class="active"</if> >
+                <a href="{:U('Admin/add_jxsp')}"><i class="icon-stop"></i>添加精选视频</a>
+              </li>   
+
+              <li class="nav-header listTxtShadow">轮播图管理</li>        
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'lbtlb')">class="active"</if> >
+                <a href="{:U('Admin/lbtlb')}"><i class="icon-stop"></i>轮播图列表</a>
+              </li>            
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'add_lbt')">class="active"</if> >
+                <a href="{:U('Admin/add_lbt')}"><i class="icon-stop"></i>添加轮播图</a>
+              </li>   
+
+  
+              <li class="nav-header listTxtShadow">广告管理</li>        
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'gglb')">class="active"</if> >
+                <a href="{:U('Admin/gglb')}"><i class="icon-stop"></i>广告列表</a>
+              </li>            
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'add_gg')">class="active"</if> >
+                <a href="{:U('Admin/add_gg')}"><i class="icon-stop"></i>添加广告</a>
+              </li>   
+
+
+              <li class="nav-header listTxtShadow">祝福管理</li>        
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'zflb')">class="active"</if> >
+                <a href="{:U('Admin/zflb')}"><i class="icon-stop"></i>祝福列表</a>
+              </li>            
+              
+
+              <li class="nav-header listTxtShadow">会员管理</li>        
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'glylb')">class="active"</if> >
+                <a href="{:U('User/userlist')}"><i class="icon-stop"></i>会员列表</a>
+              </li>
+              <!-- <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'glylb')">class="active"</if> >
+                <a href="{:U('User/wuserlist')}"><i class="icon-stop"></i>微信会员列表</a>
+              </li> -->
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'add_user')">class="active"</if> >
+                <a href="{:U('User/useradd')}"><i class="icon-stop"></i>添加会员</a>   
+
+              <li class="nav-header listTxtShadow">红包管理</li>        
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'hblb')">class="active"</if> >
+                <a href="{:U('Admin/hblb')}"><i class="icon-stop"></i>红包列表</a>
+              </li>
+              <li <if condition="(strtolower(CONTROLLER_NAME ) eq 'admin') and (strtolower(ACTION_NAME) eq 'add_hongbao')">class="active"</if> >
+                <a href="{:U('Admin/add_hongbao')}"><i class="icon-stop"></i>添加红包</a>   
+                </if>
+            </ul>
+          </div>
+        </div>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="en" class="ie6 ielt7 ielt8 ielt9"><![endif]--><!--[if IE 7 ]><html lang="en" class="ie7 ielt8 ielt9"><![endif]--><!--[if IE 8 ]><html lang="en" class="ie8 ielt9"><![endif]--><!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]--><!--[if (gt IE 9)|!(IE)]><!--> 
+<html lang="en"><!--<![endif]--> 
+  <head>
+    <meta charset="utf-8">
+    <title>goto直播</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="__PUBLIC__/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/site.css" rel="stylesheet">
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <style type="text/css">
+    /*分页*/
+      .current{
+        background-color:rgba(0,255,150,0.5);
+      }
+      .prev,.num,.next,.current{
+        width:auto;
+        height:auto;
+        margin:4px;
+        padding:1px 2px;
+        box-shadow:0 0 2px rgba(0,0,0,0.2);
+        background-color:rgba(255,255,255,0.1);
+      }
+    /*分页结束*/
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <include file="public:nav" />
+      <div class="row">
+        <include file="public:left" />
+        <div class="span9">
+
+           <h4>广告列表</h4>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>
+                  id
+                </th>
+                <th>
+                  所属
+                </th>
+                <th>
+                  操作
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+                <notempty name="arr">
+                  <volist name="arr" id="vo">
+                    <tr>
+                        <td>
+                          {$vo.fenlei}
+                        </td> 
+                        <td>
+                          {$gg[$vo['fenlei']]['desc']}
+                        </td>                     
+                        <td>
+                          <a href="{:U('admin/edit_gg',['id'=>$vo['id']])}" class="view-link">
+                            <span class="gai">修改</span></a>|
+                          <a href="javascript:void(0);" ad="{$vo.id}" class="view-link">
+                            <span class="del">删除</span></a>|
+                            <a href="javascript:void(0);" ad="{$vo.id}" class="view-link">
+                            <span class="edit">查看</span>
+                          </a>
+
+                       <!--    <a href="javascript:void(0);" ad="{$vo.id}" class="view-link">
+                          </a> -->
+                        </td>
+                    </tr>
+                  </volist>
+              </notempty>
+            </tbody>
+          </table>
+          <div class="pagination">
+　　{$page}
+</div>
+
+        </div>
+      </div>
+    </div>
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/site.js"></script>
+    <script type="text/javascript">
+            $('.current').css('color','#333');
+            $(".edit").on('click',function(){
+                  var id = $(this).parent('a').attr('ad');
+                  url = "{:U('admin/show_gg')}?id="+id;
+                  window.location.href=url; 
+            });
+            $(".del").on('click',function(){
+                  var id = $(this).parent('a').attr('ad');
+                  if(confirm("确定要删除数据吗？")){
+                            url1 = "{:U('admin/gg_del')}?id="+id;
+                            window.location.href=url1; 
+                  }
+            }); 
+
+            // $(".status").on('click',function(){
+            //       var id = $(this).parent('a').attr('ad');
+            //       var sd = $(this).attr('sd');
+            //       if(confirm("确定要修改么？")){
+            //                 url1 = "{:U('category/edit_status')}?id="+id+"&sd="+sd;
+            //                 window.location.href=url1; 
+            //       }
+            // });   
+    </script>
+  </body>
+</html>

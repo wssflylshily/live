@@ -1,0 +1,166 @@
+<include file="Public/header" />
+ <!--main part-->
+    <section>
+        <!--主图展示部分-->
+        <div class="container showPartBg2">
+            <div class="Lg-loginTitle text-center">LOGIN</div>
+            <div class="Lg-loginLogo center-block">
+                <p class="Lg-loginLogo-txt">会员登录</p>
+                <em class="alert-txt">用户手机号错误！</em>
+            </div>
+
+            <div class="Lg-loginBg center-block">
+            
+                <div class="Lg-loginInfo">
+                <form action="" method="post" id="lForm">   
+                    <label class="Lg-userPhone" for="userPhone">
+                        <span class="Lg-txtTitle">手机号：</span>
+                        <input name="mobile" id="userPhone" type="tel">
+                    </label>
+                    <label class="Lg-userPwd" for="userPwd">
+                        <span class="Lg-txtTitle">密<em></em>码：</span>
+                        <input name="password" id="userPwd" type="password">
+                    </label>
+                    <!--****注册会员入口*****-->
+                    <a href="{:U('Home/Login/register')}" class="Lg-regVip" >注册会员</a>
+                    <!--****会员登陆入口*****-->
+                    <a href="#" class="Lg-loginDone" id='aLogin'>登录
+                    <!-- {:U('user/personal_center_view')} -->
+                        <p>Login</p>
+                    </a>
+                    <!--****忘记密码入口*****-->
+                    <a href="{:U('Home/user/forget_pwd')}" class="Lg-forgetPwd">忘记密码？</a>
+                    </form> 
+                </div>
+            </div>
+            <!--第三方登录-->
+            <div class="Lg-otherLogin">
+                <div class="Lg-otherLoginTitle text-center">
+                    <span class="Lg-spaceLine"></span>
+                    <em class="Lg-spaceLine-txt">第三方登录</em>
+                    <span class="Lg-spaceLine"></span>
+                </div>
+                <div class="Lg-weiboLogin-box">
+                    <a href="{$sinaurl}" class="Lg-weiboLogin"></a>
+                    <p>微博登录</p>
+                </div>
+                <div class="" style="position: absolute;
+    top: 30%;
+    right: 46%;
+    text-align: center;">
+                    <a href="{:U('Home/login/qqlogin')}" class="Lg-qqLogin"></a>
+                    <p>QQ登录</p>
+                </div>
+                <!--移动端微信登陆-->
+                <div class="Lg-weixinLogin-box visible-xs">
+                    <a href="{$url}" class="Lg-weiboLogin Lg-weixinLogin"></a>
+                    <p>微信登录</p>
+                </div>
+                <!--PC端微信登陆-->
+                <div class="Lg-weixinLogin-box hidden-xs">
+                    <a href="{$purl}" class="Lg-weiboLogin Lg-weixinLogin"></a>
+                    <p>微信登录</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="container-fluid showPartBg hidden-xs">
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="footer-logo"></div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 footer-txt noPaddRL">
+                    <p class="small-Block">证婚直播LIVE&nbsp;&nbsp;版权所有&nbsp;&nbsp;<span>京ICP备15015202号-3&nbsp;&nbsp;</span><span class="small-Block">联系电话:010-89468899</span></p>
+                    <span class="small-Block">© 2005-2016 zhenghun.yicehua.cn, All rights reserved.</span>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="QR_Code"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="__PUBLIC__/Home/js/jquery-1.11.3.js"></script>
+    <script src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Home/js/addfunction.js"></script>
+    <script src="__PUBLIC__/Home/js/avalon.js"></script>
+    <script>
+        /***数据绑定部分****/
+        //TODO:城市列表
+        var cityList=avalon.define({
+            $id:"cityList",
+            data:["北京","上海","广州","天津"]
+        });
+        //后台更新数据
+
+        avalon.ready(function () {
+            //TODO：城市选择
+            $('.dropdown-menu li a').on('click',function (e) {
+                e.preventDefault();
+                var cityName=$(this).text();
+                jQuery.ajax({
+                    method: "POST",
+                    url: 'testLR.json',
+                    data: cityName,
+                    dataType:'json',
+                    success: function () {
+                        console.log(cityName);
+                    }
+                })
+            });
+        });
+        jQuery('#aLogin').on('click',function(){
+            var name = $("input[name = 'mobile']").val();
+            var pwd = $("input[name = 'password']").val();
+
+            if(name == ""){
+                $('.alert-txt').css("display","block");
+                $('.alert-txt').text("请输入用户名");
+                setTimeout(function () { $('.alert-txt').css("display","none");},3000);
+                $("input[name='mobile']").focus();
+                return false;
+            }
+
+            if(pwd == ""){
+                $('.alert-txt').css("display","block");
+                $('.alert-txt').text("请输入密码");
+                setTimeout(function () { $('.alert-txt').css("display","none");},3000);
+                $("input[name='password']").focus();
+                return false;
+            }
+
+            var uris = "{$uris}";
+            jQuery.ajax({
+            type: "POST",
+            url: "{:U('Login/dologin')}",
+            data: {name:name,password:pwd},
+            async:true,
+            dataType: "json",
+            success: function(data){
+
+                if(data){
+                    if(uris){
+                                uri = "{$uris}";
+                                location.href =  uri;
+                                //return false;
+                    }else{
+                                location.href = "{:U('User/personal_Info')}";
+                    }
+
+                }else{
+                    $('.alert-txt').text("用户手机号或密码不正确");
+                    $('.alert-txt').css("display","block");
+
+                    setTimeout(function () { $('.alert-txt').css("display","none");},3000);
+                    
+                }
+            }
+            });
+            return false;
+
+        });
+       
+    </script>
+</body>
+</html>

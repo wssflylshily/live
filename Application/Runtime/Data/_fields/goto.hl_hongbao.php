@@ -1,0 +1,1 @@
+a:8:{i:0;s:5:"hb_id";i:1;s:6:"xl_img";i:2;s:6:"xn_img";i:3;s:4:"v_id";i:4;s:8:"hb_title";i:5;s:10:"video_name";s:3:"_pk";s:5:"hb_id";s:5:"_type";a:6:{s:5:"hb_id";s:16:"int(11) unsigned";s:6:"xl_img";s:12:"varchar(100)";s:6:"xn_img";s:12:"varchar(100)";s:4:"v_id";s:7:"int(11)";s:8:"hb_title";s:8:"char(20)";s:10:"video_name";s:12:"varchar(255)";}}

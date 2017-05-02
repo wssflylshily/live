@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="en" class="ie6 ielt7 ielt8 ielt9"><![endif]--><!--[if IE 7 ]><html lang="en" class="ie7 ielt8 ielt9"><![endif]--><!--[if IE 8 ]><html lang="en" class="ie8 ielt9"><![endif]--><!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]--><!--[if (gt IE 9)|!(IE)]><!--> 
+<html lang="en"><!--<![endif]--> 
+  <head>
+    <meta charset="utf-8">
+    <title>婚礼后台管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="__PUBLIC__/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/site.css" rel="stylesheet">
+	<link rel="stylesheet" href="__PUBLIC__/editor/themes/default/default.css" />
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <style>
+		h3{text-align:center;}
+	</style>
+  </head>
+  <body>
+    <div class="container">
+      <include file="public:nav" />
+      <div class="row">
+        <include file="public:left" />
+        <div class="span9">
+          <h3>
+            	网站基本设置
+          </h3>
+          <form method="post" action="{:U('Index/editInfo')}" id="myform"> 
+          	<table>
+          		<tr>
+	          		<th>网站名称：</th>
+	          		<td><input type="text" name="name" id="name" style="width:400px;" value="{$info.name}" /></td>
+          		</tr>
+          		<tr>
+	          		<th>上传logo：</th>
+	          		<td>
+	          		<input class="" type="text" name="logo" id="img_url_0" value="{$info.logo}" style="width:400px" readonly/>
+	          		<!-- <input type="file" id="uploadButton_0" value="上传图片" /> -->
+	          		<input type="button" id="uploadButton_0" value="上传图片" />
+	          		</td>
+          		</tr>
+          		<if condition="$info['logo'] neq ''">
+          		<tr>
+          			<th>二维码缩略图：</th>
+          			<td>
+          				<img src="{$info.logo}" style="max-width:100px;max-height:80px;"/>
+          			</td>
+          		</tr>
+          		</if>
+          		<tr>
+	          		<th>上传二维码：</th>
+	          		<td>
+	          		<input class="" type="text" name="code" id="img_url_1" value="{$info.code}" style="width:400px" readonly/>
+	          		<input type="button" id="uploadButton_1" value="上传图片" />
+	          		</td>
+          		</tr>
+          		<if condition="$info['code'] neq ''">
+          		<tr>
+          			<th>logo缩略图：</th>
+          			<td>
+          				<img src="{$info.code}" style="max-width:100px;max-height:100px;"/>
+          			</td>
+          		</tr>
+          		</if>
+          		<tr>
+	          		<th>客服热线：</th>
+	          		<td><input type="text" name="phone" id="phone" style="width:400px;" value="{$info.phone}" /></td>
+          		</tr>
+          		<tr>
+	          		<th>版权：</th>
+	          		<td><input type="text" name="copyright" id="copyright" style="width:400px;" value="{$info.copyright}" /></td>
+          		</tr>
+          		<tr>
+	          		<th>备案号：</th>
+	          		<td><input type="text" name="icpnum" id="icpnum" style="width:400px;" value="{$info.icpnum}" /></td>
+          		</tr>
+             	<tr><td> <button id="send" >保存</button></td></tr>
+          	</table>
+          	 
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/site.js"></script>
+	<script charset="utf-8" src="__PUBLIC__/editor/kindeditor-min.js"></script>
+	<script charset="utf-8" src="__PUBLIC__/editor/lang/zh_CN.js"></script>
+    <script type="text/javascript">
+    	$(function(){
+    		$("#send").click(function(){
+                $('#pd').val($("#cate").find("option:selected").text());
+                if($("#name").val()==''){
+                      alert('请填写分类名称');
+                      return false;
+                }
+                $("#myform").submit();
+            });
+    	})
+    	KindEditor.ready(function(K) {
+			$("input[id^='uploadButton_']").each(function(i,v){
+				var obj = this;
+				var index=i;
+				var uploadbutton = K.uploadbutton({
+					button : obj,
+					fieldName : 'imgFile',
+					url : '__PUBLIC__/editor/php/upload_json.php',
+					afterUpload : function(data) {
+						if (data.error === 0) {
+							var url = K.formatUrl(data.url, 'absolute');
+							K('#img_url_'+index).val(url);
+						} else {
+							alert(data.message);
+						}
+					},
+					afterError : function(str) {
+						alert('自定义错误信息: ' + str);
+					}
+				});
+				uploadbutton.fileBox.change(function(e) {
+					uploadbutton.submit();
+				});
+			});
+		});
+            
+    </script>
+  </body>
+</html>

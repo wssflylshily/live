@@ -1,0 +1,633 @@
+<include file="Public/header" />
+    <!--main part-->
+    <section class="showPartBg2" ms-controller="userInfo">
+        <!--主图展示部分-->
+        <div class="container showPartBg3">
+            <ul class="P-infoBox row" >
+                <li class="clear" data-toggle="modal" data-target=".bs-example-modal-lg-userLogo">
+                    <em>头像</em>
+                    <div><img src="{$user['userlog']}" class="img-responsive">
+                    <!-- <img ms-attr="{src:@data.imgSrc}" class="img-responsive"> -->
+                        <a  class="glyphicon glyphicon-chevron-right" ></a>
+                    </div>
+                </li>
+                <li data-toggle="modal" data-target=".bs-example-modal-lg">
+                    <em>昵称</em>
+                    <div class="clear"><span class="single_text" name="user_nick">{$user['nick']}</span>
+                   <!--  <span  ms-text="@data.nickname"></span> -->
+                        <a class="glyphicon glyphicon-chevron-right" ></a>
+                    </div>
+                </li>
+                <li data-toggle="modal" data-target=".bs-example-modal-lg-gender">
+                    <em>性别</em>
+                    <div class="clear"><span name="user_gender">{$user['gender']}</span>
+                        <a  class="glyphicon glyphicon-chevron-right" ></a></div>
+                </li>
+                <li data-toggle="modal" data-target=".bs-example-modal-lg-addr">
+                    <em>地址</em>
+                    <div><span name="path" class="single_text">{$user['path']}</span>
+                   <!--  <span name="path">{$user['path']}</span> -->
+                        <a  class="glyphicon glyphicon-chevron-right" ></a></div>
+                </li>
+                <li data-toggle="modal" data-target=".bs-example-modal-lg-qqNum">
+                    <em>QQ号</em>
+                    <div><span  name="qqNum">{$user['QQ']}</span>
+                        <a class="glyphicon glyphicon-chevron-right" ></a></div>
+                </li>
+
+            </ul>
+            <ul id="phone_pwdBox" class="P-infoBox row" >
+                <li class="clear" data-toggle="modal" data-target=".bs-example-modal-lg-phone">
+                    <em>手机号</em>
+                    <div><span ms-text="@data.phone"></span>
+                        <a  class="glyphicon glyphicon-chevron-right" ></a></div>
+                </li>
+                <if condition="$Think.session.auth eq reguser">
+                <li data-toggle="modal" data-target=".bs-example-modal-lg-pwd">
+                    <em>修改密码</em>
+                    <div>
+                        <a class="glyphicon glyphicon-chevron-right" ></a></div>
+                </li>
+                </if>
+            </ul>
+        </div>
+        <!--弹窗：头像-->
+        <div id="updateHeadImg"  class="modal fade bs-example-modal-lg-userLogo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content my-modal-Content-userLogo">
+                    <!--PC时上传图片-->
+                    <form  action="{:U('User/personal_Info')}" enctype="multipart/form-data" method="post" id="userLogo_uploads" onsubmit="return check(this)"><!---->
+                        <p class="title">上传头像</p>
+                        <a href="javascript:;">
+                            拍照或选择相册<input type="file" name="files" id="loadFileBtn" accept="image/*" onchange="loadUserLogo(this);">
+                        </a>
+                        <input type="submit" value="上传" id="submitBtn">
+                        <h4>文件大小上限1MB，只可上传.jpg和.png格式图片</h4>
+                        <span class="P-userLogo-alert"></span>
+                    </form>
+
+                </div>
+                <div class="modal-content my-modal-Content-userLogoCancel">
+                    <button type="button" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+        <!--弹窗：修改昵称-->
+        <div id="myModal_nickname" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content my-modal-content">
+                    <p>修改昵称</p>
+                    <form action="">
+                        <input class="P-inputBox" type="text" value="" placeholder="请输入昵称" ms-duplex="@transferData.nickname">
+                        <span class="glyphicon glyphicon-remove-sign"></span>
+                    </form>
+                    <div class="P-phoneWarnBox fade">不可为空</div>
+                    <ul class="clear">
+                        <li data-dismiss="modal">取消</li>
+                        <li>确定</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--弹窗：性别-->
+        <div id="myModal_gender" class="modal fade bs-example-modal-lg-gender" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content my-modal-content">
+                    <p>选择性别</p>
+                    <div class="P-chooseGenderBox">
+                        <div><input name="gender" id="male" type="radio" class="Lnow-wishBtn" checked="checked" value="男" ms-duplex="@transferData.gender">
+                            <label for="male">男</label>
+                        </div>
+                        <div><input name="gender" id="female" type="radio" class="Lnow-wishBtn" value="女" ms-duplex="@transferData.gender">
+                            <label for="female">女</label>
+                        </div>
+                    </div>
+                    <ul class="clear">
+                        <li data-dismiss="modal">取消</li>
+                        <li>确定</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--弹窗：地址-->
+        <div id="myModal_addr" class="modal fade bs-example-modal-lg-addr" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content my-modal-content">
+                    <p>用户地址</p>
+                    <!-- <button type="button" class="btn btn-info P-addrPopBtn">编辑</button> -->
+                    <h6 class="clear" ms-text="'地址: '+@data.addr"></h6>
+                    <form class="P-chooseGenderBox">
+                        <input class="P-inputBox" type="text" ms-duplex="@transferData.addr">
+                        <span class="glyphicon glyphicon-remove-sign"></span>
+                    </form>
+                    <div class="P-phoneWarnBox fade">不可为空</div>
+                    <ul class="clear">
+                        <li data-dismiss="modal">取消</li>
+                        <li>确定</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--弹窗：QQ号-->
+        <div id="myModal_qqNum" class="modal fade bs-example-modal-lg-qqNum" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content my-modal-content">
+                    <p>绑定QQ号</p>
+                    <form class="P-changeNumBox">
+                        <input class="P-inputBox" type="text" ms-duplex="@transferData.qqNum">
+                        <span class="glyphicon glyphicon-remove-sign"></span>
+                    </form>
+                    <div class="P-phoneWarnBox fade">QQ号格式不正确</div>
+                    <ul class="clear">
+                        <li data-dismiss="modal">取消</li>
+                        <li>确定</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--弹窗：绑定手机-->
+        <div id="myModal_phone" class="modal fade bs-example-modal-lg-phone" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content my-modal-content P-addUserPhone">
+                    <p>绑定手机号</p>
+                    <form class="clear">
+                        <label for="addUserPhone" >新手机号</label>
+                        <input id="addUserPhone" type="text" placeholder="请输入手机号" name="modal_phone">
+                        <button type="button" class="btn P-sendValiSms" id="postMsg">发送短信</button>
+                    </form>
+                    <form class="clear">
+                        <label for="picValidate">图片验证</label>
+                        <input id="picValidate" type="text" placeholder="图片验证码" name="modal_photo_code">
+                        <span class="P-valiPicture" id="photo_check">
+                            <img id="codeimg" src="{:U('User/photo_check')}">
+                        </span>
+                    </form>
+                    <form class="clear">
+                        <label for="smsValidate">短信验证</label>
+                        <input id="smsValidate" type="text" placeholder="请输入短信验证码" name="modal_phone_code">
+                    </form>
+                    <form class="clear">
+                        <label for="loginPwd">登陆密码</label>
+                        <input id="loginPwd" type="password" placeholder="请输入登陆密码" name="modal_password">
+                    </form>
+                    <div class="P-phoneWarnBox fade">不可为空</div>
+                    <ul class="clear">
+                        <li data-dismiss="modal">取消</li>
+                        <li>确定</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--弹窗：密码-->
+        <div id="myModal_pwd" class="modal fade bs-example-modal-lg-pwd" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content my-modal-content P-addUserPhone">
+                    <p>修改密码</p>
+                    <form class=" ">
+                        <label for="oldPwd" >原密码</label>
+                        <input id="oldPwd" type="password" placeholder="请输入原密码" name='old_pwd'>
+                    </form>
+                    <form class=" ">
+                        <label for="newPwd">新密码</label>
+                        <input id="newPwd" type="password" placeholder="请输入新密码" name='new_pwd'>
+                    </form>
+                    <form class=" ">
+                        <label for="repeatNewPwd" >再次输入</label>
+                        <input id="repeatNewPwd" type="password" placeholder="请再次输入新密码" name='re_pwd'>
+                    </form>
+                    <div class="P-phoneWarnBox fade">不可为空</div>
+                    <ul class="clear">
+                        <li data-dismiss="modal">取消</li>
+                        <li >确定</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--退出登录-->
+    <div class="showPartBg2">
+        <div class="container noPaddRL showPartBg3">
+            <div class="P-exitBg">
+                <button type="button" class="btn exitBtn" id="logout">退出登录</button>
+            </div>
+        </div>
+    </div>
+    <footer class="container-fluid showPartBg hidden-xs">
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="footer-logo"></div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 footer-txt noPaddRL">
+                    <p class="small-Block">证婚直播LIVE&nbsp;&nbsp;版权所有&nbsp;&nbsp;<span>京ICP备15015202号-3&nbsp;&nbsp;</span><span class="small-Block">联系电话:010-89468899</span></p>
+                    <span class="small-Block">© 2005-2016 zhenghun.yicehua.cn, All rights reserved.</span>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="QR_Code"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="__PUBLIC__/Home/js/jquery-1.11.3.js"></script>
+    <script src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Home/js/addfunction.js"></script>
+    <script src="__PUBLIC__/Home/js/avalon.js"></script>
+    <script>
+
+        /***编辑资料页数据绑定部分****/
+
+        var userInfo=avalon.define({
+            $id:"userInfo",
+            data: ''/*{imgSrc:'img/history_personalLogo.jpg',nickname:'未填写',gender:'',phone:'未填写',addr:'未填写',qqNum:'未填写'}*/,
+            transferData: ' '
+        });
+        //渲染页面时插入数据插入
+        userInfo.data={$new_arr};
+        userInfo.transferData=userInfo.data;
+  
+        //退出登录
+        jQuery('#logout').click(function(){
+            location.href="{:U('User/logout')}";
+        });
+        //验证码点击刷新
+        jQuery('#photo_check').click(function (){
+            getVerify();
+        });
+
+        function getVerify(){
+            var src = $("#codeimg").attr('src');
+            if( src.indexOf('?')>0){ 
+                var srcs = src.split('?');
+                $("#codeimg").attr("src", srcs[0].replace(/\?.*$/,'')+'?'+Math.random());  
+            }else{  
+                $("#codeimg").attr("src", src.replace(/\?.*$/,'')+'?'+Math.random());  
+            } 
+        }
+
+        avalon.ready(function () {
+
+            /*手机未绑定，值为空修改页面空白内容为‘未绑定’*/
+            var elem = $('#phone_pwdBox li:first-child div span')[0];
+            elem.style.color='#ddd';
+            jQuery.ajax({
+                        type: "GET",
+                        url: "{:U('User/get_modal_phone')}",
+                        dataType:'json',
+                        success: function (data) {
+                            if(data){
+                                avalon.innerHTML(elem, '已绑定');
+                            }else{
+                                avalon.innerHTML(elem, '未绑定');
+                            }    
+                        }
+                    });
+            
+        //TODO:昵称操作********
+            $('#myModal_nickname>div>div>form>span').on('click', function () {
+                var $uname=$('#myModal_nickname .my-modal-content>form>input');
+                $uname.val()&&$uname.val('');
+            });
+            //昵称-确定
+            $('#myModal_nickname li:last-child').on('click', function () {
+                var username = $("#myModal_nickname .my-modal-content form>input").val();
+                if(/^\s*$/g.test(username)){
+                    $('#myModal_nickname .P-phoneWarnBox').text('不可为空!');
+                    $('#myModal_nickname .P-phoneWarnBox').css('opacity','1');
+                    return false;
+                }else if(!/^[\u4E00-\u9FA5A-Za-z0-9]{1,10}$/g.test(username)){
+                    $('#myModal_nickname .P-phoneWarnBox').text('您输入的内容太长了!');
+                    $('#myModal_nickname .P-phoneWarnBox').css('opacity','1');
+                    return false;
+                }else {
+                    var nick = userInfo.transferData;
+                    jQuery.ajax({
+                        type:"POST",
+                        url:"{:U('User/update_user_Nick')}",
+                        data:{name:nick.nickname},
+                        datatype:'json',
+                        success:function(data){
+                            if(!data){
+                                $('#myModal_nickname .P-phoneWarnBox').text('修改失败,请重试!');
+                                $('#myModal_nickname .P-phoneWarnBox').css('opacity','1');
+                                setTimeout(function () {
+                                    $('#myModal_nickname .P-phoneWarnBox').css('opacity','0');
+                                },1500);
+                                //alert('修改失败,请重试.');
+                            }else {
+                                changeUserInput($('#myModal_nickname'),$('.P-infoBox>li:nth-child(2)>div>span'),'nickname');
+                                $('#myModal_nickname .P-phoneWarnBox').css('opacity','0');
+                            }
+                        }
+                    });
+                    //changeUserInput($('#myModal_nickname'),$('.P-infoBox>li:nth-child(2)>div>span'),'nickname');
+                    //$('#myModal_nickname .P-phoneWarnBox').css('opacity','0');
+
+                }
+            });
+
+        //TODO:性别-确定
+            $('#myModal_gender li:last-child').on('click', function () {
+                var gender = userInfo.transferData;
+                jQuery.ajax({
+                    type: "POST",
+                    url: "{:U('user/update_user_Gender')}",
+                    data:{name:gender.gender},
+                    dataType:'json',
+                    success: function (data) {
+                        if(!data){
+                            $("#myModal_gender .P-phoneWarnBox").text('系统繁忙,请重试!');
+                            $('#myModal_gender .P-phoneWarnBox').css('opacity','1');
+                          //alert('系统繁忙,请重试.');
+                        }else {
+                            changeUserInput($('#myModal_gender'),$('.P-infoBox>li:nth-child(3)>div>span'),'gender');
+                            $('#myModal_gender .P-phoneWarnBox').css('opacity','0');
+                        }
+                    }
+                });
+                //changeUserInput($('#myModal_gender'),$('.P-infoBox>li:nth-child(3)>div>span'),'gender');
+            });
+
+        //TODO:地址
+            //编辑展开
+            // $('.P-addrPopBtn').on('click', function () {
+            //     $('.bs-example-modal-lg-addr>div>div>form').css('opacity','1');
+            // });
+            //清空内容
+            $('#myModal_addr form>span').on('click', function () {
+                var $uname=$('#myModal_addr form>input');
+                $uname.val()&&$uname.val('');
+            });
+
+            $('#myModal_addr li:last-child').on('click', function () {
+                var uaddr=$('#myModal_addr form>input').val();
+                if(!/^[\u4E00-\u9FA5A-Za-z0-9]{0,40}$/g.test(uaddr)){
+                    $('#myModal_addr .P-phoneWarnBox').text('您输入的内容太长了!');
+                    $('#myModal_addr .P-phoneWarnBox').css('opacity','1');
+                    //return false;
+                }else {
+                    var path = userInfo.transferData;
+                    jQuery.ajax({
+                        type: "POST",
+                        url: "{:U('user/update_user_Path')}",
+                        data:{name:path.addr},
+                        dataType:'json',
+                        success: function (data) {
+                            if(!data){
+                                $("#myModal_addr .P-phoneWarnBox").text('系统繁忙,请重试!');
+                                $("#myModal_addr .P-phoneWarnBox").css('opacity','1');
+                            }else{
+                                changeUserInput($('#myModal_addr'),$('.P-infoBox>li:nth-child(4)>div>span'),'addr');
+                                $("#myModal_addr .P-phoneWarnBox").css('opacity','0');
+                            }
+                        }
+                    });
+                }
+
+            });
+
+        //TODO:QQ号
+            $('#myModal_qqNum form>span').on('click', function () {
+                var $uname=$('#myModal_qqNum form>input');
+                $uname.val()&&$uname.val('');
+            });
+            $('#myModal_qqNum li:last-child').on('click', function () {
+                var qqNums= $("#myModal_qqNum form>input").val();
+                if(!/^\d{6,18}$/.test(qqNums)){
+                    $("#myModal_qqNum .P-phoneWarnBox").css('opacity','1');
+                    //$("#myModal_qqNum .P-valiTips").css('display',"block");
+                    return false;
+                }else {
+                    //changeUserInput($('#myModal_qqNum'),$('.P-infoBox>li:nth-child(5)>div>span'),'qqNum');
+                    //$("#myModal_qqNum .P-valiTips").css('display',"none");
+                    var user_qq = userInfo.transferData;
+                    jQuery.ajax({
+                        type: "POST",
+                        url: "{:U('User/update_user_qq')}",
+                        data:{name:user_qq.qqNum},
+                        dataType:'json',
+                        success: function (data) {
+                            if(!data){
+                                $("#myModal_qqNum .P-phoneWarnBox").css('opacity','1');
+                                $("#myModal_qqNum .P-phoneWarnBox").text('系统繁忙,请重试!');
+                              //alert('系统繁忙,请重试.');
+                            }else{
+                                changeUserInput($('#myModal_qqNum'),$('.P-infoBox>li:nth-child(5)>div>span'),'qqNum');
+                                $("#myModal_qqNum .P-phoneWarnBox").css('opacity','0');
+                            }
+                        }
+                    });
+                }
+            });
+        
+        //TODO:手机号
+            //手机绑定发送短信
+            $('#postMsg').on('click',function(){
+                var newmobile = $("#addUserPhone").val();
+                if(newmobile== ""){
+                        $("#myModal_phone .P-phoneWarnBox").css('opacity','1');
+                        $("#myModal_phone .P-phoneWarnBox").text('手机号不能为空!');
+                        //alert("手机号不能为空");
+                        $("input[name='modal_phone']").focus();
+                }else{
+                        jQuery.ajax({
+                            type: "POST",
+                            url: "{:U('User/user_modal_phone_code')}",
+                            data:{name:newmobile},
+                            dataType:'json',
+                            success: function (data) {
+                                if(data){ 
+                                    $("#myModal_phone .P-phoneWarnBox").css('opacity','1');
+                                    $("#myModal_phone .P-phoneWarnBox").text('信息已发送至您的手机,请注意查收!');
+                                  //alert('信息已发送至您的手机,请注意查收!');
+                                }      
+                            }
+                        });    
+                }
+            });
+            //验证不为空且显示为空项
+            $('#myModal_phone li:last-child').on('click', function () {
+                /*需要验证所有输入空均不为空才可提交，任意一个为空也不行*/
+                var mPhone = $("input[name='modal_phone']").val();
+                var mPhonecode = $("#smsValidate").val();
+                var mPhotocode = $("input[name='modal_photo_code']").val();
+                var mPassword = $("input[name='modal_password']").val();
+
+                var phoneInputs=$("#myModal_phone>div>div form input");
+                var warnTxt=$("#myModal_phone .P-phoneWarnBox")[0];
+                for(var i=0;i<phoneInputs.length;i++){
+                    if(phoneInputs[i].value==''){
+                        $('#myModal_phone .P-phoneWarnBox').css('opacity','1');
+                        switch (phoneInputs[i].getAttribute('id')){
+                            case 'addUserPhone':warnTxt.innerHTML='手机号不可为空';break;
+                            case 'picValidate' :warnTxt.innerHTML='图片验证码不可为空';break;
+                            case 'smsValidate' :warnTxt.innerHTML='短信验证不可为空';break;
+                            case 'loginPwd'    :warnTxt.innerHTML='登陆密码不可为空';break;
+                        }
+                        return false;
+                    }
+                }
+
+                //$('#myModal_phone .P-phoneWarnBox').css('opacity','0');
+                //changeUserInput($('#myModal_phone'),'phone');
+                jQuery.ajax({
+                        type: "POST",
+                        url: "{:U('User/user_modal_phone')}",
+                        data:{mPhone:mPhone,mPhonecode:mPhonecode,mPhotocode:mPhotocode,mPassword:mPassword},
+                        dataType:'json',
+                        success: function (data) {
+                            if(data == '1'){
+                                $('#myModal_phone .P-phoneWarnBox').css('opacity','1');
+                                $('#myModal_phone .P-phoneWarnBox').text('绑定成功!');
+                                changeUserInput($('#myModal_phone'),'phone');
+                                //alert('绑定成功!');
+                            }else if(data == '-2'){
+                                $('#myModal_phone .P-phoneWarnBox').css('opacity','1');
+                                $('#myModal_phone .P-phoneWarnBox').text('图片验证错误!');
+                                //alert('验证错误!');
+                            }else if(data == '-1'){
+                                $('#myModal_phone .P-phoneWarnBox').css('opacity','1');
+                                $('#myModal_phone .P-phoneWarnBox').text('手机验证码错误!');
+                              //alert('手机验证码错误!');
+                            }else if(data == '0'){
+                                $('#myModal_phone .P-phoneWarnBox').css('opacity','1');
+                                $('#myModal_phone .P-phoneWarnBox').text('密码错误!');
+                                //alert('密码错误!');
+                            }else if(data == '-3'){
+                                $('#myModal_phone .P-phoneWarnBox').css('opacity','1');
+                                $('#myModal_phone .P-phoneWarnBox').text('系统繁忙,请重试!');
+                              //alert('系统繁忙,请重试!');
+                            }/*else{
+                                $('#myModal_phone .P-phoneWarnBox').css('opacity','0');
+                                changeUserInput($('#myModal_phone'),'phone');
+                            }*/
+                        }
+                    });
+            });
+
+        //TODO:密码
+            $('#myModal_pwd  li:last-child').on('click', function () {
+                /*需要验证所有输入空均不为空才可提交，任意一个为空也不行*/
+                var pwdInputs=$("#myModal_pwd>div>div form input");
+                var warnMsg=$("#myModal_pwd .P-phoneWarnBox")[0];
+
+                var oldPwd =$("input[name='old_pwd']").val();
+                var newPwd =$("input[name='new_pwd']").val();
+                var rePwd =$("input[name='re_pwd']").val();
+
+                for(var i=0;i<pwdInputs.length;i++){
+                    if(pwdInputs[i].value==''){
+                        $('#myModal_pwd .P-phoneWarnBox').css('opacity','1');
+                        switch (pwdInputs[i].getAttribute('id')){
+                            case 'oldPwd' :warnMsg.innerHTML='原密码不可为空';break;
+                            case 'newPwd' :warnMsg.innerHTML='新密码不可为空';break;
+                            case 'repeatNewPwd' :warnMsg.innerHTML='新密码验证不可为空';break;
+                        }
+                        return false;
+                    }
+                }
+                jQuery.ajax({
+                    type:"POST",
+                    url:"{:U('User/user_Update_password')}",
+                    data:{oldPwd:oldPwd,newPwd:newPwd,rePwd:rePwd},
+                    dataType:'json',
+                    success:function(data){
+                        if(data == '0'){
+                            $('#myModal_pwd .P-phoneWarnBox').css('opacity','1');
+                            $('#myModal_pwd .P-phoneWarnBox').text('原密码错误,请核实!');
+                            //alert('原密码错误,请核实.');
+                            return false;
+                        }
+                        if(data == '-2'){
+                            $('#myModal_pwd .P-phoneWarnBox').css('opacity','1');
+                            $('#myModal_pwd .P-phoneWarnBox').text('系统繁忙,请稍后重试!');
+                            //alert('系统繁忙,请稍后重试.');
+                            return false;
+                        }
+                        if(data == '-1'){
+                            $('#myModal_pwd .P-phoneWarnBox').css('opacity','1');
+                            $('#myModal_pwd .P-phoneWarnBox').text('两次新密码不一致!');
+                            //alert('两次新密码不一致');
+                            return false;
+                        }
+                        if(data == '-3'){
+                            $('#myModal_pwd .P-phoneWarnBox').css('opacity','1');
+                            $('#myModal_pwd .P-phoneWarnBox').text('密码长度不够!');
+                            //alert('密码长度不够');
+                            return false;
+                        }
+                        if(data == '1'){
+                            $('#myModal_pwd .P-phoneWarnBox').css('opacity','1');
+                            $('#myModal_pwd .P-phoneWarnBox').text('修改成功!');
+                            //alert('修改成功');
+                            changeUserInput($('#myModal_pwd'),'phone');
+                        }
+                    }
+                });
+                 //changeUserInput($('#myModal_pwd'),'phone');
+            });
+
+        /*编辑资料完成后执行数据修改方法*/
+            function changeUserInput(inputParent,outputVal,item){
+                avalon.each(userInfo.transferData, function (k,v) {
+                    if(k==item){
+                        userInfo.data[item]=v;
+                        var elem = outputVal[0];
+                        avalon.innerHTML(elem,userInfo.data[item]);
+                    }
+                });
+                //inputParent.modal('hide');
+                setTimeout(function () {
+                    inputParent.modal('hide');
+                },1000);
+            }
+        });
+
+        //TODO:上传头像验证和限制
+        function loadUserLogo(target) {
+            //console.log(target.value);
+            var fileSize = 0;
+            //兼容性处理
+            if ( !target.files) {
+                var filePath = target.value;
+                var fileSystem = new ActiveXObject("Scripting.FileSystemObject");
+                var file = fileSystem.GetFile (filePath);
+                fileSize = file.Size;
+            } else {
+                fileSize = target.files[0].size;
+            }
+
+            var size = fileSize/1024;
+            if(size>1024){
+                document.getElementsByClassName('P-userLogo-alert')[0].innerHTML="您选择的图片不能大于1M";
+                document.getElementsByClassName('P-userLogo-alert')[0].style.opacity='1';
+                target.value="";
+                return
+            }
+
+            var name=target.value;
+            var fileName = name.substring(name.lastIndexOf(".")+1).toLowerCase();
+            if(fileName !="jpg" && fileName !="jpeg" && fileName !="png"){
+                document.getElementsByClassName('P-userLogo-alert')[0].innerHTML="请选择图片格式文件上传(jpg,png等)！";
+                document.getElementsByClassName('P-userLogo-alert')[0].style.opacity='1';
+                target.value="";
+                return
+            }
+
+        }
+        function check(){
+            var inputFile=document.getElementById('loadFileBtn').value;
+            var fileValue=inputFile.substring(inputFile.lastIndexOf(".")+1).toLowerCase();
+            if(!inputFile){
+                document.getElementsByClassName('P-userLogo-alert')[0].innerHTML='您还未选择头像，无法上传！';
+                document.getElementsByClassName('P-userLogo-alert')[0].style.opacity='1';
+                return false
+            }else {
+                if(fileValue !="jpg" && fileValue !="jpeg" && fileValue !="png"){
+                    return false
+                }
+            }
+        }
+    </script>
+</body>
+</html>

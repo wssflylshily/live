@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="en" class="ie6 ielt7 ielt8 ielt9"><![endif]--><!--[if IE 7 ]><html lang="en" class="ie7 ielt8 ielt9"><![endif]--><!--[if IE 8 ]><html lang="en" class="ie8 ielt9"><![endif]--><!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]--><!--[if (gt IE 9)|!(IE)]><!--> 
+<html lang="en"><!--<![endif]--> 
+  <head>
+    <meta charset="utf-8">
+    <title>婚礼后台管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="__PUBLIC__/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/site.css" rel="stylesheet">
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <include file="public:nav" />
+      <div class="row">
+        <include file="public:left" />
+        <div class="span9">
+          <h2>
+            修改区域
+          </h2>
+          <form method="post" action="{:U('Admin/edit_qy')}" id="myform">
+              
+              <div>
+                  区域名称:
+                  <input type="text" name="name" id="name" style="width:200px;" value="{$arr.qy_name}" />
+              </div>
+              <h5>
+                值越大排序越靠前范围(0-255)
+              </h5>
+              <div>
+                  排　　序:
+                  <input type="text" name="sort" id="sort" style="width:200px;" value="{$arr.qy_sort}" />
+                  <input type="hidden" name="dd" value="{$arr.qy_id}"  /> 
+              </div>              
+              <button id="send" >提交</button>
+          </form>
+  
+        </div>
+      </div>
+    </div>
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/site.js"></script>
+    <script type="text/javascript">
+            $("#send").click(function(){
+                $('#pd').val($("#cate").find("option:selected").text());
+                if($("#name").val()==''){
+                      alert('请填写分类名称');
+                      return false;
+                }
+                $("#myform").submit();
+            });
+    </script>
+  </body>
+</html>

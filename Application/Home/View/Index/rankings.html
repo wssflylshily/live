@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 兼容国产浏览器的高速模式 -->
+    <title>Goto.live-人气排行</title>
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/normalize.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/main.css"/>
+    <script src="__PUBLIC__/Home/js/html5shiv.min.js"></script>
+    <script src="__PUBLIC__/Home/js/respond.src.js"></script>
+    
+</head>
+<body>
+    <!--nav part-->
+    <div class=" navbar-default hidden-xs">
+        <div class="container">
+            <div class="row">
+                <!--logo-->
+                <a class="hidden-xs" >
+                    <div class="brand"></div>
+                </a>
+                <a class="hidden-xs brandBox">
+                    <!--<div class="brand2"></div>-->
+                </a>
+            </div>
+        </div>
+        <div class=" navLine"></div>
+    </div>
+    <nav id="navPart" class="nav navbar-default navbar-fixed-top">
+        <div class="container" role="navigation">
+            <div class="row">
+                <!--pc端-->
+                <div id="navBox" class="navbar-collapse collapse">
+                    <ul class="nav navbar  noMargin">
+                        <li class="dropdown  dropBoxLine col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                            <span class="leftBoxline hidden-xs"></span>
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle drop_link">
+                                <span class="locoLogo"></span>{$cname}
+                            </a>
+                            <ul class="dropdown-menu">
+                            <foreach name='citys' item='cv'>
+                                <li><a href="{:U('Home/Index/rankings',['cid'=>$cv['qy_id']])}">{$cv['qy_name']}</a></li>
+                            </foreach>    
+                            </ul>
+                        </li>
+                        <!--菜单选项-->
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="{:U('Index/index')}" class="navSet_txt indexPage">
+                                首页
+                                <p class="navSet_txt_sub">HOME</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="{:U('Live/liveRoom')}" class="navSet_txt livePage">
+                                直播间
+                                <p class="navSet_txt_sub">LIVE SHOW</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="{:U('Live/wonderful')}" class="navSet_txt">
+                                精选视频
+                                <p class="navSet_txt_sub">WONDERFUL</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="http://www.yicehua.cn" class="navSet_txt">
+                                商城
+                                <p class="navSet_txt_sub">THE MALL</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="{:U('User/personal_center_view')}" class="navSet_txt">
+                                个人中心
+                                <p class="navSet_txt_sub">PERSONAL</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--移动端--><!--移动端代码位于pc下部，可出现导航条上不折叠菜单-->
+                <div class="navbar-header mo-navBg">
+                    <div class="navbar-left dropdown mo-navBg-title visible-xs-inline-block">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle drop_link2">
+                            <span class="locoLogo2"></span>{$cname}<span class="caret leftMore"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                         <foreach name='citys' item='cv'>
+                                <li><a href="{:U('Home/Index/Index',['cid'=>$cv['qy_id']])}">{$cv['qy_name']}</a></li>
+                            </foreach>    
+                        </ul>
+                    </div>
+                    <!--移动端中心logo-->
+                    <div class="mo-navLogo visible-xs">
+                        <div class="mo-navLogo_sub1"></div>
+                        <!--<div class="mo-navLogo_sub2"></div>-->
+                    </div>
+
+                    <button type="button" class="navbar-toggle mo-navBtn" data-toggle="collapse" data-target="#navBox">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar mo-navBtnSub"></span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--main part-->
+    <section>
+        <!--主图展示部分-->
+        <div class="container-fluid L-mainImg hidden-xs"></div>
+        <div class="container-fluid L-mainImg-xs visible-xs"></div>
+        <!--live show-->
+        <div class="container-fluid showPartBg">
+            <div class="container sm-addPadd L-addMar">
+                <div class="row">
+                    <div class="L-liveTitle RK-marBott">
+                        <span>人气排行</span>
+                        <em class="L-liveTitleSub2">RANKINGS</em>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container ">
+                        <div class="row" ms-controller="rankings">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 showSubBox RK-showSubBox" ms-for="el in @data">
+                                <div class="rank-subBox">
+                                    <a href=" ">
+                                        <div class="RK-imageBox">
+                                            <img ms-attr="{src:el.imgSrc}" class=" img-responsive showSubImg">
+                                        </div>
+                                    </a>
+                                    <div class="half-maskBox">
+                                        <div class="half-mask">
+                                            <p class="single_text showSubTxtTitle showSubTxtTitle2" ms-text="el.towsName"></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="RK-rankHotBox">
+                                    <span  ms-text="el.date"></span>
+                                    <span ms-text="el.hotSum" class="RK-rankHotSum"></span>
+                                </div>
+                                <div id="rankStar" ms-class="@show(el.rate)">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <button class="moreBtn center-block">加载更多数据</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="container-fluid showPartBg hidden-xs">
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="footer-logo"></div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 footer-txt noPaddRL">
+                    <p class="small-Block">证婚直播LIVE&nbsp;&nbsp;版权所有&nbsp;&nbsp;<span>京ICP备15015202号-3&nbsp;&nbsp;</span><span class="small-Block">联系电话:010-89468899</span></p>
+                    <span class="small-Block">© 2005-2016 zhenghun.yicehua.cn, All rights reserved.</span>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="QR_Code"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="__PUBLIC__/Home/js/jquery-1.11.3.js"></script>
+    <script src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Home/js/addfunction.js"></script>
+    <script src="__PUBLIC__/Home/js/avalon.js"></script>
+    <script>
+        /***数据绑定部分****/
+
+        /*排行榜*/
+        var rankings=avalon.define({
+            $id:"rankings",
+            /*rate-视频排行榜名次，数字1-3为正向第一二三名，0为没有。hotSum-点击观看热度数量*/
+            data:[
+                /*{imgSrc:'img/hl_show_1_24.png',towsName:'萧先生&陆小姐',date:'2016-06-01',rate:1,hotSum:4321},
+                {imgSrc:'img/hl_show_1_24.png',towsName:'萧先生&陆小姐',date:'2016-06-01',rate:2,hotSum:1321},
+                {imgSrc:'img/hl_show_1_24.png',towsName:'萧先生&陆小姐',date:'2016-06-01',rate:3,hotSum:521},
+                {imgSrc:'img/hl_show_1_24.png',towsName:'萧先生&陆小姐',date:'2016-06-01',rate:0,hotSum:321},
+                {imgSrc:'img/hl_show_1_24.png',towsName:'萧先生&陆小姐',date:'2016-06-01',rate:0,hotSum:21}*/
+            ],
+            show: function (data) {
+                var obj='';
+                data==1?obj='rankStar': data==2?obj='rankStar2': data==3?obj='rankStar3':obj='rankStar4';
+                return obj;
+            }
+        });
+        //页面渲染数据
+        for(var key in {$userModel}.data ){
+            rankings.data.push({$userModel}.data[key]);  
+        }
+        avalon.ready(function () {
+            //导航标题选中样式
+            $('.pageTitleActive').removeClass('pageTitleActive');
+            $('.livePage').addClass('pageTitleActive');
+
+            var cid="{$cid}";
+            if({$userModel}.data==""){
+                $('.moreBtn').css('display','none');
+            }else if({$num}==0){
+                $('.moreBtn').text('没有更多啦!').addClass('disabledbtn');
+            }else {
+                var currAjax=null;
+                var page=2;
+                $('.moreBtn').on('click', function () {
+                    currAjax=jQuery.ajax({
+                        method: "GET",
+                        url: "{:U('Index/ajaxGetranks')}",
+                        data:{page:page,cid:cid},
+                        dataType: 'json',
+                        success: function (data) {
+                                avalon.each(data.data, function (k, v) {
+                                    rankings.data.push(v);
+                                });
+                                page++;
+                            if(data.num==0) {
+                                $('.moreBtn').text('没有更多啦!').addClass('disabledbtn');
+                                stopAjax();
+                            }
+                        }
+                    })
+                });
+                function stopAjax(){
+                    if(currAjax){ currAjax.abort(); }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

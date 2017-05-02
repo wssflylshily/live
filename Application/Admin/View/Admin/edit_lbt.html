@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="en" class="ie6 ielt7 ielt8 ielt9"><![endif]--><!--[if IE 7 ]><html lang="en" class="ie7 ielt8 ielt9"><![endif]--><!--[if IE 8 ]><html lang="en" class="ie8 ielt9"><![endif]--><!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]--><!--[if (gt IE 9)|!(IE)]><!--> 
+<html lang="en"><!--<![endif]--> 
+  <head>
+    <meta charset="utf-8">
+    <title>goto直播</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="__PUBLIC__/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/site.css" rel="stylesheet">
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <include file="public:nav" />
+      <div class="row">
+        <include file="public:left" />
+        <div class="span9">
+
+          <h4>
+            添加轮播图 只显示最新添加的4张 倒序排列 图片只支持jpg png jpeg格式
+            <br />1.轮播大图尺寸：822*548   2.轮播小图尺寸：298*128
+          </h4>
+          <form method="post" action="{:U('Admin/edit_lbt')}" id="myform" enctype="multipart/form-data">
+          <input type="hidden" name="id" value="{$lbt['id']}">
+              图片主题:
+              <input type="text"  id="imgname" name="imgname"  value="{$lbt['imgname']}" /><font color="red">图片主题名字不能超过6个中文数字</font>              
+              <br />
+               轮播图链接:
+              <input type="text"  name="url"  value="{$lbt['url']}" />(<font color="red">必须以http://或者https://开头</font>) 
+              <br/>
+              直播时间:(例如2016年11月31日 则填写2016-11-31)
+              <input type="text"  name="livetime"  value="{$lbt['livetime']}" />              
+              <br />
+              上传<b style="color:red">大</b>轮播图片:
+              <input type="file"  name="big_img" />              
+  
+              <br /><br />
+              上传<b style="color:red">小</b>轮播图片;
+              <input type="file"  name="small_img"  />              
+              <br /><br />
+              <button id="send" >提交</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/site.js"></script>
+    <script type="text/javascript">
+
+            $("#send").click(function(){
+                var leng = $('#imgname').val().length;
+                if(leng > 6){
+                  alert('图片主题长度不能超过6个');
+                  return false;
+                }
+                $("#myform").submit();
+            });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,141 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<script src="__PUBLIC__/Home/js/jquery.min.js"></script>
+	<style type="text/css">
+		body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=FGTbUIjcp01uH689xKewMjs01MQsnbKq"></script>
+	<title>IP定位获取当前城市</title>
+</head>
+<body>
+	
+	
+        <input name="mobile" type="text" class="col-xs-10 animation" placeholder="手机号码"/>
+        <br />
+        <input name="password" type="password" class="col-xs-10 animation" placeholder="密码"/>
+        <br />
+      <!--   <input name="code" type="text" class="col-xs-10 animation" placeholder="验证码" />
+        <br />
+        <img id="codeimg" src="{:U('Index/getVerify')}" style="height:50px;cursor: pointer;" onclick="javascript:getVerify();"/>
+        <br />
+        <input name="mobilecode" type="text" class="col-xs-10 animation" placeholder="手机验证码" />
+        <br />
+        <button id="yzm">获取手机验证码</button> -->
+        <button id="tj">登录啊</button>
+        <div id="allmap" style="width:600px;height:300px;"></div>
+</body>
+
+
+<script>
+	$(function(){
+		//getVerify();
+		/*登陆*/
+		$("#tj").click(function(){
+			var uname = $("input[name='name']").val();
+				upwd  = $("input[name='password']").val();
+			if(uname==""){
+				alert("请输入用户名");
+				$("input[name='username']").focus();
+				return false;
+			}
+			if(upwd==""){
+				alert("请输入登陆密码");
+				$("input[name='password']").focus();
+				return false;
+			}
+			var info = {name:uname,pwd:upwd}
+			$.post("{:U('Login/dologin')}",info,function(data){
+				alert(data.msg);
+				if(data.status==1){
+					location.href="{:U('Index/index')}";
+				}
+			},'json');
+		});
+		
+		
+
+		//获取手机验证码
+		$("#yzm").click(function(){
+			var name = $("input[name='name']").val();
+			var code = $("input[name='code']").val();
+			//alert('1');
+			if(code==""){
+				alert("验证码不能为空");
+				$("input[name='code']").focus();
+				return false;
+			}
+
+			var info = {name:name,code:code};
+			$.post("{:U('Login/get_mobile_code')}",info,function(data){
+				if(data.status==1){
+					alert('haha');
+					//location.href = "{:U('Index/index')}";
+				}else{
+					alert('请点击验证码刷新后再重新获取');
+				}
+			},'json');
+
+		});
+
+	})
+	
+	// function getVerify(){
+	// 	var src = $("#codeimg").attr('src');
+	// 	if( src.indexOf('?')>0){ 
+	// 		var srcs = src.split('?');
+	//         $("#codeimg").attr("src", srcs[0].replace(/\?.*$/,'')+'?'+Math.random());  
+	//     }else{  
+	//         $("#codeimg").attr("src", src.replace(/\?.*$/,'')+'?'+Math.random());  
+	//     } 
+	// }
+
+</script>
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=FGTbUIjcp01uH689xKewMjs01MQsnbKq"></script>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+	var point = new BMap.Point(116.331398,39.897445);
+	map.centerAndZoom(point,13);
+
+	function myFun(result){
+		var cityName = result.name;
+		map.setCenter(cityName);
+		alert("当前定位城市:"+cityName);
+	}
+	var myCity = new BMap.LocalCity();
+	myCity.get(myFun);
+</script>
+
+</html>
+
+<!-- <html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=FGTbUIjcp01uH689xKewMjs01MQsnbKq"></script>
+	<title>IP定位获取当前城市</title>
+</head>
+<body>
+	<div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+	var point = new BMap.Point(116.331398,39.897445);
+	map.centerAndZoom(point,12);
+
+	function myFun(result){
+		var cityName = result.name;
+		map.setCenter(cityName);
+		alert("当前定位城市:"+cityName);
+	}
+	var myCity = new BMap.LocalCity();
+	myCity.get(myFun);
+</script> -->

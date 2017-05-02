@@ -1,0 +1,1 @@
+a:5:{i:0;s:5:"qy_id";i:1;s:7:"qy_name";i:2;s:7:"qy_sort";s:3:"_pk";s:5:"qy_id";s:5:"_type";a:3:{s:5:"qy_id";s:16:"int(11) unsigned";s:7:"qy_name";s:11:"varchar(60)";s:7:"qy_sort";s:11:"varchar(10)";}}

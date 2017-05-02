@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 兼容国产浏览器的高速模式 -->
+    <title>个人中心_历史记录</title>
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/normalize.css"/>
+    <link rel="stylesheet" href="css/main.css"/>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.src.js"></script>
+</head>
+<body>
+    <!--nav part-->
+    <div class=" navbar-default ">
+        <div class="container">
+            <div class="row">
+                <!--logo-->
+                <a class="hidden-xs" >
+                    <div class="brand"></div>
+                </a>
+                <a class="hidden-xs brandBox">
+                    <div class="brand2"></div>
+                </a>
+            </div>
+        </div>
+        <div class=" navLine"></div>
+    </div>
+    <nav id="navPart" class="nav navbar-default navbar-fixed-top">
+        <div class="container" role="navigation">
+            <div class="row">
+                <!--pc端-->
+                <div id="navBox" class="navbar-collapse collapse">
+                    <ul class="nav navbar  noMargin">
+                        <li class="dropdown  dropBoxLine col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                            <span class="leftBoxline hidden-xs"></span>
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle drop_link">
+                                <span class="locoLogo"></span>天津<span class="caret leftMore"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">北京</a></li>
+                                <li><a href="#">上海</a></li>
+                                <li><a href="#">广州</a></li>
+                                <li><a href="#">沈阳</a></li>
+                                <li><a href="#">石家庄</a></li>
+                                <li><a href="#">济南</a></li>
+                            </ul>
+                        </li>
+                        <!--菜单选项-->
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="index.html" class="navSet_txt">
+                                首页
+                                <p class="navSet_txt_sub">HOME</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="liveRoom.html" class="navSet_txt">
+                                直播间
+                                <p class="navSet_txt_sub">LIVE SHOW</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="wonderful.html" class="navSet_txt">
+                                精选视频
+                                <p class="navSet_txt_sub">WONDERFUL</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="#" class="navSet_txt">
+                                商城
+                                <p class="navSet_txt_sub">THE MALL</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="#" class="navSet_txt pageTitleActive">
+                                个人中心
+                                <p class="navSet_txt_sub">PERSONAL</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--移动端--><!--移动端代码位于pc下部，可出现导航条上不折叠菜单-->
+                <div class="navbar-header mo-navBg">
+                    <div class="navbar-left dropdown mo-navBg-title visible-xs-inline-block">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle drop_link2">
+                            <span class="locoLogo2"></span>天津<span class="caret leftMore"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">北京</a></li>
+                            <li><a href="#">上海</a></li>
+                            <li><a href="#">广州</a></li>
+                            <li><a href="#">沈阳</a></li>
+                            <li><a href="#">石家庄</a></li>
+                            <li><a href="#">济南</a></li>
+                        </ul>
+                    </div>
+                    <!--移动端中心logo-->
+                    <div class="mo-navLogo visible-xs">
+                        <div class="mo-navLogo_sub1"></div>
+                        <div class="mo-navLogo_sub2"></div>
+                    </div>
+
+                    <button type="button" class="navbar-toggle mo-navBtn" data-toggle="collapse" data-target="#navBox">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar mo-navBtnSub"></span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--nav end-->
+    <!--main part-->
+    <section>
+        <div class="container showPartBg2">
+            <!--用户历史头部-->
+            <div class="row">
+                <div class="H-topBg">
+                    <div class="H-personalInfo">
+                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
+                            <img src="img/history_personalLogo.jpg" class="H-userLogo img-responsive">
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-8 col-xs-8">
+                            <h4>用户一</h4>
+                            <p>13999999999</p>
+                            <a href="personal_Info.html">编辑资料</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="historyList">
+                <!-- TODO 标签页 -->
+                <div class="row">
+                    <ul class="nav nav-tabs col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+                        <li class="col-lg-6 col-md-6 col-sm-6 col-xs-6 active"><a data-toggle="tab" href="#viewHistory">观看历史</a></li>
+                        <li class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><a data-toggle="tab" href="#inviteHistory">邀约记录</a></li>
+                    </ul>
+                </div>
+                <!-- TODO 面板 -->
+                <div class="row">
+                    <div class="tab-content">
+                        <!--观看历史-->
+                        <div id="viewHistory" class="tab-pane fade in active  ">
+                            <ul class="historyList" ms-controller="viewHistory">
+                                <!--用户数据显示-->
+                                <li ms-for="el in @data" class="clear">
+                                    <img class=" " ms-attr="{src:el.imgSrc}">
+                                    <div class="">
+                                        <b ms-text="el.title"></b>
+                                    </div>
+                                    <p><span ms-text="el.date"></span><em ms-text="el.time"></em></p>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--人气邀约-->
+                        <div id="inviteHistory" class="tab-pane fade" ms-controller="inviteHistory">
+                            <ul class="historyList">
+                                <!--用户数据显示-->
+                                <li ms-for="el in @data" class="clear">
+                                    <a class="col-lg-3 col-md-3 col-sm-4 col-xs-4"  href="inviteList.html"><img class="img-responsive" ms-attr="{src:el.imgSrc}"></a>
+                                    <div>
+                                        <b ms-text="el.title"></b>
+                                    </div>
+                                    <p>成功邀约：<span ms-text="el.uSum"></span></p>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="container-fluid showPartBg hidden-xs">
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="footer-logo"></div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 footer-txt noPaddRL">
+                    <p class="hidden-xs">粤ICP备09075143号 | 增值电信业务经营许可证B2-20120219 | 粤公网安备44011302000069号 | 视听许可证1910441号</p>
+                    <div>
+                        <span class="small-Block">© 2005-2015 YY.com, All rights reserved.</span>
+                        <em class="small-Block">广州证婚直播LIVE网络科技有限公司&nbsp;版权所有</em>
+                        <span class="small-Block">联系电话:020-82120010</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="QR_Code"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/addfunction.js"></script>
+    <script src="js/avalon.js"></script>
+    <script>
+        /***数据绑定部分****/
+        var viewHistory=avalon.define({
+            $id:"viewHistory",
+            data:[
+                {imgSrc:'img/liveroom_videos_01.jpg',title:'创意天津婚礼，小成本，达成面dasdasdasdas',date:'2016-05-30',time:'18:06'},
+                {imgSrc:'img/liveroom_videos_01.jpg',title:'创意天津婚礼，小成本，达成面',date:'2016-05-30',time:'18:06'},
+                {imgSrc:'img/liveroom_videos_01.jpg',title:'创意天津婚礼，小成本，达成面',date:'2016-05-30',time:'18:06'}
+            ]
+        });
+        var inviteHistory=avalon.define({
+            $id:"inviteHistory",
+            data:[
+                {imgSrc:'img/history_ListSub.jpg',title:'创意天津婚礼，小成本，达成面dasdasdasdas',uSum:123456},
+                {imgSrc:'img/history_ListSub.jpg',title:'创意天津婚礼，小成本，达成面',uSum:553456},
+                {imgSrc:'img/history_ListSub.jpg',title:'创意天津婚礼，小成本，达成面',uSum:553456}
+            ]
+        })
+    </script>
+</body>
+</html>

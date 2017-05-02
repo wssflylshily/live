@@ -1,0 +1,97 @@
+ <!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="en" class="ie6 ielt7 ielt8 ielt9"><![endif]--><!--[if IE 7 ]><html lang="en" class="ie7 ielt8 ielt9"><![endif]--><!--[if IE 8 ]><html lang="en" class="ie8 ielt9"><![endif]--><!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]--><!--[if (gt IE 9)|!(IE)]><!--> 
+<html lang="en"><!--<![endif]--> 
+  <head>
+    <meta charset="utf-8">
+    <title>goto直播</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="__PUBLIC__/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/site.css" rel="stylesheet">
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <include file="public:nav" />
+      <div class="row">
+        <include file="public:left" />
+        <div class="span9">
+          <h4>
+            添加精选视频
+            <br />所有图片 只支持jpg png jpeg格式 图片大小必须尺寸为：260*180    
+          </h4>
+          <form method="post" action="{:U('Admin/bcjxsp')}" id="myform" enctype="multipart/form-data">
+          <input type="hidden" name="dd" value="{$arr['jx_id']}">
+              <div>
+                  精选视频名称:
+                  <input type="text" name="jx_name" id="name" style="width:200px;" value="{$arr['jx_name']}" />
+              </div>
+              <div>
+                  精选视频播放地址:
+                  <input type="text" name="url" id="name" style="width:200px;" value="{$arr['url']}" /><font color='red'>必须是阿里上传文件后得到的.m3u8文件地址</font>
+              </div>
+
+              <div>            
+                  安全码:
+                  <input type="text" name="safe_code" id="safe_code" style="width:200px;" value="{$arr['safe_code']}" />    安全码长度为6位(例如123456)，默认值为0，0表示不开启安全码
+                  <br />
+                 上传精选视频图片:
+                 <input type="file"  name="jx_img"  value="" />    
+              </div>
+              <div>
+                 <span class="reneed" style="position:relative">视频的开始时间:</span>
+                  <input type="text" name="start_time" id="start_time" style="width:200px;" value="{$arr['start_time']}" />
+                  (例如2016年10月20日15时00分02秒 则需要填写格式为<span style="color:red">2016/10/20/15/00/02</span>  必需这样填写 否则无法匹配时间)
+                  <br /><br />
+              </div>
+              <div>
+                <span class="reneed" style="position:relative">选择所属直播:</span>
+                  <select name="v_id" id="cate"> 
+                      <foreach name='videos' item="v">
+                      <if condition="$v['v_id'] eq $arr['v_id']">
+                      <option value="{$v['v_id']}" selected>{$v['video_file']}</option>
+                      <else />
+                      <option value="{$v['v_id']}">{$v['video_file']}</option>
+                      </if>
+                      </foreach>
+                  </select> 
+              </div>
+              <div>
+                <span class="reneed" style="position:relative">添加房间管理员:(每个直播只能有一个管理员)</span>
+                  <select name="a_id" id="cate"> 
+                      <foreach name="member" item='vo'>
+                          <if condition="$vo['admin_id'] eq $arr['a_id']">
+                            <option value="{$vo.admin_id}" selected>{$vo.name}</option>
+                            <else />
+                            <option value="{$vo.admin_id}">{$vo.name}</option>
+                          </if>
+                      </foreach>
+                  </select>
+              </div>
+              
+              <button id="send" >提交</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/site.js"></script>
+    <script type="text/javascript">
+
+
+            $("#send").click(function(){
+
+
+                if(($("#safe_code").val()!=0)&&($("#safe_code").val()!='')){
+                    if($("#safe_code").val().length!=6){
+                          alert('安全码必须为6位');
+                          return false;
+                    }
+                }
+
+              $("#myform").submit();
+            });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+a:8:{i:0;s:6:"zcr_id";i:1;s:8:"zcr_name";i:2;s:7:"zcr_url";i:3;s:7:"zcr_img";i:4;s:8:"zcr_star";i:5;s:3:"hid";s:3:"_pk";s:6:"zcr_id";s:5:"_type";a:6:{s:6:"zcr_id";s:16:"int(11) unsigned";s:8:"zcr_name";s:11:"varchar(60)";s:7:"zcr_url";s:12:"varchar(255)";s:7:"zcr_img";s:12:"varchar(100)";s:8:"zcr_star";s:10:"tinyint(4)";s:3:"hid";s:7:"int(11)";}}

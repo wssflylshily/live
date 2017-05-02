@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="en" class="ie6 ielt7 ielt8 ielt9"><![endif]--><!--[if IE 7 ]><html lang="en" class="ie7 ielt8 ielt9"><![endif]--><!--[if IE 8 ]><html lang="en" class="ie8 ielt9"><![endif]--><!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]--><!--[if (gt IE 9)|!(IE)]><!--> 
+<html lang="en"><!--<![endif]--> 
+	<head>
+		<meta charset="utf-8">
+		<title>婚礼后台管理系统</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="__PUBLIC__/Admin/css/bootstrap.min.css" rel="stylesheet">
+		<link href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" rel="stylesheet">
+		<link href="__PUBLIC__/Admin/css/site.css" rel="stylesheet">
+		<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	</head>
+	<body>
+		<div id="login-page" class="container">
+			<h1 style="text-align:center;">添加管理员</h1>
+			<form id="login-form" class="well"  method="post" action="{:U('admin/save_user')}">
+			管理员权限:<select name="type">
+				<option value="1">超级管理员</option>
+				<option value="0">普通管理员</option>
+			</select><br/>
+			用户名:<input type="text" class="span2" id="user" name="user" placeholder="用户名" style="width:95%" /><br />
+			密码:<input type="password" class="span2"  id="pwd" name="pwd" placeholder="密码" style="width:95%" /><br />
+			确认密码:<input type="password" class="span2" id="qpwd"  name="qpwd" placeholder="确认密码" style="width:95%" /><br />			
+			<!-- <label class="checkbox"> <input type="checkbox" /> Remember me </label> -->
+			<button class="btn btn-primary" style="width:100%">添加</button>
+			<!-- <button type="submit" class="btn">Forgot Password</button> -->
+			</form>	
+		</div>
+		<script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+		<script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+		<script src="__PUBLIC__/Admin/js/site.js"></script>
+	</body>
+
+	<script type="text/javascript">
+
+		$(function(){
+
+			$("button").click(function(){
+
+				if($("#user").val()==''){
+					alert('用户名不能为空');
+					return false;
+				}
+				if($("#pwd").val()==''){
+					alert('密码不能为空');
+					return false;
+				}
+
+				if(($("#pwd").val().length<6)||($("#pwd").val().length>10)){
+					alert('密码长度为6-10位');
+					return false;
+				}
+
+				if($("#qpwd").val()==''){
+					alert('确认密码不能为空');
+					return false;
+				}
+				if ($("#pwd").val()!=$("#qpwd").val()) {
+					alert('两次密码不一致');
+					return false;
+				};
+
+				$('#login-form').submit();
+			});
+
+
+		});
+
+
+
+	</script>
+
+
+</html>

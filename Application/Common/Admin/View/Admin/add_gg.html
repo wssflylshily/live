@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="en" class="ie6 ielt7 ielt8 ielt9"><![endif]--><!--[if IE 7 ]><html lang="en" class="ie7 ielt8 ielt9"><![endif]--><!--[if IE 8 ]><html lang="en" class="ie8 ielt9"><![endif]--><!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]--><!--[if (gt IE 9)|!(IE)]><!--> 
+<html lang="en"><!--<![endif]--> 
+  <head>
+    <meta charset="utf-8">
+    <title>婚礼后台管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="__PUBLIC__/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/site.css" rel="stylesheet">
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+      </head>
+  <body>
+    <div class="container">
+      <include file="public:nav" />
+      <div class="row">
+        <include file="public:left" />
+        <div class="span9">
+          <h4>
+            添加广告图 图片只支持jpg png jpeg格式<br />广告图片格式说明如下：<hr />
+          </h4>  
+            <h5>一:主页：</h5>
+              <ol style="font-size:1.1em">
+                <li>banner广告一(首页轮播图下 直播间上 )：1100*140</li>
+                <li>底部广告展示图（首页最底下的广告图）：1100*140</li>
+                <li>直播部分左一展示广告（首页直播间下的左侧）：260*500</li>
+                <li>首页左右2侧广告图 210*510 左侧填写在大图里 右侧填写在小图里</li>
+              </ol>
+            <hr />
+            <h5>二:直播间首页:</h5>
+              <ol style="font-size:1.1em">
+                <li>PC大屏顶部主体广告展示图：1900*499</li>
+                <li>移动小屏顶部主体广告展示图：1080*460</li>
+              </ol>
+            <hr />
+            <h5>三、直播间部分</h5>
+              <ol style="font-size:1.1em">
+                <li>中部广告展示图：1060*200</li>
+              </ol>
+            <hr />
+            <h5>四、精选视频（点播）首页</h5>
+              <ol style="font-size:1.1em">
+                <li>PC大屏顶部主体广告展示图：1900*499</li>
+                <li>移动小屏顶部主体广告展示图：1080*460</li>
+              </ol>
+            <hr />
+            <h5>五、精选视频（点播）播放部分</h5>
+              <ol style="font-size:1.1em">
+                <li>中部广告展示图：1060*200</li>
+              </ol>
+            <hr />
+            <h5>注意：</h5>
+            <strong style="color:blue">
+                第二大项和第四大项根据分类需要传两张不同大小尺寸的图片，其余项根据分类标注的大小传相同尺寸。<br>
+                即 下面下拉列表写着需要传2张图的 需要准备2种尺寸，如果没说明则传相同尺寸。
+            </strong>
+          <hr />
+            <form method="post" action="{:U('Admin/add_gg')}" id="myform" enctype="multipart/form-data">
+
+              
+                 <label from="cate">图片上传选项：</label><select name="fenlei" id="cate" style="width:600px;"> 
+                      <notempty name="gg">
+                          <volist name="gg" id="vo" key="k">
+                            <option value="{$k}">{$vo}</option>
+                          </volist>
+                      </notempty>
+                </select>
+
+            <br />   <br />
+              <p>上传大广告图片:<input type="file"  name="big_img"  value="" /></p>   
+              <p>上传小广告图片;<input type="file"  name="small_img"  value="" /></p>
+              <p>广告图片链接:<input type="text"  name="url"  value="" /></p>  
+              <button id="send" >提交</button>
+              <input type="hidden" name="dd" value="<?php echo $_GET['id']; ?>"> 
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/site.js"></script>
+    <script type="text/javascript">
+            $("#send").click(function(){
+                $("#myform").submit();
+            });
+    </script>
+  </body>
+</html>

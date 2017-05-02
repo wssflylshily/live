@@ -1,0 +1,195 @@
+<include file="Public/header" />
+    <!--main part-->
+    <section>
+        <div class="container showPartBg2">
+            <!--用户历史头部-->
+            <div class="row">
+                <div class="H-topBg">
+                    <div class="H-personalInfo">
+                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
+                            <img src="{$user['userlog']}" class="H-userLogo img-responsive">
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-8 col-xs-8">
+                            <h4 class="single_text">{$user['nick']}</h4>
+                            <p>{$user['mobile']}</p>
+                            <a href="{:U('User/personal_Info')}">编辑资料</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="historyList">
+                <!-- TODO 标签页 -->
+                <div class="row">
+                    <ul class="nav nav-tabs col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+                        <li class="col-lg-6 col-md-6 col-sm-6 col-xs-6 active"><a data-toggle="tab" href="#viewHistory">观看历史</a></li>
+                        <li class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><a data-toggle="tab" href="#inviteHistory">邀约记录</a></li>
+                    </ul>
+                </div>
+                <!-- TODO 面板 -->
+                <div class="row">
+                    <div class="tab-content">
+                        <!--观看历史-->
+                        <div id="viewHistory" class="tab-pane fade in active  ">
+                            <ul class="historyList" ms-controller="viewHistory">
+                                <!--用户数据显示-->
+                                <li ms-for="el in @data" class="clear">
+                                    <div class="H-listBox-left">
+                                        <img class="img-responsive" ms-attr="{src:el.imgSrc}">
+                                    </div>
+                                    <div class="H-listBox-right">
+                                        <b ms-text="el.title"></b>
+                                        <p><span ms-text="el.date"></span><em ms-text="el.time"></em></p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div>
+                                <button class="H-view-moreBtn moreBtn center-block" type="button">加载更多信息</button>
+                            </div>
+                        </div>
+                        <!--人气邀约-->
+                        <div id="inviteHistory" class="tab-pane fade" ms-controller="inviteHistory">
+                            <ul class="historyList">
+                                <!--用户数据显示-->
+                                <li ms-for="el in @data" class="clear">
+                                    <div class="H-listBox-left">
+                                        <a class="col-lg-3 col-md-3 col-sm-4 col-xs-4" href="inviteList.html">
+                                        <img class="img-responsive" ms-attr="{src:el.imgSrc}">
+                                    </a></div>
+                                    <div class="H-listBox-right">
+                                        <b ms-text="el.title"></b>
+                                        <p>成功邀约：<span ms-text="el.uSum"></span></p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div>
+                                <button class="H-invite-moreBtn moreBtn center-block" type="button">加载更多信息</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="container-fluid showPartBg hidden-xs">
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="footer-logo"></div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 footer-txt noPaddRL">
+                    <p class="small-Block">证婚直播LIVE&nbsp;&nbsp;版权所有&nbsp;&nbsp;<span>京ICP备15015202号-3&nbsp;&nbsp;</span><span class="small-Block">联系电话:010-89468899</span></p>
+                    <span class="small-Block">© 2005-2016 zhenghun.yicehua.cn, All rights reserved.</span>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="QR_Code"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="__PUBLIC__/Home/js/jquery-1.11.3.js"></script>
+    <script src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Home/js/addfunction.js"></script>
+    <script src="__PUBLIC__/Home/js/avalon.js"></script>
+    <script>
+        /***数据绑定部分****/
+        var viewHistory=avalon.define({
+            $id:"viewHistory",
+            data:[
+              //  {imgSrc:'/Public/Home/img/liveroom_videos_01.jpg',title:'创意北京婚礼，小成本，达成面dasdasdasdas',date:'2016-05-30',time:'18:06'},
+               // {imgSrc:'/Public/Home/img/liveroom_videos_01.jpg',title:'创意北京婚礼，小成本，达成面',date:'2016-05-30',time:'18:06'},
+               // {imgSrc:'/Public/Home/img/liveroom_videos_01.jpg',title:'创意北京婚礼，小成本，达成面',date:'2016-05-30',time:'18:06'}
+            ]
+        });
+        for(var j in {$his}.data ){
+            viewHistory.data.push({$his}.data[j]);
+        }
+
+        var inviteHistory=avalon.define({
+            $id:"inviteHistory",
+            data:[
+               // {imgSrc:'/Public/Home/img/history_ListSub.jpg',title:'创意北京婚礼，小成本，达成面dasdasdasdas',uSum:123456},
+               // {imgSrc:'/Public/Home/img/history_ListSub.jpg',title:'创意北京婚礼，小成本，达成面',uSum:553456},
+               // {imgSrc:'/Public/Home/img/history_ListSub.jpg',title:'创意北京婚礼，小成本，达成面',uSum:553456}
+            ]
+        });
+        for(var j in {$invs}.data ){
+            inviteHistory.data.push({$invs}.data[j]);
+        }
+        //加载功能
+        $(function () {
+            //一开始判断加载的话，是否还有数据
+            if({$his}.data==""){
+                $('.H-view-moreBtn').css('display','none');
+            }else if({$hisnum}==0){
+                $('.H-view-moreBtn').text('没有更多数据了').addClass('disabledbtn');
+            }else{
+                //执行异步
+                //观看历史
+                var currAjax=null;
+                var page=2;
+                $('.H-view-moreBtn').on('click',function(){
+                    currAjax=jQuery.ajax({
+                        method: "GET",
+                        url: "{:U('User/ajaxGethis')}",
+                        data:{page:page},
+                        dataType:'json',
+                        success: function (data) {
+                            avalon.each(data.data, function (k,v) {
+                                viewHistory.data.push(v);
+                            });
+                            page++;
+                            if(data.num==0){
+                                $('.H-view-moreBtn').text('没有更多数据了').addClass('disabledbtn');
+                                stopAjax();
+                            }
+                        }
+                    });
+                });
+                function stopAjax(){
+                    if(currAjax){ currAjax.abort(); }
+                }
+            }
+
+            /*if({$his}.data==""){
+                $('.H-view-moreBtn').css('display','none');
+
+            }else if({$userModel}.data.length<5){
+                $('.moreBtn').text('没有更多视频了！').addClass('disabledbtn');
+            }*/
+            if({$invs}.data==""){
+                $('.H-invite-moreBtn').css('display','none');
+            }else if({$invnum}==0){
+                $('.H-invite-moreBtn').text('没有更多数据了').addClass('disabledbtn');
+            }else{
+                //邀约记录
+                var currentAjax=null;
+                var p=2;
+                $('.H-invite-moreBtn').on('click',function(){
+                    currentAjax=jQuery.ajax({
+                        method: "GET",
+                        url: "{:U('User/ajaxGetinvs')}",
+                        data:{page:p},
+                        dataType:'json',
+                        success: function (data) {
+                            avalon.each(data.data, function (k,v) {
+                                    viewHistory.data.push(v);
+                            });
+                            p++;
+                            if(data.num==0){
+                                $('.H-invite-moreBtn').text('没有更多数据了').addClass('disabledbtn');
+                                stopAjax();
+                            }
+                        }
+                    });
+                    
+                });
+                function stopAjax(){
+                    if(currentAjax){ currentAjax.abort(); }
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>

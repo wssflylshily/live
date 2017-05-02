@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 兼容国产浏览器的高速模式 -->
+    <title>个人中心-编辑资料</title>
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/normalize.css"/>
+    <link rel="stylesheet" href="css/main.css"/>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.src.js"></script>
+</head>
+<body>
+    <!--nav part-->
+    <div class=" navbar-default">
+        <div class="container">
+            <div class="row">
+                <!--logo-->
+                <a class="hidden-xs" >
+                    <div class="brand"></div>
+                </a>
+                <a class="hidden-xs brandBox">
+                    <div class="brand2"></div>
+                </a>
+            </div>
+        </div>
+        <div class=" navLine"></div>
+    </div>
+    <nav id="navPart" class="nav navbar-default navbar-fixed-top">
+        <div class="container" role="navigation">
+            <div class="row">
+                <!--pc端-->
+                <div id="navBox" class="navbar-collapse collapse">
+                    <ul class="nav navbar  noMargin">
+                        <li class="dropdown  dropBoxLine col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                            <span class="leftBoxline hidden-xs"></span>
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle drop_link">
+                                <span class="locoLogo"></span>天津<span class="caret leftMore"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">北京</a></li>
+                                <li><a href="#">上海</a></li>
+                                <li><a href="#">广州</a></li>
+                                <li><a href="#">沈阳</a></li>
+                                <li><a href="#">石家庄</a></li>
+                                <li><a href="#">济南</a></li>
+                            </ul>
+                        </li>
+                        <!--菜单选项-->
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="index.html" class="navSet_txt">
+                                首页
+                                <p class="navSet_txt_sub">HOME</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="liveRoom.html" class="navSet_txt">
+                                直播间
+                                <p class="navSet_txt_sub">LIVE SHOW</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="wonderful.html" class="navSet_txt">
+                                精选视频
+                                <p class="navSet_txt_sub">WONDERFUL</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="#" class="navSet_txt">
+                                商城
+                                <p class="navSet_txt_sub">THE MALL</p>
+                            </a>
+                        </li>
+                        <li class="col-lg-2 col-md-2 col-sm-2 titleLine">
+                            <a href="personal_center_view.html" class="navSet_txt pageTitleActive">
+                                个人中心
+                                <p class="navSet_txt_sub">PERSONAL</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--移动端--><!--移动端代码位于pc下部，可出现导航条上不折叠菜单-->
+                <div class="navbar-header mo-navBg">
+                    <div class="navbar-left dropdown mo-navBg-title visible-xs-inline-block">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle drop_link2">
+                            <span class="locoLogo2"></span>天津<span class="caret leftMore"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">北京</a></li>
+                            <li><a href="#">上海</a></li>
+                            <li><a href="#">广州</a></li>
+                            <li><a href="#">沈阳</a></li>
+                            <li><a href="#">石家庄</a></li>
+                            <li><a href="#">济南</a></li>
+                        </ul>
+                    </div>
+                    <!--移动端中心logo-->
+                    <div class="mo-navLogo visible-xs">
+                        <div class="mo-navLogo_sub1"></div>
+                        <div class="mo-navLogo_sub2"></div>
+                    </div>
+
+                    <button type="button" class="navbar-toggle mo-navBtn" data-toggle="collapse" data-target="#navBox">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar mo-navBtnSub"></span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--nav end-->
+    <!--main part-->
+    <section class="showPartBg2" ms-controller="userInfo">
+        <!--主图展示部分-->
+        <div class="container showPartBg3">
+            <ul class="P-infoBox row" >
+                <li class="clear">
+                    <em>头像</em>
+                    <div><img ms-attr="{src:@data.imgSrc}" class="img-responsive">
+                        <a  class="glyphicon glyphicon-chevron-right" data-toggle="modal" data-target=".bs-example-modal-lg-userLogo"></a>
+                    </div>
+                </li>
+                <li>
+                    <em>昵称</em>
+                    <div class="clear"><span  ms-text="@data.nickname"></span>
+                        <a class="glyphicon glyphicon-chevron-right" data-toggle="modal" data-target=".bs-example-modal-lg"></a>
+                    </div>
+                </li>
+                <li>
+                    <em>性别</em>
+                    <div class="clear"><span ms-text="@data.gender"></span>
+                        <a  class="glyphicon glyphicon-chevron-right" data-toggle="modal" data-target=".bs-example-modal-lg-gender"></a></div>
+                </li>
+                <li>
+                    <em>地址</em>
+                    <div><span ms-text="@data.addr"></span>
+                        <a  class="glyphicon glyphicon-chevron-right" data-toggle="modal" data-target=".bs-example-modal-lg-addr"></a></div>
+                </li>
+                <li>
+                    <em>QQ号</em>
+                    <div><span ms-text="@data.qqNum"></span>
+                        <a class="glyphicon glyphicon-chevron-right" data-toggle="modal" data-target=".bs-example-modal-lg-qqNum"></a></div>
+                </li>
+
+            </ul>
+            <ul id="phone_pwdBox" class="P-infoBox row" >
+                <li class="clear">
+                    <em>手机号</em>
+                    <div><span ms-text="@data.phone"></span>
+                        <a  class="glyphicon glyphicon-chevron-right" data-toggle="modal" data-target=".bs-example-modal-lg-phone"></a></div>
+                </li>
+                <li>
+                    <em>修改密码</em>
+                    <div>
+                        <a  class="glyphicon glyphicon-chevron-right" data-toggle="modal" data-target=".bs-example-modal-lg-pwd"></a></div>
+                </li>
+            </ul>
+        </div>
+        <!--弹窗：头像-->
+        <div class="modal fade bs-example-modal-lg-userLogo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content my-modal-Content-userLogo">
+                    <!--PC时上传图片-->
+                    <form  action="后端接口" enctype="multipart/form-data" method="post" id="userLogo_uploads" onsubmit="return check(this)"><!---->
+                        <p>上传图片</p>
+                        <input type="file" name="files" id="loadFileBtn" multiple="multiple" onchange="loadUserLogo(this);">
+                        <input type="submit" value="上传文件" id="submitBtn">
+                        <h4>文件大小上限1MB，只可上传.jpg和.png格式图片</h4>
+                        <span class="P-userLogo-alert"></span>
+                    </form>
+
+
+                    <!--移动端上传文件方式调用文件和摄像头-->
+                    <!--<ul class="clear visible-xs" >
+                        <li>拍照</li>
+                        <li>
+                           <h3>选择图片：<input type="file" id="browseFile" onchange=""></h3>
+                             <script type="text/javascript">
+                                var input_browseFile = document.getElementById("browseFile");
+                                input_browseFile.addEventListener("change", function () {
+                                    //通过 this.files 取到 FileList ，这里只有一个
+                                    previewInImage(this.files[0]);
+                                }, false);
+                                function previewInImage (file) {
+                                    //通过file.size可以取得图片大小
+                                    var reader = new FileReader();
+                                    reader.onload = function( evt ){
+                                        $('img').src = evt.target.result;
+                                    };
+                                    Options_image.imgData= reader.readAsDataURL(file);
+                                }
+
+                                var video_element = document.getElementById('video');
+                                if (navigator.getUserMedia) { // opera should use opera.getUserMedia now, chrome use webkitGetUserMedia
+                                    navigator.getUserMedia('video',success, error);
+                                }
+                                function success(stream) {
+                                    video_element.src =stream;
+                                }
+                            </script>-->
+                        <!-- <video id="video" autoplay=""style='height:180px'></video>
+                            <button type="button" id='picture'>PICTURE</button>
+                            <canvas id="canvas" width="320" height="180"></canvas>
+                            <script type="text/javascript">
+                                var video = document.getElementById("video");
+                                var context = canvas.getContext("2d");
+                                var errocb = function () {
+                                    console.log('sth wrong!');
+                                };
+                                if(navigator.getUserMedia){
+                                  navigator.getUserMedia({'video':true}, function (stream) {
+                                      video.src=stream;
+                                      video.play();
+                                  },errocb);
+                                }else  if(navigator.webkitGetUserMedia){
+                                    navigator.webkitGetUserMedia({'video':true}, function (stream) {
+                                        video.src=window.webkitURL.createObjectURL(stream);
+                                        video.play();
+                                    },errocb);
+                                }
+                                document.getElementById('picture').addEventListener("click", function () {
+                                    context.drawImage(video,0,0,320,180);
+                                })
+
+                            </script>
+                        </li>
+                    </ul>-->
+                </div>
+                <div class="modal-content my-modal-Content-userLogoCancel">
+                    <button type="button" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+        <!--弹窗：修改昵称-->
+        <div id="myModal_nickname" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content my-modal-content">
+                    <p>修改昵称</p>
+                    <form action="">
+                        <input class="P-inputBox" type="text" value="" placeholder="请输入昵称" ms-duplex="@transferData.nickname">
+                        <div class="P-valiTips">
+                            <p>用户名格式错误</p>
+                            <div class="arrow"></div>
+                        </div>
+                        <span class="glyphicon glyphicon-remove-sign"></span>
+                    </form>
+                    <ul class="clear">
+                        <li data-dismiss="modal">取消</li>
+                        <li>确定</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <!--弹窗：性别-->
+        <div id="myModal_gender" class="modal fade bs-example-modal-lg-gender" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content my-modal-content">
+                    <p>选择性别</p>
+                    <div class="P-chooseGenderBox">
+                        <div><input name="gender" id="male" type="radio" class="Lnow-wishBtn" checked="checked" value="男" ms-duplex="@transferData.gender">
+                            <label for="male">男</label>
+                        </div>
+                        <div><input name="gender" id="female" type="radio" class="Lnow-wishBtn" value="女" ms-duplex="@transferData.gender">
+                            <label for="female">女</label>
+                        </div>
+                    </div>
+                    <ul class="clear">
+                        <li data-dismiss="modal">取消</li>
+                        <li>确定</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--弹窗：地址-->
+        <div id="myModal_addr" class="modal fade bs-example-modal-lg-addr" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content my-modal-content">
+                    <p>用户地址</p>
+                    <button type="button" class="btn btn-info P-addrPopBtn">编辑</button>
+                    <span ms-text="@data.addr"></span>
+                    <form class="P-chooseGenderBox fade">
+                        <input class="P-inputBox" type="text" ms-duplex="@transferData.addr">
+                        <span class="glyphicon glyphicon-remove-sign"></span>
+                    </form>
+                    <ul class="clear">
+                        <li data-dismiss="modal">取消</li>
+                        <li>确定</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--弹窗：QQ号-->
+        <div id="myModal_qqNum" class="modal fade bs-example-modal-lg-qqNum" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content my-modal-content">
+                    <p>绑定QQ号</p>
+                    <form class="P-changeNumBox">
+                        <input class="P-inputBox" type="text" ms-duplex="@transferData.qqNum">
+                        <div class="P-valiTips">
+                            <p>QQ格式错误</p>
+                            <div class="arrow"></div>
+                        </div>
+                        <span class="glyphicon glyphicon-remove-sign"></span>
+                    </form>
+                    <ul class="clear">
+                        <li data-dismiss="modal">取消</li>
+                        <li>确定</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--弹窗：绑定手机-->
+        <div id="myModal_phone" class="modal fade bs-example-modal-lg-phone" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content my-modal-content P-addUserPhone">
+                    <p>绑定手机号</p>
+                    <form class="clear">
+                        <label for="addUserPhone">新手机号</label>
+                        <input id="addUserPhone" type="text" placeholder="请输入手机号" ms-duplex="@transferData.phone">
+                        <button type="button" class="btn P-sendValiSms">发送短信</button>
+                    </form>
+                    <form class="clear">
+                        <label for="picValidate">图片验证</label>
+                        <input id="picValidate" type="text" placeholder="图片验证码" ms-duplex="@transferData.valiPicture">
+                        <span class="P-valiPicture">
+                            <img src="img/valiPicture.jpg">
+                        </span>
+                    </form>
+                    <form class="clear">
+                        <label for="smsValidate">短信验证</label>
+                        <input id="smsValidate" type="text" placeholder="请输入短信验证码" ms-duplex="@transferData.valiSms">
+                    </form>
+                    <form class="clear">
+                        <label for="loginPwd">登陆密码</label>
+                        <input id="loginPwd" type="password" placeholder="请输入登陆密码" ms-duplex="@transferData.loginPwd">
+                    </form>
+                    <div class="P-phoneWarnBox fade">不可为空</div>
+                    <ul class="clear">
+                        <li data-dismiss="modal">取消</li>
+                        <li>确定</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--弹窗：密码-->
+        <div id="myModal_pwd" class="modal fade bs-example-modal-lg-pwd" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content my-modal-content P-addUserPhone">
+                    <p>修改密码</p>
+                    <form class=" ">
+                        <label for="oldPwd">原密码</label>
+                        <input id="oldPwd" type="password" placeholder="请输入原密码">
+                    </form>
+                    <form class=" ">
+                        <label for="newPwd">新密码</label>
+                        <input id="newPwd" type="password" placeholder="请输入新密码">
+                    </form>
+                    <form class=" ">
+                        <label for="repeatNewPwd">再次输入</label>
+                        <input id="repeatNewPwd" type="password" placeholder="请再次输入新密码">
+                    </form>
+                    <div class="P-phoneWarnBox fade">不可为空</div>
+                    <ul class="clear">
+                        <li data-dismiss="modal">取消</li>
+                        <li>确定</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--退出登录-->
+    <div class="showPartBg2">
+        <div class="container noPaddRL showPartBg3">
+            <div class="P-exitBg">
+                <button type="button" class="btn exitBtn">退出登录</button>
+            </div>
+        </div>
+    </div>
+    <footer class="container-fluid showPartBg hidden-xs">
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="footer-logo"></div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 footer-txt noPaddRL">
+                    <p class="hidden-xs">粤ICP备09075143号 | 增值电信业务经营许可证B2-20120219 | 粤公网安备44011302000069号 | 视听许可证1910441号</p>
+                    <div>
+                        <span class="small-Block">© 2005-2015 YY.com, All rights reserved.</span>
+                        <em class="small-Block">广州证婚直播LIVE网络科技有限公司&nbsp;版权所有</em>
+                        <span class="small-Block">联系电话:020-82120010</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="QR_Code"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/addfunction.js"></script>
+    <script src="js/avalon.js"></script>
+    <script>
+
+        /***编辑资料页数据绑定部分****/
+        var userInfo=avalon.define({
+            $id:"userInfo",
+            data: {imgSrc:'img/history_personalLogo.jpg',nickname:'美屡',gender:'女',phone:'',addr:'天津和平区xxxx',qqNum:'123123456'},
+            transferData: {imgSrc:'img/history_personalLogo.jpg',nickname:'美屡',gender:'女',addr:'天津和平区xxxx',qqNum:'123123456',phone:'',valiPicture:'',valiSms:'',loginPwd:''}
+
+        });
+        avalon.ready(function () {
+            /*手机未绑定，值为空修改页面空白内容为‘未绑定’*/
+            if(userInfo.data.phone==''){
+                var elem = $('#phone_pwdBox li:first-child div span')[0];
+                elem.style.color='#ddd';
+                avalon.innerHTML(elem, '未绑定')
+            }
+        //TODO:昵称操作********
+            $('#myModal_nickname>div>div>form>span').on('click', function () {
+                var $uname=$('#myModal_nickname .my-modal-content>form>input');
+                $uname.val()&&$uname.val('');
+            });
+            //昵称-确定
+            $('#myModal_nickname li:last-child').on('click', function () {
+                var username = $("#myModal_nickname .my-modal-content form>input").val();
+                if(!/[a-zA-Z0-9\u4e00-\u9fa5]{2,18}/.test(username)){
+                    $("#myModal_nickname .P-valiTips").css('display',"block");
+                    return false;
+                }else {
+                    changeUserInput($('#myModal_nickname'),$('.P-infoBox>li:nth-child(2)>div>span'),'nickname');
+                    $("#myModal_nickname .P-valiTips").css('display',"none");
+                }
+            });
+
+        //TODO:性别-确定
+            $('#myModal_gender li:last-child').on('click', function () {
+                changeUserInput($('#myModal_gender'),$('.P-infoBox>li:nth-child(3)>div>span'),'gender');
+            });
+
+        //TODO:地址
+            //编辑展开
+            $('.P-addrPopBtn').on('click', function () {
+                $('.bs-example-modal-lg-addr>div>div>form').css('opacity','1');
+            });
+            //清空内容
+            $('#myModal_addr form>span').on('click', function () {
+                var $uname=$('#myModal_addr form>input');
+                $uname.val()&&$uname.val('');
+            });
+            $('#myModal_addr li:last-child').on('click', function () {
+                changeUserInput($('#myModal_addr'),$('.P-infoBox>li:nth-child(4)>div>span'),'addr');
+            });
+
+        //TODO:QQ号
+            $('#myModal_qqNum form>span').on('click', function () {
+                var $uname=$('#myModal_qqNum form>input');
+                $uname.val()&&$uname.val('');
+            });
+            $('#myModal_qqNum li:last-child').on('click', function () {
+                var qqNums= $("#myModal_qqNum form>input").val();
+                if(!/^\d{6,18}$/.test(qqNums)){
+                    $("#myModal_qqNum .P-valiTips").css('display',"block");
+                    return false;
+                }else {
+                    changeUserInput($('#myModal_qqNum'),$('.P-infoBox>li:nth-child(5)>div>span'),'qqNum');
+                    $("#myModal_qqNum .P-valiTips").css('display',"none");
+                }
+            });
+
+        //TODO:手机号
+            //验证不为空且显示为空项
+            $('#myModal_phone li:last-child').on('click', function () {
+                /*需要验证所有输入空均不为空才可提交，任意一个为空也不行*/
+                var phoneInputs=$("#myModal_phone>div>div form input");
+                var warnTxt=$("#myModal_phone .P-phoneWarnBox")[0];
+                for(var i=0;i<phoneInputs.length;i++){
+                    if(phoneInputs[i].value==''){
+                        $('#myModal_phone .P-phoneWarnBox').css('opacity','1');
+                        switch (phoneInputs[i].getAttribute('id')){
+                            case 'addUserPhone':warnTxt.innerHTML='手机号不可为空';break;
+                            case 'picValidate' :warnTxt.innerHTML='图片验证码不可为空';break;
+                            case 'smsValidate' :warnTxt.innerHTML='短信验证不可为空';break;
+                            case 'loginPwd'    :warnTxt.innerHTML='登陆密码不可为空';break;
+                        }
+                        return false;
+                    }
+                }
+                changeUserInput($('#myModal_phone'),'phone');
+            });
+
+        //TODO:密码
+            $('#myModal_pwd  li:last-child').on('click', function () {
+                /*需要验证所有输入空均不为空才可提交，任意一个为空也不行*/
+                var pwdInputs=$("#myModal_pwd>div>div form input");
+                var warnMsg=$("#myModal_pwd .P-phoneWarnBox")[0];
+                for(var i=0;i<pwdInputs.length;i++){
+                    if(pwdInputs[i].value==''){
+                        $('#myModal_pwd .P-phoneWarnBox').css('opacity','1');
+                        switch (pwdInputs[i].getAttribute('id')){
+                            case 'oldPwd':warnMsg.innerHTML='原密码不可为空';break;
+                            case 'newPwd' :warnMsg.innerHTML='新密码不可为空';break;
+                            case 'repeatNewPwd' :warnMsg.innerHTML='新密码验证不可为空';break;
+                        }
+                        return false;
+                    }
+                }
+                changeUserInput($('#myModal_pwd'),'phone');
+            });
+
+        /*编辑资料完成后执行数据修改方法*/
+            function changeUserInput(inputParent,outputVal,item){
+                avalon.each(userInfo.transferData, function (k,v) {
+                    if(k==item){
+                        userInfo.data[item]=v;
+                        var elem = outputVal[0];
+                        avalon.innerHTML(elem,userInfo.data[item]);
+                    }
+                });
+                inputParent.modal('hide');
+            }
+
+
+        });
+
+        //TODO:上传头像验证和限制
+        function loadUserLogo(target) {
+            //console.log(target.value);
+            var fileSize = 0;
+            //兼容性处理
+            if ( !target.files) {
+                var filePath = target.value;
+                var fileSystem = new ActiveXObject("Scripting.FileSystemObject");
+                var file = fileSystem.GetFile (filePath);
+                fileSize = file.Size;
+            } else {
+                fileSize = target.files[0].size;
+            }
+            var size = fileSize/1024;
+            if(size>1024){
+                document.getElementsByClassName('P-userLogo-alert')[0].innerHTML="您选择的图片不能大于1M";
+                document.getElementsByClassName('P-userLogo-alert')[0].style.opacity='1';
+                target.value="";
+                return
+            }
+            var name=target.value;
+            var fileName = name.substring(name.lastIndexOf(".")+1).toLowerCase();
+            if(fileName !="jpg" && fileName !="jpeg" && fileName !="png"){
+                document.getElementsByClassName('P-userLogo-alert')[0].innerHTML="请选择图片格式文件上传(jpg,png等)！";
+                document.getElementsByClassName('P-userLogo-alert')[0].style.opacity='1';
+                target.value="";
+                return
+            }
+        }
+        function check(){
+            var inputFile=document.getElementById('loadFileBtn').value;
+            var fileValue=inputFile.substring(inputFile.lastIndexOf(".")+1).toLowerCase();
+            if(!inputFile){
+                document.getElementsByClassName('P-userLogo-alert')[0].innerHTML='您还未选择头像，无法上传！';
+                document.getElementsByClassName('P-userLogo-alert')[0].style.opacity='1';
+                return false
+            }else {
+                if(fileValue !="jpg" && fileValue !="jpeg" && fileValue !="png"){
+                    return false
+                }
+            }
+        }
+    </script>
+</body>
+</html>

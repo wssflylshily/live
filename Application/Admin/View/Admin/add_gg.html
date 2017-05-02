@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="en" class="ie6 ielt7 ielt8 ielt9"><![endif]--><!--[if IE 7 ]><html lang="en" class="ie7 ielt8 ielt9"><![endif]--><!--[if IE 8 ]><html lang="en" class="ie8 ielt9"><![endif]--><!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]--><!--[if (gt IE 9)|!(IE)]><!--> 
+<html lang="en"><!--<![endif]--> 
+  <head>
+    <meta charset="utf-8">
+    <title>goto直播</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="__PUBLIC__/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/site.css" rel="stylesheet">
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <style>
+      #send{padding:4px 60px;font-weight: 600;display: block;font-size: 14px;border-radius: 4px;box-shadow: 0 0 5px #666;margin:40px auto 0;}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <include file="public:nav" />
+      <div class="row">
+        <include file="public:left" />
+        <div class="span9">
+            <form method="post" action="{:U('Admin/add_gg')}" id="myform" enctype="multipart/form-data">
+                 <label from="cate">图片上传选项：</label>
+                 <select name="fenlei" id="cate" style="width:600px;">
+                 <option value="">请选择</option>
+                      <notempty name="gg">
+                          <volist name="gg" id="vo" key="k">
+                            <option value="{$k}">{$vo['desc']}</option>
+                          </volist>
+                      </notempty>
+                </select>
+            <br />   <br />
+                <div id="pic_img"><h3>请选择图片上传选项.</h3></div>
+                <!--<table >
+                    <tr >
+                      <th>上传大广告图片1:</th>
+                      <td><input type="file"  name="big_img1"  value="" /></td>
+                    </tr>
+                     <tr >
+                        <th>上传大广告图片2:</th>
+                        <td><input type="file"  name="big_img2"  value="" /></td>
+                    </tr>
+                    <tr >
+                        <th>上传大广告图片3:</th>
+                        <td><input type="file"  name="big_img3"  value="" /></td>
+                    </tr>
+                    <tr >
+                        <th>上传大广告图片4:</th>
+                        <td><input type="file"  name="big_img4"  value="" /></td>
+                    </tr>
+                    <tr >
+                        <th>上传大广告图片5:</th>
+                        <td><input type="file"  name="big_img5"  value="" /></td>
+                    </tr>
+                    <tr height="20">
+                        <th></th>
+                        <td></td>
+                    </tr>
+                    <tr >
+                        <th>上传小广告图片1:</th>
+                        <td><input type="file"  name="small_img1"  value="" /></td>
+                    </tr>
+                    <tr >
+                        <th>上传小广告图片2:</th>
+                        <td><input type="file"  name="small_img2"  value="" /></td>
+                    </tr>
+                    <tr >
+                        <th>上传小广告图片3:</th>
+                        <td><input type="file"  name="small_img3"  value="" /></td>
+                    </tr>
+                    <tr >
+                        <th>上传小广告图片4:</th>
+                        <td><input type="file"  name="small_img4"  value="" /></td>
+                    </tr>
+                    <tr >
+                        <th>上传小广告图片5:</th>
+                        <td><input type="file"  name="small_img5"  value="" /></td>
+                    </tr>
+                </table>-->
+                <!--<p>上传大广告图片;<input id="upload" type="file"  name="big_img"  value="" /></p>
+                <p>上传小广告图片;<input type="file"  name="small_img"  value="" /></p>-->
+                  <p>广告图片链接:<input type="text"  name="url"  value="" /></p>
+                  <button id="send" >提交</button>
+                  <input type="hidden" name="dd" value="<?php echo $_GET['id']; ?>">
+
+          </form>
+          <!--<p style="">
+            <p><font color="green" id="ggtip">广告图片说明:</font></p>
+              <img src="" id="ggimg">
+              <p><font id="ggtips"></font></p>
+            </p>-->
+        </div>
+         
+      </div>
+    </div>
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/site.js"></script>
+
+    <link href="__PUBLIC__/uploadify/uploadify.css" rel="stylesheet">
+    <script src="__PUBLIC__/uploadify/uploadify.js"></script>
+
+    <script type="text/javascript">
+            $("#send").click(function(){
+                $("#myform").submit();
+            });
+            // var json_gg = "{$json_gg}";
+
+            $('#cate').change(function(){
+                var id = $(this).val();
+                // console.log(id);
+                if(!id){
+                  return false;
+                }
+
+                var jurl = "{:U('Admin/Admin/ajaxgg')}?id=" + id;
+                console.log(jurl);
+                $.ajax({
+                  'url':jurl,
+                  'type':'GET',
+                  'success':function(data){
+                      var data = JSON.parse(data);
+                      $('#ggimg').attr('src',data.url);
+                      $('#ggtips').html(data.desc);
+                  }
+                });
+            });
+            $(function(){
+                $('#cate').on('change',function(){
+                    var cated=$(this).val();
+
+                    //更具不同的分类显示不同的上传图片数量
+                    if(cated==''){
+                        $("#pic_img").html("<h3>请选择图片上传选项.</h3>");
+                    }else if(cated==1||cated==2||cated==3||cated==4||cated==5||cated==7){
+                        $("#pic_img").html('<p>上传大广告图片;<input id="upload" type="file"  name="big_img"  value="" /></p><p>上传小广告图片;<input type="file" name="small_img" value="" /></p>');
+                    }else{
+                        $("#pic_img").html('<table ><tr ><th>上传大广告图片1:</th><td><input type="file"  name="big_img1"  value="" /></td></tr> <tr ><th>上传大广告图片2:</th><td><input type="file"  name="big_img2"  value="" /></td></tr> <tr > <th>上传大广告图片3:</th> <td><input type="file"  name="big_img3"  value="" /></td> </tr> <tr > <th>上传大广告图片4:</th> <td><input type="file"  name="big_img4"  value="" /></td> </tr> <tr > <th>上传大广告图片5:</th> <td><input type="file"  name="big_img5"  value="" /></td> </tr> <tr height="20"> <th></th> <td></td> </tr> <tr > <th>上传小广告图片1:</th> <td><input type="file"  name="small_img1"  value="" /></td> </tr> <tr > <th>上传小广告图片2:</th> <td><input type="file"  name="small_img2"  value="" /></td> </tr> <tr > <th>上传小广告图片3:</th> <td><input type="file"  name="small_img3"  value="" /></td> </tr> <tr > <th>上传小广告图片4:</th> <td><input type="file"  name="small_img4"  value="" /></td> </tr> <tr > <th>上传小广告图片5:</th> <td><input type="file"  name="small_img5"  value="" /></td> </tr> </table>')
+                    }
+
+                });
+            });
+    </script>
+  </body>
+</html>

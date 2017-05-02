@@ -1,0 +1,49 @@
+{"safeCode":0,"safeValiState":1,"uu":"jcxllg5x8o","vu":"b53d96f311","pu":"21b035ef8a","likesSum":31243,"viewSum":1343,
+  "AdvBanner_img":"img/Lnow-tab-banner.jpg","AdvBanner_url":"index.html",
+  "WeddingProcedure":[
+    {"coupleName":"凌先生和云小姐","date":"2016-06-06",
+      "conTxt1":"婚礼仪式",
+      "conTxt2":"1、新人入场（新人手挽手踏上红地毯。步速慢，接受来宾的祝福。新人事先安排好在红地毯两侧放礼宾花的来宾），乐队演奏，音乐响起，宾客鼓掌欢呼。",
+      "conTxt3":"2、新人共同入场。新娘挽着父亲的臂膀入场，新郎在红地毯的1/3 处等待，再由父亲把女儿交给新郎，新人共同入场。（西式教堂式）",
+      "conTxt4":"3、新娘拿手捧花入场，新郎在红地毯1/3处等待，新郎单腿跪下向新娘求婚，新娘把手捧花中最鲜艳的一朵玫瑰插入新郎衣服胸口的口袋，新人共同入场。（最浪漫的）",
+      "conTxt5":"4、司仪简单介绍一下新人（新人目前的工作职务。司仪提问，新人现在的心情）",
+      "conTxt6":"5、证婚人证婚",
+      "conTxt7":"6、感恩仪式（父母仪式）",
+      "conTxt8":"7、父母代表致辞",
+      "conTxt9":"8、交换爱情信物（伴娘送上，新郎先为新娘戴戒指，新娘再为新郎戴戒指。戒指是慢慢的移动戴入，摄影师要拍一个特写的。戴上戒指后，向来宾展示一下。新郎亲吻新娘）",
+      "conTxt10":"9、倒香槟美酒。（两个人一起倒香槟酒，倒的时候慢一点，幅度小一些，免得酒杯破碎。）",
+      "conTxt11":"10、喝交杯酒 （两人手挽手喝交杯酒，饮尽酒杯中的香槟。慢，一个过程。）"
+    }
+  ],
+  "liveTel":"tel:13900012456",
+  "liveTargetPlace":"天津火车站",
+  "inviteList":[
+    {"uName":"贵妇BB","imgSrc":"img/liveroom_userLogo.png","uSum":290,"ranking":1},
+    {"uName":"贵妇BB","imgSrc":"img/liveroom_userLogo.png","uSum":280,"ranking":2},
+    {"uName":"贵妇BB","imgSrc":"img/liveroom_userLogo.png","uSum":19,"ranking":3},
+    {"uName":"贵妇BB","imgSrc":"img/liveroom_userLogo.png","uSum":1,"ranking":4}
+  ],
+  "otherVideos":[
+    {"imgSrc":"img/liveroom_videos_01.jpg","title":"创意天津婚礼，小成本，达成面","conTxt":"牛郎配侄女，才子配佳人，花好月圆，地久天长！"},
+    {"imgSrc":"img/liveroom_videos_01.jpg","title":"创意天津婚礼，小成本，达成面","conTxt":"牛郎配侄女，才子配佳人，花好月圆，地久天长！"},
+    {"imgSrc":"img/liveroom_videos_01.jpg","title":"创意天津婚礼，小成本，达成面","conTxt":"牛郎配侄女，才子配佳人，花好月圆，地久天长！"},
+    {"imgSrc":"img/liveroom_videos_01.jpg","title":"创意天津婚礼，小成本，达成面","conTxt":"牛郎配侄女，才子配佳人，花好月圆，地久天长！"}
+  ],
+  "liveLoadMore":[
+    {"imgSrc":"img/hl_1_15.png","hrefAddr":"","title":"美好美好美好","date":"2015-06","countTime":"2016/10/13 19:18:00"},
+    {"imgSrc":"img/hl_1_15.png","hrefAddr":"","title":"美好美好美好","date":"2015-06","countTime":"2016/10/14 19:18:00"},
+    {"imgSrc":"img/hl_1_15.png","hrefAddr":"","title":"美好美好美好","date":"2015-06","countTime":"2016/10/29 19:18:00"},
+    {"imgSrc":"img/hl_1_15.png","hrefAddr":"","title":"美好美好美好","date":"2015-06","countTime":"2016/10/29 19:18:00"}
+  ],
+  "videoLoadMore":[
+    {"imgSrc":"img/hl_1_15.png","hrefAddr":"","title":"美好美好美好","date":"2015-06","countTime":"2016/10/13 19:18:00"},
+    {"imgSrc":"img/hl_1_15.png","hrefAddr":"","title":"美好美好美好","date":"2015-06","countTime":"2016/10/14 19:18:00"},
+    {"imgSrc":"img/hl_1_15.png","hrefAddr":"","title":"美好美好美好","date":"2015-06","countTime":"2016/09/29 19:18:00"},
+    {"imgSrc":"img/hl_1_15.png","hrefAddr":"","title":"美好美好美好","date":"2015-06","countTime":"2016/09/29 19:18:00"}
+  ],
+  "inviteUserList":[
+    {"inviteRanking":4,"uName":"贵妇BB","imgSrc":"img/liveroom_userLogo.png","inviteDate":"2016-05-12","inviteTime":"08:12"},
+    {"inviteRanking":5,"uName":"贵妇BB","imgSrc":"img/liveroom_userLogo.png","inviteDate":"2016-05-12","inviteTime":"08:12"}
+  ]
+
+}

@@ -1,0 +1,366 @@
+<include file="Public/header" />
+    <!--main part-->
+    <section>
+        <!--主图展示部分-->
+        <div class="container-fluid carouselBoxBg carouselMainBoxBg">
+            <div class="container  noPaddRL "><!--hidden-xs-->
+                <div class="row carouselBg">
+                    <!--轮播部分*********-->
+                    <div id="myCarousel" class="carousel slide myCarousel" ms-controller="carouselImg">
+                        <!-- Carousel items -->
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 newCarousel-imgBox">
+                            <div class="carousel-inner carouselImgBox">
+                                <div class="item" ms-for="el in @data" ms-class="[el.toggle && @className]">
+                                    <a ms-attr="{href:el.url}">
+                                        <img ms-attr="{src:el.bigImgSrc}" class="img-responsive carousel-MainImg-zoom" >
+                                    </a>
+                                </div>
+                            </div>
+                            <!--轮播主图阴影播放&遮罩
+                            <div class="img-shade"></div>-->
+                            <a href="#" class=" "></a>
+                        </div>
+                        <!--轮播焦点图-->
+                        <div class="col-lg-3 col-md-3  col-sm-3 col-xs-12 noPaddRL">
+                            <ol class="carousel-indicators newCarousel-box clear">
+                                <li data-target="#myCarousel" class="newCarousel col-xs-3" ms-for="el in @data" ms-class="[el.toggle && @className]" ms-attr="{'data-slide-to':el.focusNum}">
+                                    <img ms-attr="{src:el.smallImgSrc}" class="img-responsive pointerImg-respon">
+                                    <a ms-attr="{href:el.url}" class="newCarousel-bg col-xs-3"></a>
+                                    <div class="newCarousel-bgTxt">
+                                        <span class="newCarousel-bgTxt-B" ms-text="el.txt"></span>
+                                        <p class="newCarousel-bgTxt-S hidden-xs" ms-text="el.date"></p>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <!--****end*****-->
+                </div>
+                <div class="clear">
+                    <a href="{$img_responsive[1]['url']}" class="clear">
+                        <div class="banner col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+                    </a>
+                </div>
+            </div>
+            <!--广告浮窗-->
+          <a href="{$img_responsive[4]['url']}" class="float-adv ">
+               <img src="{$img_responsive[4]['big_img']}" class="img-responsive"></a>
+               
+           <a href="{$img_responsive[4]['url']}" class="float-adv2 ">
+               <img src="{$img_responsive[4]['small_img']}" class="img-responsive">
+           </a> 
+        </div>
+        <!--LIVE SHOW-->
+        <div class="container-fluid showPartBg">
+            <div class="container">
+                <div class="text-center tab-titleTxt">LIVE SHOW</div>
+                <div class="tab-titleImg ">直播间</div>
+            </div>
+            <div class="container  sm-addPadd">
+                <div class="row" ms-controller="lives">
+                    <div class="col-xs-6 col-lg-3 col-md-3 col-sm-3 ipadNopaddRL sm-noPaddLf ">
+                        <img src="{$img_responsive[3]['big_img']}" class="img-responsive center liveShowLeftImg">
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 showSubBox liveShowSubBox" ms-for="el in @data">
+                        <a href="javascript:;"  class="lt" ms-attr="{tid:el.v_id}">
+                            <img ms-attr="{src:el.imgSrc}" class="img-responsive showSubImg"></a>
+                        <div class="showSubTxtBox center">
+                            <p class="single_text showSubTxtTitle" ms-text="el.title"></p>
+                            <span ms-text="el.date | date('yyyy.MM')"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="spaceLogo">
+                        <a href="{:U('Live/liveRoom')}" class="rank-enterLink"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--精选视频-->
+        <div class="container-fluid showPartBg2">
+            <div class="container">
+                <div class="text-center tab-titleTxt">WONDERFUL</div>
+                <div class="tab-titleImg">精选视频</div>
+            </div>
+            <div class="container  sm-addPadd" ms-controller="videos">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 showSubBox " ms-for="el in @data">
+                        <a href="javascript:;"  class="tz" ms-attr="{tid:el.jx_id}">
+                            <img ms-attr="{src:el.imgSrc}" class=" img-responsive showSubImg">
+                        </a>
+                        <div class="boxSizeFixed">
+                            <p class="single_text showSubTxtTitle showSubTxtTitle2" ms-text="el.title"></p>
+                            <span class="showSubTxtdate" ms-text="el.date | date('yyyy.MM')"></span>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="spaceLogo"><a href="{:U('Live/wonderful')}" class="rank-enterLink"> </a></div>
+                </div>
+            </div>
+        </div>
+        <!--排行榜-->
+        <div class="container-fluid showPartBg">
+            <div class="container">
+                <div class="text-center tab-titleTxt">RANKINGS</div>
+                <div class="tab-titleImg">排行榜</div>
+            </div>
+            <div class="container  sm-addPadd">
+                <div class="row" ms-controller="rankings">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 showSubBox" ms-for="el in @data">
+                        <div class="rank-subBox center">
+                            <a href="javascript:;"  class="lt" ms-attr="{tid:el.v_id}" >
+                            <img ms-attr="{src:el.imgSrc}" class=" img-responsive showSubImg">
+                            </a>
+                            <div class="half-mask">
+                                <p class="single_text showSubTxtTitle showSubTxtTitle2" ms-text="el.towsName"></p>
+                            </div>
+                        </div>
+                        <div ms-class="@show(el.rate)">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="spaceLogo"><a href="{:U('Index/rankings')}" class="rank-enterLink"> </a></div>
+                </div>
+            </div>
+        </div>
+        <!--婚礼点评-->
+        <div class="container-fluid showPartBg2">
+            <div class="container  sm-addPadd">
+                <div class="row">
+                    <div class=" col-xs-6 serviceLogo">
+                        <span>婚礼服务点评&nbsp;&nbsp;<em class="small">WEDDING SERVICE</em></span>
+                    </div>
+                </div>
+                <div class="row" ms-controller="services">
+                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 showSubBox" ms-for="el in @data">
+                        <a href="javascript:;"  class="tt" ms-attr="{zid:el.zcr_id}">
+                            <div class="hostImgBox">
+                                <img ms-attr="{src:el.imgSrc}" class="img-responsive img-center ">
+                            </div>
+                        </a>
+                        <div class="host-rate">
+                            <p ms-class="@showStar(el.hostRate)"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <a href="{$img_responsive[2]['url']}" class="clear">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footer-banner"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+    <footer class="container-fluid showPartBg">
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="footer-logo"></div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 footer-txt noPaddRL">
+                    <p class="small-Block">证婚直播LIVE&nbsp;&nbsp;版权所有&nbsp;&nbsp;<span>京ICP备15015202号-3&nbsp;&nbsp;</span><span class="small-Block">联系电话:010-89468899</span></p>
+                    <span class="small-Block">© 2005-2016 zhenghun.yicehua.cn, All rights reserved.</span>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+                    <div class="QR_Code"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="__PUBLIC__/Home/js/jquery-1.11.3.js"></script>
+    <script src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Home/js/addfunction.js"></script>
+    <script src="__PUBLIC__/Home/js/avalon.js"></script>
+    <script>
+
+        //判断浏览器or微信
+        /*window.onload= function () {
+          if(is_weixin()){
+              alert(123);
+          }else{alert(456);}
+        };*/
+        /***数据绑定部分****/
+      
+
+        /*轮播图*/
+        var carouselImg=avalon.define({
+            $id:"carouselImg",
+            className:"active",/*active类名为轮播主图和焦点图的第一张，data数组，只需第一个对象toggle为true即可*/
+            data:[
+                /*{bigImgSrc:'img/hl_fp_b.jpg',smallImgSrc:'img/hl_fp_s.png',txt:'缘来是你',date:'2015-06',addr:'9号公馆',focusNum:'0',toggle:true},
+                {bigImgSrc:'img/hl_fp_b.jpg',smallImgSrc:'img/hl_fp_s.png',txt:'缘来是你',date:'2015-06',addr:'9号公馆',focusNum:'1',toggle:false},
+                {bigImgSrc:'img/hl_fp_b.jpg',smallImgSrc:'img/hl_fp_s.png',txt:'缘来是你',date:'2015-06',addr:'9号公馆',focusNum:'2',toggle:false},
+                {bigImgSrc:'img/hl_fp_b.jpg',smallImgSrc:'img/hl_fp_s.png',txt:'缘来是你',date:'2015-06',addr:'9号公馆',focusNum:'3',toggle:false}*/
+            ]
+        });
+
+        for(var i in {$carouselImg}.data ){
+            carouselImg.data.push({$carouselImg}.data[i]);
+        }
+        /*直播图*/
+        var lives=avalon.define({
+            $id:"lives",
+            data:[
+                /*{imgSrc:'img/hl_1_15.png',title:'美好美好美好',date:'2015-06'},
+                {imgSrc:'img/hl_1_15.png',title:'美好美好美好',date:'2015-06'},
+                {imgSrc:'img/hl_1_15.png',title:'美好美好美好',date:'2015-06'},
+                {imgSrc:'img/hl_1_15.png',title:'美好美好美好',date:'2015-06'},
+                {imgSrc:'img/hl_1_15.png',title:'美好美好美好',date:'2015-06'},
+                {imgSrc:'img/hl_1_15.png',title:'美好美好美好',date:'2015-06'}*/
+            ]
+        });
+        for(var j in {$lives}.data ){
+            lives.data.push({$lives}.data[j]);
+        }
+        /*精彩视频*/
+        var videos=avalon.define({
+            $id:"videos",
+            data:[
+                /*{imgSrc:'img/hl_1_15.png',title:'美好美好美好',date:'2015-06'},
+                {imgSrc:'img/hl_1_15.png',title:'美好美好美好',date:'2015-06'},
+                {imgSrc:'img/hl_1_15.png',title:'美好美好美好',date:'2015-06'},
+                {imgSrc:'img/hl_1_15.png',title:'美好美好美好',date:'2015-06'}*/
+            ]
+        });
+
+        for(var k in {$videos}.data ){
+            videos.data.push({$videos}.data[k]);
+        }
+        
+        /*排行榜*/
+        var rankings=avalon.define({
+            $id:"rankings",
+            /*rate-视频排行榜名次，数字1-3为正向第一二三名，0为没有*/
+            data:[
+                /*{imgSrc:'img/hl_show_1_24.png',towsName:'萧先生&陆小姐',rate:1},
+                {imgSrc:'img/hl_show_1_24.png',towsName:'萧先生&陆小姐',rate:2},
+                {imgSrc:'img/hl_show_1_24.png',towsName:'萧先生&陆小姐',rate:3},
+                {imgSrc:'img/hl_show_1_24.png',towsName:'萧先生&陆小姐',rate:0}*/
+            ],
+            show: function (data) {
+                var obj='';
+                data==1?obj='rankStar': data==2?obj='rankStar2': data==3?obj='rankStar3':obj='rankStar4';
+                return obj;
+            }
+            /*show方法解释：先设置三个css样式，写一个方法：根据数据传入一个值进行判断，哪个值取哪一个样式属性呈现*/
+        });
+
+        for(var m in {$rankings}.data ){
+            rankings.data.push({$rankings}.data[m]);
+        }
+
+        /*服务点评*/
+        var services=avalon.define({
+            $id:"services",
+                /*hostRate-为服务视频名次，5-0分别为5星、4星、3星。。*/
+            data:[
+               /* {imgSrc:'img/hl_1_26.png',hostRate:5},
+                {imgSrc:'img/hl_1_26.png',hostRate:4},
+                {imgSrc:'img/hl_1_26.png',hostRate:3},
+                {imgSrc:'img/hl_1_26.png',hostRate:2},
+                {imgSrc:'img/hl_1_26.png',hostRate:1},
+                {imgSrc:'img/hl_1_26.png',hostRate:0}*/
+            ],
+            showStar: function (data) {
+                var obj='';
+                data==5?obj='hostRates5-0':
+                        data==4?obj='hostRates4-1':
+                        data==3?obj='hostRates3-2':
+                        data==2?obj='hostRates2-3':
+                        data==1?obj='hostRates1-4':
+                        data==0?obj='hostRates0-5':
+                        obj='';
+                return obj;
+            }        });
+
+            for(var n in {$services}.data ){
+                services.data.push({$services}.data[n]);
+            }
+
+            avalon.ready(function(){
+                    //导航标题选中样式
+                $('.pageTitleActive').removeClass('pageTitleActive');
+                $('.indexPage').addClass('pageTitleActive');    
+                //页面跳转传值
+                $('.tz').on('click',function(){
+                    var jx_id= $(this).attr('tid');
+                    var url = "{:U('Live/wonderful_broadcast')}?id="+jx_id;
+                    location.href = url;         
+                });
+
+                $('.lt').on('click',function(){
+                    var zid= $(this).attr('tid');
+                    var url = "{:U('Live/liveRoom_broadcast')}?id="+zid;
+                    location.href = url;         
+                });
+
+                $('.tt').on('click',function(){
+                    var z_id = $(this).attr('zid');
+                    var url = "{:U('Index/host')}?id="+z_id;
+                    location.href = url;         
+                })
+
+            });
+
+
+        //执行轮播功能
+        $('.carousel').carousel({interval: 3000});
+
+        $(function(){
+            //轮播滑动
+            var $carousels= $('.carousel');//1.获取轮播图容器
+                var startX, endX;   //起始和结束坐标变量
+                var offset=50;
+                  //2.注册滑动事件（获取手指在轮播图上的滑动方向-左右。手指触摸开始记录触摸点的坐标X，结束触摸一瞬间最后手指所在X坐标，比较大小（X坐标左上角为0点））
+                $carousels.on('touchstart',function(e){
+                        //originalEvent:原生touch事件，touches:触摸数组(因为多点触控)的第一个
+                        startX=e.originalEvent.touches[0].clientX;  
+                });
+                $carousels.on('touchmove',function(e){
+                        //originalEvent:原生touch事件，touches:触摸数组(因为多点触控)的第一个
+                        //touchmove：触摸划过的事件而touchend为一瞬间不可获得其坐标
+                        endX=e.originalEvent.touches[0].clientX;    
+                        //console.log(endX);
+                });
+                $carousels.on('touchend',function(e){
+                        //左滑startX>endX,右滑srartX<endX。比较startX和endX的绝对值，同时因触摸不精准，可造成无触碰，startX-endX大于一定值时有方向变化，可以控制滑动距离
+                        var distance=Math.abs(startX-endX);
+                        if(distance>offset){
+                            //$carousels.carousel(startX>endX ? 'next':'prev');     $carousels如果存在多个轮播图，可会使一起动作
+                            $(this).carousel(startX>endX ? 'next':'prev');  
+                        }
+                });
+            
+                var  img_url = "{$img_responsive[1]['big_img']}";
+                $('.banner').css({'background':"url("+img_url+")","background-size": "100% 100%"});
+
+                var  img_url1 = "{$img_responsive[2]['big_img']}";
+                $('.footer-banner').css({'background':"url("+img_url1+")","background-size": "100% 100%"});
+
+
+        });
+        $(window).resize(function() {
+            var referenceImg=$('.liveShowLeftImg').height();
+            $('.showSubImg').height(function () {return (referenceImg/2.8)});
+        });
+	window.onload=function(){
+              //图片响应缩放（防贱人）
+            var referenceImg=$('.liveShowLeftImg').height();
+            if(window.innerWidth<=991){
+                $('.showSubImg').height(function () {return (referenceImg/2.9)});
+            }
+            if(window.innerWidth>991){
+                $('.showSubImg').height(function () {return (referenceImg/2.8)});
+            }
+        };  
+    </script>
+</body>
+</html>
